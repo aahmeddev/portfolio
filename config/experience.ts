@@ -41,32 +41,32 @@ export const Experiences: ExperienceInterface[] = [
     techStack: ["Java", "Python", "Git", "HTML 5", "JavaFX", "Biopython"],
     startDate: new Date("2025-07-01"),
     endDate: new Date("2025-07-27"),
-    companyLogoImg: "/projects/dna-quality-control-toolkit/QClogo.png",
+    companyLogoImg: "/portfolio/projects/dna-quality-control-toolkit/QClogo.png",
     pagesInfoTitle: "Features",
     pagesInfoArr: [
       {
         title: "Welcome Page",
         description:
           "Select .fastq/fastq.gz file for quality analysis, dragging from file explorer or browsing locally.",
-        imgArr: ["/projects/dna-quality-control-toolkit/welcome_page.png"],
+        imgArr: ["/portfolio/projects/dna-quality-control-toolkit/welcome_page.png"],
       },
       {
         title: "Base Statistics",
         description:
           "Get a quality overview for the selected tab's data, and the core information, including areas of concern to do with the data.",
-        imgArr: ["/projects/dna-quality-control-toolkit/base_statistics.png"],
+        imgArr: ["/portfolio/projects/dna-quality-control-toolkit/base_statistics.png"],
       },
       {
         title: "Data Visualisation",
         description:
           "Select between 10 different plots, and learn essential information on the base sequences and dataset information. See these examples from a good quality dataset:",
-        imgArr: ["/projects/dna-quality-control-toolkit/data_examples.png"],
+        imgArr: ["/portfolio/projects/dna-quality-control-toolkit/data_examples.png"],
       },
       {
         title: "Data Trimming",
         description:
           "Remove adapter and poor quality sequences, allowing for an overrall better quality dataset",
-        imgArr: ["/projects/dna-quality-control-toolkit/trimming.png"],
+        imgArr: ["/portfolio/projects/dna-quality-control-toolkit/trimming.png"],
       },
       {
         title: "Export to HTML",
@@ -74,7 +74,7 @@ export const Experiences: ExperienceInterface[] = [
           "Export the report as an interactive HTML, allowing it to be shared and saved.",
         imgArr: [],
         linkURL:
-          "/projects/dna-quality-control-toolkit/SRR490124_2_quality_report.html",
+          "/portfolio/projects/dna-quality-control-toolkit/SRR490124_2_quality_report.html",
       },
     ],
     descriptionDetails: {
