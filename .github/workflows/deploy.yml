@@ -1,23 +1,16 @@
 name: Deploy Next.js site to Pages
-env: # <-- Add this block
-  NEXT_PUBLIC_GOOGLE_ANALYTICS_ID: ${{ secrets.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID }}
-  run: npm run build
 
 on:
-  # Runs on pushes targeting the main branch
   push:
     branches: ["main"]
-  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
   contents: read
   pages: write
   id-token: write
 
 jobs:
-  # Build job
   build:
     runs-on: ubuntu-latest
     steps:
@@ -26,19 +19,20 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: "20" # Or the Node.js version your project uses
+          node-version: "20"
           cache: 'npm'
       - name: Install dependencies
         run: npm ci
       - name: Build with Next.js
+        # This 'env' block makes the secret available to the 'npm run build' command
+        env:
+          NEXT_PUBLIC_GOOGLE_ANALYTICS_ID: ${{ secrets.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID }}
         run: npm run build
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # Upload the 'out' directory which contains the static export
           path: ./out
 
-  # Deployment job
   deploy:
     environment:
       name: github-pages
