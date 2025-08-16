@@ -12,6 +12,12 @@ import { siteConfig } from "@/config/site";
 import { cn, formatDateFromObj } from "@/lib/utils";
 import profileImg from "@/public/profile-img.jpg";
 
+export async function generateStaticParams() {
+  return Experiences.map((project) => ({
+    expId: project.id,
+  }));
+}
+
 interface ExperiencePageProps {
   params: {
     expId: string;
