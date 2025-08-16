@@ -3,6 +3,7 @@ import { ValidCategory, ValidExpType, ValidSkills } from "./constants";
 interface PagesInfoInterface {
   title: string;
   imgArr: string[];
+  linkURL?: string;
   description?: string;
 }
 
@@ -24,393 +25,97 @@ export interface ExperienceInterface {
   endDate: Date;
   companyLogoImg: any;
   descriptionDetails: DescriptionDetailsInterface;
+  pagesInfoTitle?: string;
   pagesInfoArr: PagesInfoInterface[];
 }
 
 export const Experiences: ExperienceInterface[] = [
   {
-    id: "built-design",
-    companyName: "Builtdesign",
-    type: "Professional",
-    category: ["Web Dev", "Full Stack", "UI/UX"],
-    shortDescription:
-      "Developed and optimized a high-performing website catering to over 4000 users, emphasizing efficiency and maintainability.",
-    websiteLink: "https://builtdesign.in",
-    techStack: [
-      "Next.js",
-      "React",
-      "Node.js",
-      "MongoDB",
-      "GraphQL",
-      "Nest.js",
-      "Typescript",
-    ],
-    startDate: new Date("2021-07-01"),
-    endDate: new Date("2022-07-01"),
-    companyLogoImg: "/experience/builtdesign/logo.png",
-    pagesInfoArr: [
-      {
-        title: "Landing Page",
-        description:
-          "Modern and responsive landing page showcasing company services and portfolio",
-        imgArr: [
-          "/experience/builtdesign/landing_1.webp",
-          "/experience/builtdesign/landing_3.webp",
-          "/experience/builtdesign/landing_5.webp",
-          "/experience/builtdesign/landing_6.webp",
-          "/experience/builtdesign/landing_2.webp",
-          "/experience/builtdesign/landing_4.webp",
-        ],
-      },
-      {
-        title: "Custom PDF Reader and optimizer",
-        description:
-          "Specialized PDF viewer with optimization features for improved performance and user experience",
-        imgArr: ["/experience/builtdesign/pdf_opt.webp"],
-      },
-      {
-        title: "Clients Dashboard",
-        description:
-          "Comprehensive client portal with project tracking, document management, and communication tools",
-        imgArr: [
-          "/experience/builtdesign/cli_dashboard_1.webp",
-          "/experience/builtdesign/cli_dashboard_2.webp",
-          "/experience/builtdesign/cli_dashboard_3.webp",
-        ],
-      },
-      {
-        title: "Admin Dashboard",
-        description:
-          "Powerful administrative interface for managing users, projects, and system settings",
-        imgArr: ["/experience/builtdesign/logo.png"],
-      },
-    ],
-    descriptionDetails: {
-      paragraphs: [
-        "During my time at Builtdesign, I had the opportunity to work on a dynamic and user-focused project that involved designing and optimizing a website catering to a user base of over 4000 individuals. My role as a full-stack web developer was to ensure a seamless experience for users by creating an efficient and maintainable platform.",
-        "I collaborated closely with the product team to integrate cutting-edge features, employing technologies like Next.js and React with TypeScript for captivating front-end experiences. Additionally, I contributed significantly to the backend by utilizing Node.js, MongoDB, and GraphQL to design robust APIs and ensure smooth system functionality.",
-        "This experience allowed me to enhance my skills in various areas of web development and deliver a high-quality product. I gained proficiency in front-end technologies such as Material UI and Tailwind CSS, as well as backend technologies including Nest.js and MySQL. The project's success in catering to a large user base and providing an intuitive user interface has further motivated me to pursue excellence in web development.",
-      ],
-      bullets: [
-        "Developed and optimized a high-performing website catering to over 4000 users.",
-        "Collaborated closely with the product team to implement cutting-edge features.",
-        "Created an intuitive admin dashboard to efficiently manage and announce contest winners.",
-        "Leveraged Next.js, React with TypeScript for captivating front-end experiences.",
-        "Utilized Node.js, MongoDB, and GraphQL to design and manage databases.",
-      ],
-    },
-  },
-  {
-    id: "the-super-quotes",
-    companyName: "The Super Quotes",
-    type: "Professional",
-    category: ["Mobile Dev", "Full Stack", "UI/UX"],
-    shortDescription:
-      "Elevated The Super Quotes app with JavaScript, React Native, APIs, Redux magic, and Google Play Store debut.",
-    websiteLink:
-      "https://play.google.com/store/apps/details?id=com.thesuperlife",
-    techStack: ["React Native", "Node.js", "MongoDB", "Javascript"],
-    startDate: new Date("2021-07-01"),
-    endDate: new Date("2022-07-01"),
-    companyLogoImg: "/experience/superquotes/logo.png",
-    pagesInfoArr: [
-      {
-        title: "Quotes View Page",
-        description:
-          "Elegantly designed quotes display with customizable themes and sharing options",
-        imgArr: ["/experience/superquotes/app_2.webp"],
-      },
-      {
-        title: "Quotes Download Component",
-        description:
-          "Feature allowing users to download quotes as beautiful images for social media sharing",
-        imgArr: [
-          "/experience/superquotes/app_4.webp",
-          "/experience/superquotes/app_7.webp",
-        ],
-      },
-      {
-        title: "Account Management",
-        description:
-          "User profile management with favorites, history, and personalization settings",
-        imgArr: ["/experience/superquotes/app_6.webp"],
-      },
-      {
-        title: "Interest Selection and Update Page",
-        description:
-          "Interactive interface for users to select and update their quote preferences and interests",
-        imgArr: [
-          "/experience/superquotes/app_1.webp",
-          "/experience/superquotes/app_3.webp",
-        ],
-      },
-      {
-        title: "Responsiveness",
-        description:
-          "Adaptive design ensuring optimal user experience across various device sizes and orientations",
-        imgArr: ["/experience/superquotes/app_5.webp"],
-      },
-    ],
-    descriptionDetails: {
-      paragraphs: [
-        `Venturing into the world of creativity at The Super Quotes was an exhilarating journey. As a passionate developer, I led the charge in crafting a compelling application from inception to completion, using the dynamic duo of JavaScript and React Native.`,
-        `The heart of my achievement lay in the seamless integration of APIs, threading a tapestry of data flow that propelled the application's functionality to new heights.`,
-        `With the wizardry of Redux, I choreographed a symphony of state management and performance optimization, orchestrating a ballet of responsiveness that wowed users with every interaction.`,
-        `A crescendo awaited as I unveiled the culmination of my work on the grand stage of the Google Play Store. The app's debut marked an epoch, opening doors to an expansive audience eager to embrace the charm of The Super Quotes.`,
-      ],
-      bullets: [
-        "Led the end-to-end development of a captivating application using JavaScript and React Native.",
-        "Championed the integration of APIs, harmonizing data flow and enhancing application functionality.",
-        "Conducted Redux magic to ensure state management and optimize performance, delivering a mesmerizing user experience.",
-        "Premiered the application on the Google Play Store, capturing hearts and expanding its user base.",
-      ],
-    },
-  },
-  {
-    id: "apex-shopping",
-    companyName: "Apex Shopping App",
+    id: "dna-quality-control-toolkit",
+    companyName: "DNA QC Toolkit",
     type: "Personal Project",
-    category: ["Mobile Dev", "Full Stack", "UI/UX"],
+    category: ["Bioinformatics", "Computational Bioengineering", "UI/UX"],
     shortDescription:
-      "Developed a feature-rich mobile shopping application with admin panel, user authentication, and seamless product management using React Native and Firebase.",
-    githubLink: "https://github.com/namanbarkiya/apex-shopping-app",
-    techStack: ["React Native", "Javascript", "Redux", "Node.js", "express.js"],
-    startDate: new Date("2021-07-14"),
-    endDate: new Date("2022-07-01"),
-    companyLogoImg: "/experience/apex/logo.png",
+      "Developed and optimized a high-performing quality control toolkit for DNA sequence analysis, emphasizing efficiency and accuracy.",
+    websiteLink: "https://github.com/aahmeddev/QC-Toolkit/",
+    techStack: ["Java", "Python", "Git", "HTML 5", "JavaFX", "Biopython"],
+    startDate: new Date("2025-07-01"),
+    endDate: new Date("2025-07-27"),
+    companyLogoImg: "/projects/dna-quality-control-toolkit/QClogo.png",
+    pagesInfoTitle: "Features",
     pagesInfoArr: [
       {
-        title: "Splash Screen",
-        description: "Custom animated splash screen with app branding",
-        imgArr: ["/experience/apex/app_7.webp"],
-      },
-      {
-        title: "Login/Signup Authentication",
-        description: "Secure user authentication system with Firebase",
-        imgArr: ["/experience/apex/app_1.webp"],
-      },
-      {
-        title: "All Products Explore Screen",
-        description: "Interactive product browsing with categories and filters",
-        imgArr: ["/experience/apex/app_3.webp"],
-      },
-      {
-        title: "Admin Panel",
+        title: "Welcome Page",
         description:
-          "Comprehensive admin dashboard for product and order management",
-        imgArr: ["/experience/apex/app_4.webp", "/experience/apex/app_6.webp"],
+          "Select .fastq/fastq.gz file for quality analysis, dragging from file explorer or browsing locally.",
+        imgArr: ["/projects/dna-quality-control-toolkit/welcome_page.png"],
       },
       {
-        title: "Sidenav Navigation",
-        description: "Intuitive side navigation for easy app navigation",
-        imgArr: ["/experience/apex/app_5.webp"],
-      },
-      {
-        title: "Firebase Database",
+        title: "Base Statistics",
         description:
-          "Real-time database structure for efficient data management",
-        imgArr: ["/experience/apex/db.webp"],
+          "Get a quality overview for the selected tab's data, and the core information, including areas of concern to do with the data.",
+        imgArr: ["/projects/dna-quality-control-toolkit/base_statistics.png"],
+      },
+      {
+        title: "Data Visualisation",
+        description:
+          "Select between 10 different plots, and learn essential information on the base sequences and dataset information. See these examples from a good quality dataset:",
+        imgArr: ["/projects/dna-quality-control-toolkit/data_examples.png"],
+      },
+      {
+        title: "Data Trimming",
+        description:
+          "Remove adapter and poor quality sequences, allowing for an overrall better quality dataset",
+        imgArr: ["/projects/dna-quality-control-toolkit/trimming.png"],
+      },
+      {
+        title: "Export to HTML",
+        description:
+          "Export the report as an interactive HTML, allowing it to be shared and saved.",
+        imgArr: [],
+        linkURL:
+          "/projects/dna-quality-control-toolkit/SRR490124_2_quality_report.html",
       },
     ],
     descriptionDetails: {
       paragraphs: [
-        "The Apex Shopping App represents a comprehensive mobile e-commerce solution that I developed from the ground up using React Native and Firebase. This project showcases my ability to create a full-featured shopping application with both user and admin functionalities.",
-        "The application features a robust authentication system, allowing users to securely sign up and log in. The product exploration interface is designed with user experience in mind, incorporating smooth navigation and intuitive filtering options.",
-        "One of the key highlights is the admin panel, which provides complete control over product management, order processing, and inventory tracking. The integration with Firebase ensures real-time data synchronization and reliable data persistence.",
-        "The app's architecture emphasizes scalability and performance, utilizing Redux for state management and following best practices for mobile app development. The UI/UX design focuses on providing a seamless shopping experience across different device sizes.",
+        "In any DNA sequencing project, the raw data generated by sequencing machines is the foundation for all subsequent discoveries. However, this raw data is rarely perfect. It can contain a range of technical errors and artifacts, such as low-quality reads, leftover adapter sequences from the lab process, and other biases.",
+        "This is where a Quality Control (QC) application comes in. It serves as the first and most critical checkpoint in the bioinformatics pipeline. Before any meaningful biological analysis can begin—such as aligning reads to a genome or identifying mutations—researchers must first use a tool like this one to assess the health of their raw data",
+        "By generating a comprehensive summary of data quality, these applications allow scientists to diagnose potential issues. Based on the QC report, a researcher can then make an informed decision: either the data is of high quality and ready for analysis, or it needs to be cleaned (e.g., by trimming adapters and low-quality ends) to ensure that the final scientific conclusions are accurate and reliable. To get a deeper understanding of the quality control process, I made an amateur DNA QC Toolkit, inspired by applications like FastQC.",
+        "A key part of this project was developing a deep understanding of the FASTQ file format, including how to parse its four-line structure to extract both the DNA sequences and their corresponding Phred quality scores. I researched and implemented the logic for several essential quality control (QC) metrics, such as Per-Base Sequence Quality, GC Content, Sequence Duplication Levels, and Adapter Contamination, ensuring the application provides a scientifically valid analysis.",
+        "The underlying application logic, including file I/O and data manipulation, was implemented in Java. For the user interface, JavaFX and FXML were used to create a user-friendly and responsive graphical application with the multi-tabbed design. To prevent UI freezing while performing analysis of large files, I implemented a multi-threaded system based on Java's ExecutorService where all intensive computations are performed on background threads.",
+        "All plots are visualized using a Python backend. The central Java application governs and communicates with external Python processes. This option leverages the strengths and versatility of the Matplotlib library to generate the entire range of scientific plots and tables required for final analysis reports.",
       ],
-      bullets: [
-        "Implemented secure user authentication and authorization using Firebase",
-        "Designed and developed an intuitive product browsing and shopping cart system",
-        "Created a comprehensive admin panel for product and order management",
-        "Integrated real-time data synchronization using Firebase Database",
-        "Implemented state management using Redux for optimal performance",
-        "Designed responsive UI components following mobile-first principles",
-        "Incorporated smooth animations and transitions for enhanced user experience",
-      ],
+      bullets: [],
     },
   },
   {
-    id: "builtdesign-blogs",
-    companyName: "Builtdesign Blogs",
-    type: "Professional",
-    category: ["Web Dev", "Full Stack", "UI/UX"],
-    shortDescription:
-      "Crafted Builtdesign's vibrant Blogs Website using Netlify CMS and React for engaging content experiences.",
-    websiteLink: "https://blog.builtdesign.in",
-    techStack: ["Next.js", "React", "Node.js", "MongoDB", "Typescript"],
-    startDate: new Date("2022-03-01"),
-    endDate: new Date("2022-07-01"),
-    companyLogoImg: "/experience/builtdesign-blogs/logo.png",
-    pagesInfoArr: [
-      {
-        title: "Blog Landing Page",
-        description:
-          "Modern and responsive landing page showcasing featured articles",
-        imgArr: ["/experience/builtdesign-blogs/blog_2.webp"],
-      },
-      {
-        title: "Blog Listing",
-        description:
-          "Organized display of all blog posts with search and filtering",
-        imgArr: ["/experience/builtdesign-blogs/blog_3.webp"],
-      },
-      {
-        title: "Category Navigation",
-        description: "Intuitive category-based navigation system",
-        imgArr: ["/experience/builtdesign-blogs/blog_1.webp"],
-      },
-      {
-        title: "Article View",
-        description:
-          "Clean and readable article layout with rich media support",
-        imgArr: [
-          "/experience/builtdesign-blogs/blog_4.webp",
-          "/experience/builtdesign-blogs/blog_5.webp",
-        ],
-      },
-    ],
-    descriptionDetails: {
-      paragraphs: [
-        "As part of the Builtdesign platform, I developed a sophisticated blog website that serves as a content hub for the company's thought leadership and industry insights. The project leveraged Next.js and React to create a fast, SEO-friendly platform.",
-        "The blog platform features a modern, responsive design that prioritizes readability and user engagement. I implemented a robust content management system using Netlify CMS, enabling the content team to easily publish and manage blog posts.",
-        "The architecture includes server-side rendering for optimal performance and SEO, while MongoDB provides flexible content storage. TypeScript ensures code reliability and maintainability throughout the application.",
-        "Key features include category-based navigation, search functionality, and a rich text editor for content creation. The platform supports various content types including images, code snippets, and embedded media.",
-      ],
-      bullets: [
-        "Developed a modern blog platform using Next.js and React with TypeScript",
-        "Implemented Netlify CMS for efficient content management",
-        "Created a responsive design that prioritizes readability and user engagement",
-        "Built server-side rendering for optimal performance and SEO",
-        "Integrated MongoDB for flexible content storage and management",
-        "Developed category-based navigation and search functionality",
-        "Implemented rich text editing capabilities for content creation",
-      ],
-    },
-  },
-  {
-    id: "portfolio-card",
-    companyName: "Portfolio Card",
-    type: "Personal Project",
-    category: ["Web Dev", "Frontend", "3D Modeling"],
-    shortDescription:
-      "Forged an immersive 3D Portfolio Card utilizing the prowess of Three.js and Blender, where art and technology converge in an interactive masterpiece.",
-    websiteLink: "https://card.namanbarkiya.xyz/",
-    githubLink: "https://github.com/namanbarkiya/3d-portfolio-card",
-    techStack: ["React", "Javascript", "HTML 5", "CSS 3"],
-    startDate: new Date("2022-03-01"),
-    endDate: new Date("2022-07-01"),
-    companyLogoImg: "/experience/card/logo.png",
-    pagesInfoArr: [
-      {
-        title: "Card Views",
-        description: "Front and back views of the interactive 3D card",
-        imgArr: [
-          "/experience/card/card_2.webp",
-          "/experience/card/card_3.webp",
-        ],
-      },
-      {
-        title: "Interactive Elements",
-        description:
-          "Custom links embedded in the 3D model with interactive animations",
-        imgArr: ["/experience/card/card_1.webp"],
-      },
-      {
-        title: "3D Model Development",
-        description: "Blender project showcasing the model creation process",
-        imgArr: ["/experience/card/card_4.webp"],
-      },
-    ],
-    descriptionDetails: {
-      paragraphs: [
-        "In my personal project, I've ventured into the world of creativity, fashioning a distinctive portfolio card through the utilization of Three.js.",
-        "This portfolio card transcends convention; it emerges as a captivating 3D model, adorned with meticulous lighting arrangements that conjure a spellbinding visual journey.",
-        "To materialize this concept, I've harnessed the combined potential of Three.js and Blender, orchestrating a meticulous crafting of the central 3D model that serves as the cornerstone of the card's allure.",
-        "Yet, the allure extends beyond aesthetics. I've ingeniously interwoven custom links directly into the fabric of Three.js components. Through the creation and seamless integration of novel components, these additions elegantly rest upon the card's surface, mirroring its rotations and delivering an interactive dimension to my portfolio.",
-        "The portfolio card itself is an opus of motion, perpetually swaying in an auto-rotational dance that unfurls its multifaceted essence. As an enhancement, I've introduced an instinctive user interaction element. A simple, intuitive drag of the card in specific directions grants viewers a comprehensive vantage, enabling exploration from every conceivable angle.",
-        "At its core, my personal project epitomizes technical finesse, artistic expression, and interactive design. The amalgamation of Three.js, Blender's prowess, and the innovation of component integration has birthed not only a portfolio card, but a dynamic encounter leaving an indelible imprint on all who partake.",
-      ],
-      bullets: [
-        "Conceptualized and realized a distinct portfolio card using Three.js, highlighting creative exploration.",
-        "Crafted a mesmerizing 3D model enhanced by thoughtful lighting arrangements, resulting in a captivating visual voyage.",
-        "Leveraged the synergy of Three.js and Blender to meticulously sculpt and refine the central 3D model, embodying meticulous attention to detail.",
-        "Innovatively integrated custom links within Three.js components, introducing an interactive layer via seamlessly incorporated new elements.",
-        "Enabled an auto-rotating feature for the portfolio card, perpetually showcasing its various facets to observers.",
-        "Introduced an instinctual user interaction mechanism, allowing viewers to comprehensively explore the card's dimensions through simple, intuitive dragging motions.",
-        "Represented a fusion of technical prowess, artistic ingenuity, and interactive design in a project that reshapes the boundaries of conventional portfolio representation.",
-      ],
-    },
-  },
-  {
-    id: "cirql-dashboard",
-    companyName: "Cirql Dashboard",
-    type: "Personal Project",
-    category: ["Web Dev", "Frontend", "UI/UX"],
-    shortDescription:
-      "Created a dashboard project using React and Tailwind CSS, focusing on UI design and routing implementation.",
-    websiteLink: "https://cirql-ui.namanbarkiya.xyz/",
-    techStack: ["React", "Tailwind CSS", "Google Auth"],
-    startDate: new Date("2023-01-01"),
-    endDate: new Date("2023-02-15"),
-    companyLogoImg: "/experience/cirql/logo.png",
-    pagesInfoArr: [
-      {
-        title: "Dashboard Home",
-        description:
-          "Main dashboard view with analytics widgets and data visualization",
-        imgArr: ["/experience/cirql/web_1.png", "/experience/cirql/web_2.png"],
-      },
-      {
-        title: "Profile Page",
-        description:
-          "User profile management interface with customization options",
-        imgArr: ["/experience/cirql/web_3.png", "/experience/cirql/web_4.png"],
-      },
-    ],
-    descriptionDetails: {
-      paragraphs: [
-        "For the 'Cirql Dashboard' personal project, I aimed to enhance my UI design skills and deepen my understanding of routing within a React application.",
-        "I utilized React and Tailwind CSS to craft an intuitive dashboard interface that provides users with an organized overview of data and functionalities. The UI components were thoughtfully designed to ensure a seamless user experience.",
-        "Incorporating Google Sign-In Authentication further fortified the project by adding a layer of security and convenience. Users are required to authenticate before accessing certain routes, ensuring the safety of sensitive information.",
-        "The routing system was meticulously implemented to enable smooth navigation between different sections of the dashboard, simulating real-world use cases.",
-        "Through this project, I've gained valuable insights into UI/UX design principles and the implementation of secure and efficient routing in React applications.",
-      ],
-      bullets: [
-        "Created a user-friendly dashboard project using React and Tailwind CSS.",
-        "Implemented Google Sign-In Authentication to ensure secure access to sensitive routes.",
-        "Designed UI components to provide an intuitive and visually pleasing experience.",
-        "Focused on implementing a smooth routing system to simulate real-world use cases.",
-        "Enhanced my skills in UI design, routing, and component architecture.",
-      ],
-    },
-  },
-  {
-    id: "inscript-hindi-typing",
-    companyName: "Inscript Hindi Typing",
+    id: "nanopore-basecalling",
+    companyName: "Nanopore Basecalling",
     type: "Personal Project",
     category: ["Web Dev", "UI/UX"],
     shortDescription:
       "Developed a user-friendly website for Inscript Hindi typing, addressing the need for a simple tool for Hindi writers to convey data digitally.",
     websiteLink: "https://hindityping.namanbarkiya.xyz",
     githubLink: "https://github.com/namanbarkiya/inscript-hindi-keyboard",
-    techStack: ["HTML 5", "CSS 3", "Javascript"],
+    techStack: ["HTML 5", "C++", "Javascript"],
     startDate: new Date("2022-05-01"),
     endDate: new Date("2022-06-15"),
-    companyLogoImg: "/experience/hindi-keyboard/logo.png",
+    companyLogoImg: "/projects/hindi-keyboard/logo.png",
+    pagesInfoTitle: "Functions",
     pagesInfoArr: [
       {
         title: "Typing Interface",
         description: "Minimal and user-friendly Inscript Hindi typing area",
-        imgArr: ["/experience/hindi-keyboard/web_1.png"],
+        imgArr: ["/projects/hindi-keyboard/web_1.png"],
       },
       {
         title: "Copy and Download the file",
         description:
           "Export functionality allowing users to copy text or download as a document file",
         imgArr: [
-          "/experience/hindi-keyboard/web_2.png",
-          "/experience/hindi-keyboard/web_3.png",
+          "/projects/hindi-keyboard/web_2.png",
+          "/projects/hindi-keyboard/web_3.png",
         ],
       },
     ],

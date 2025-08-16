@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Norican } from "next/font/google";
+import { Gochi_Hand  } from "next/font/google";
 import Link from "next/link";
 import { usePathname, useSelectedLayoutSegment } from "next/navigation";
 import * as React from "react";
@@ -16,7 +16,7 @@ interface MainNavProps {
   children?: React.ReactNode;
 }
 
-const norican = Norican({
+const norican = Gochi_Hand({
   weight: ["400"],
   style: ["normal"],
   subsets: ["latin"],
@@ -47,7 +47,7 @@ export function MainNav({ items, children }: MainNavProps) {
   }, [pathname]);
 
   return (
-    <div className="flex gap-6 md:gap-10">
+    <div className="flex gap-6 items-center md:gap-10">
       <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}

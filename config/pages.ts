@@ -18,7 +18,7 @@ export const pagesConfig: PagesConfig = {
     description: "Welcome to my portfolio website.",
     metadata: {
       title: "Home",
-      description: "Naman Barkiya's portfolio website.",
+      description: "Ahmed Ahmed's portfolio website.",
     },
   },
   skills: {
@@ -27,15 +27,15 @@ export const pagesConfig: PagesConfig = {
     metadata: {
       title: "Skills",
       description:
-        "Naman Barkiya's key skills that define his professional identity.",
+        "Ahmed Ahmed's key skills.",
     },
   },
-  experience: {
-    title: "Experience",
-    description: "Highlighting career journey and impactful projects.",
+  projects: {
+    title: "Projects",
+    description: "A showcase of my computational biology and software development projects.",
     metadata: {
-      title: "Experience",
-      description: "Naman Barkiya's experience in building web applications.",
+      title: "Projects",
+      description: "Ahmed Ahmed's projects in bioinformatics and molecular bioengineering.",
     },
   },
   contact: {
@@ -43,24 +43,23 @@ export const pagesConfig: PagesConfig = {
     description: "Let's connect and explore collaborations.",
     metadata: {
       title: "Contact",
-      description: "Contact Naman Barkiya.",
+      description: "Contact Ahmed Ahmed.",
     },
   },
-  contributions: {
-    title: "Contributions",
-    description: "Open-source contributions and community involvement.",
+  blog: { 
+    title: "Blog",
+    description: "Writings and thoughts on molecular bioengineering and technology.",
     metadata: {
-      title: "Contributions",
-      description:
-        "Naman Barkiya's open-source contributions and community involvement.",
+      title: "Blog",
+      description: "Ahmed Ahmed's blog on science and technology.",
     },
   },
   resume: {
     title: "Resume",
-    description: "Naman Barkiya's resume.",
+    description: "Ahmed Ahmed's resume.",
     metadata: {
       title: "Resume",
-      description: "Naman Barkiya's resume.",
+      description: "Ahmed Ahmed's resume.",
     },
   },
   career: {
@@ -68,7 +67,7 @@ export const pagesConfig: PagesConfig = {
     description: "Professional journey and experience timeline.",
     metadata: {
       title: "Career Timeline",
-      description: "Naman Barkiya's professional journey and career timeline.",
+      description: "Ahmed Ahmed's professional journey and career timeline.",
     },
   },
 };

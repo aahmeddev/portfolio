@@ -20,8 +20,8 @@ import { cn } from "@/lib/utils";
 import profileImg from "@/public/profile-img.jpg";
 
 export const metadata: Metadata = {
-  title: `${pagesConfig.home.metadata.title} | Modern Next.js Developer Portfolio Template`,
-  description: `${pagesConfig.home.metadata.description} This open-source Next.js portfolio template is customizable to showcase your skills and projects.`,
+  title: `${pagesConfig.home.metadata.title}`,
+  description: `${pagesConfig.home.metadata.description}`,
   alternates: {
     canonical: siteConfig.url,
   },
@@ -34,8 +34,8 @@ export default function IndexPage() {
     "@type": "Person",
     name: siteConfig.authorName,
     url: siteConfig.url,
-    image: siteConfig.ogImage,
-    jobTitle: "Full Stack Developer",
+    image: siteConfig.ogImage,  
+    jobTitle: "Molecular Bioengineering Undergraduate Student",
     sameAs: [siteConfig.links.github, siteConfig.links.twitter],
   };
 
@@ -43,7 +43,7 @@ export default function IndexPage() {
   const softwareSchema = {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
-    name: "Next.js Portfolio Template",
+    name: "Ahmed Portfolio",
     applicationCategory: "DeveloperApplication",
     operatingSystem: "Web",
     offers: {
@@ -79,7 +79,7 @@ export default function IndexPage() {
             width={100}
             sizes="100vw"
             className="bg-primary rounded-full mb-0 h-auto md:mb-2 w-[60%] max-w-[16rem] border-8 border-primary"
-            alt="Naman Barkiya - Full Stack Developer Portfolio"
+            alt="Ahmed Ahmed Portfolio"
             priority
           />
           <AnimatedText
@@ -87,36 +87,35 @@ export default function IndexPage() {
             delay={0.2}
             className="font-heading text-3xl sm:text-5xl md:text-6xl lg:text-7xl"
           >
-            Naman Barkiya
+            Ahmed Ahmed
           </AnimatedText>
           <AnimatedText
             as="h3"
             delay={0.4}
             className="font-heading text-base sm:text-xl md:text-xl lg:text-2xl"
           >
-            Full Stack Developer
+            Molecular Bioengineering Undergraduate Student
           </AnimatedText>
           <div className="mt-4 max-w-[42rem] text-center">
             <p className="leading-normal text-muted-foreground text-sm sm:text-base">
-              Open-source Next.js portfolio template. Fork this on GitHub to
-              create your own developer portfolio.
+              yadadadada
             </p>
           </div>
 
           <div className="flex flex-col mt-10 items-center justify-center sm:flex-row sm:space-x-4 gap-3">
             <AnimatedText delay={0.6}>
               <Link
-                href={"https://github.com/namanbarkiya"}
+                href={"https://github.com/aahmeddev"}
                 target="_blank"
                 className={cn(buttonVariants({ size: "lg" }))}
-                aria-label="View Naman Barkiya's GitHub profile"
+                aria-label="View Ahmed Ahmed's GitHub profile"
               >
                 <Icons.gitHub className="w-4 h-4 mr-2" /> GitHub
               </Link>
             </AnimatedText>
             <AnimatedText delay={0.8}>
               <Link
-                href={"/contact"}
+                href={"https://www.linkedin.com/in/ahmed-ahmed-37554021a/"}
                 rel="noreferrer"
                 className={cn(
                   buttonVariants({
@@ -124,9 +123,9 @@ export default function IndexPage() {
                     size: "lg",
                   })
                 )}
-                aria-label="Contact Naman Barkiya"
+                aria-label="View Ahmed's LinkedIn profile"
               >
-                <Icons.contact className="w-4 h-4 mr-2" /> Contact
+                <Icons.linkedin className="w-4 h-4 mr-2" /> LinkedIn
               </Link>
             </AnimatedText>
           </div>
@@ -173,14 +172,14 @@ export default function IndexPage() {
             as="h2"
             className="font-heading text-3xl leading-[1.1] sm:text-3xl md:text-6xl"
           >
-            {pagesConfig.experience.title}
+            {pagesConfig.projects.title}
           </AnimatedText>
           <AnimatedText
             as="p"
             delay={0.2}
             className="max-w-[85%] leading-normal text-muted-foreground sm:text-lg sm:leading-7"
           >
-            {pagesConfig.experience.description}
+            {pagesConfig.projects.description}
           </AnimatedText>
         </div>
         <div className="mx-auto grid justify-center gap-4 md:w-full lg:grid-cols-3">
@@ -195,7 +194,7 @@ export default function IndexPage() {
           ))}
         </div>
         <AnimatedText delay={0.4} className="flex justify-center">
-          <Link href="/experience">
+          <Link href="/projects">
             <Button variant={"outline"} className="rounded-xl">
               <Icons.chevronDown className="mr-2 h-4 w-4" /> View All
             </Button>
@@ -217,14 +216,14 @@ export default function IndexPage() {
             as="h2"
             className="font-heading text-3xl leading-[1.1] sm:text-3xl md:text-6xl"
           >
-            {pagesConfig.contributions.title}
+            {pagesConfig.blog.title}
           </AnimatedText>
           <AnimatedText
             as="p"
             delay={0.2}
             className="max-w-[85%] leading-normal text-muted-foreground sm:text-lg sm:leading-7"
           >
-            {pagesConfig.contributions.description}
+            {pagesConfig.blog.description}
           </AnimatedText>
         </div>
         <div className="mx-auto justify-center gap-4 md:w-full lg:grid-cols-3">
