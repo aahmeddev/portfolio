@@ -97,41 +97,38 @@ export const metadata = {
 
 export default function RootLayout({ children }: RootLayoutProps) {
   const GA_ID = process.env.NEXT_PUBLIC_GOOGLE_MEASUREMENT_ID;
-  if (!GA_ID) {
-    throw new Error("Missing Google Analytics ID");
-  }
 
   return (
     <html lang="en" suppressHydrationWarning>
-      <head />
-      <body
-        className={cn(
-          "min-h-screen bg-background font-sans antialiased",
-          fontSans.variable,
-          fontHeading.variable
-        )}
-      >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          themes={[
-            "light",
-            "dark",
-            "retro",
-            "cyberpunk",
-            "paper",
-            "aurora",
-            "synthwave",
-          ]}
-        >
-          {children}
-          <Analytics />
-          <Toaster />
-          <ModalProvider />
-        </ThemeProvider>
-      </body>
-      <GoogleAnalytics gaId={GA_ID} />
+    <head />
+    <body
+      className={cn(
+        "min-h-screen bg-background font-sans antialiased",
+        fontSans.variable,
+        fontHeading.variable
+      )}
+    >
+    <ThemeProvider
+      attribute="class"
+      defaultTheme="system"
+      enableSystem
+      themes={[
+        "light",
+        "dark",
+        "retro",
+        "cyberpunk",
+        "paper",
+        "aurora",
+        "synthwave",
+      ]}
+    >
+      {children}
+      <Toaster />
+      <ModalProvider />
+    </ThemeProvider>
+    </body>
+    {/* Conditionally render Google Analytics only if the ID exists */}
+    {GA_ID && <GoogleAnalytics gaId={GA_ID} />}
     </html>
   );
 }
