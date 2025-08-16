@@ -1,4 +1,7 @@
 name: Deploy Next.js site to Pages
+env: # <-- Add this block
+  NEXT_PUBLIC_GOOGLE_ANALYTICS_ID: ${{ secrets.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID }}
+  run: npm run build
 
 on:
   # Runs on pushes targeting the main branch
