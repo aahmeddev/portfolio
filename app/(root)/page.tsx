@@ -209,7 +209,7 @@ export default function IndexPage() {
       <AnimatedSection
         direction="down"
         className="container space-y-6 bg-muted py-10 my-14"
-        id="contributions"
+        id="blog"
       >
         <div className="mx-auto flex max-w-[58rem] flex-col items-center space-y-4 text-center">
           <AnimatedText
@@ -230,7 +230,7 @@ export default function IndexPage() {
           <ContributionCard contributions={featuredContributions} />
         </div>
         <AnimatedText delay={0.4} className="flex justify-center">
-          <Link href="/contributions">
+          <Link href="/blog">
             <Button variant={"outline"} className="rounded-xl">
               <Icons.chevronDown className="mr-2 h-4 w-4" /> View All
             </Button>
