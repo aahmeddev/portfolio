@@ -8,7 +8,8 @@ export type ValidSkills =
   | "Git"
   | "Biopython"
   | "Firebase"
-  | "Figma";
+  | "Figma"
+  | "Streamlit";
 
 export type ValidCategory =
   | "Full Stack"
@@ -17,7 +18,6 @@ export type ValidCategory =
   | "Computational Bioengineering"
   | "UI/UX"
   | "Web Dev"
-  | "Mobile Dev"
   | "3D Modeling";
 
 export type ValidExpType = "Personal Project" | "Professional";
@@ -26,7 +26,6 @@ export type ValidPages =
   | "home"
   | "skills"
   | "projects"
-  | "career"
   | "contact"
   | "blog"
-  | "resume";
+  | "CV";

@@ -6,5 +6,5 @@ export default function ResumePage() {
   useEffect(() => {
     redirect(process.env.NEXT_PUBLIC_RESUME_LINK || "/");
   }, []);
-  return <div>Redirecting to the resume...</div>;
+  return <div>Redirecting to the CV...</div>;
 }

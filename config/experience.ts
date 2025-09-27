@@ -41,32 +41,40 @@ export const Experiences: ExperienceInterface[] = [
     techStack: ["Java", "Python", "Git", "HTML 5", "JavaFX", "Biopython"],
     startDate: new Date("2025-07-01"),
     endDate: new Date("2025-07-27"),
-    companyLogoImg: "/portfolio/projects/dna-quality-control-toolkit/QClogo.png",
+    companyLogoImg: "/portfolio/projects/dna-quality-control-toolkit/logo.png",
     pagesInfoTitle: "Features",
     pagesInfoArr: [
       {
         title: "Welcome Page",
         description:
           "Select .fastq/fastq.gz file for quality analysis, dragging from file explorer or browsing locally.",
-        imgArr: ["/portfolio/projects/dna-quality-control-toolkit/welcome_page.png"],
+        imgArr: [
+          "/portfolio/projects/dna-quality-control-toolkit/welcome_page.png",
+        ],
       },
       {
         title: "Base Statistics",
         description:
           "Get a quality overview for the selected tab's data, and the core information, including areas of concern to do with the data.",
-        imgArr: ["/portfolio/projects/dna-quality-control-toolkit/base_statistics.png"],
+        imgArr: [
+          "/portfolio/projects/dna-quality-control-toolkit/base_statistics.png",
+        ],
       },
       {
         title: "Data Visualisation",
         description:
           "Select between 10 different plots, and learn essential information on the base sequences and dataset information. See these examples from a good quality dataset:",
-        imgArr: ["/portfolio/projects/dna-quality-control-toolkit/data_examples.png"],
+        imgArr: [
+          "/portfolio/projects/dna-quality-control-toolkit/data_examples.png",
+        ],
       },
       {
         title: "Data Trimming",
         description:
           "Remove adapter and poor quality sequences, allowing for an overrall better quality dataset",
-        imgArr: ["/portfolio/projects/dna-quality-control-toolkit/trimming.png"],
+        imgArr: [
+          "/portfolio/projects/dna-quality-control-toolkit/trimming.png",
+        ],
       },
       {
         title: "Export to HTML",
@@ -90,54 +98,36 @@ export const Experiences: ExperienceInterface[] = [
     },
   },
   {
-    id: "nanopore-basecalling",
-    companyName: "Nanopore Basecalling",
+    id: "gene-expression-explorer",
+    companyName: "Gene Expression Explorer",
     type: "Personal Project",
-    category: ["Web Dev", "UI/UX"],
+    category: ["Computational Bioengineering", "Web Dev", "UI/UX"],
     shortDescription:
-      "Developed a user-friendly website for Inscript Hindi typing, addressing the need for a simple tool for Hindi writers to convey data digitally.",
-    websiteLink: "https://hindityping.namanbarkiya.xyz",
-    githubLink: "https://github.com/namanbarkiya/inscript-hindi-keyboard",
-    techStack: ["HTML 5", "C++", "Javascript"],
-    startDate: new Date("2022-05-01"),
-    endDate: new Date("2022-06-15"),
-    companyLogoImg: "/projects/hindi-keyboard/logo.png",
-    pagesInfoTitle: "Functions",
+      "An interactive web app for gene expression data analysis and visualization. Upload your dataset, define sample groups easily, view heatmaps, volcano plots, gene boxplots, and download results—all powered by Streamlit and Python.",
+    websiteLink: "https://gene-expression-explorer.streamlit.app/",
+    githubLink: "https://github.com/aahmeddev/gene-expression-explorer",
+    techStack: ["Python", "Streamlit"],
+    startDate: new Date("2025-08-22"),
+    endDate: new Date("2022-09-01"),
+    companyLogoImg: "/portfolio/projects/gene-expression-explorer/logo.png",
+    pagesInfoTitle: "Visit The Streamlit App",
     pagesInfoArr: [
       {
-        title: "Typing Interface",
-        description: "Minimal and user-friendly Inscript Hindi typing area",
-        imgArr: ["/projects/hindi-keyboard/web_1.png"],
-      },
-      {
-        title: "Copy and Download the file",
-        description:
-          "Export functionality allowing users to copy text or download as a document file",
-        imgArr: [
-          "/projects/hindi-keyboard/web_2.png",
-          "/projects/hindi-keyboard/web_3.png",
-        ],
-      },
+        title: "",
+        linkURL: "https://gene-expression-explorer.streamlit.app",
+        imgArr: [],
+      }
     ],
     descriptionDetails: {
       paragraphs: [
-        "The 'Inscript Hindi Typing Website' project emerged from the need to provide a simple and accessible tool for Hindi writers, especially those in digital news and media, who wished to convey data in Hindi.",
-        "Recognizing the challenges posed by complex software in the market, I set out to create a minimalistic typing area that catered to the needs of a vast community of Hindi typists in India.",
-        "The project was designed to address the specific requirements of users familiar with the Inscript keyboard layout, mapping English and Hindi alphabets for seamless typing. The intuitive interface allowed users to effortlessly switch between languages, streamlining the process of content creation.",
-        "Leveraging HTML and CSS, I crafted the website's UI to ensure a user-friendly experience. Additionally, Local Storage was utilized to enable users to save and retrieve their work, enhancing convenience and productivity.",
-        "The website's focus on user experience and simplicity proved to be a key factor in its popularity among Hindi writers. By offering a tool that reduced the barriers to entry, I contributed to the digital empowerment of Hindi typists who previously faced challenges in conveying their message effectively.",
-        "This project marked one of my initial forays into web development and highlighted the transformative potential of technology in addressing real-world challenges.",
+        "In any genomics research project, once sequencing data has passed quality control and been processed, the next critical step is understanding which genes are actually changing between experimental conditions. Raw gene expression data—whether from RNA-seq, microarrays, or other transcriptomic experiments—contains thousands of measurements, but without proper statistical analysis, it's impossible to distinguish meaningful biological signals from technical noise.\n",
+        "This is where a differential gene expression analysis tool becomes essential. It serves as the analytical bridge between raw expression measurements and biological insights. Before researchers can make claims about which genes are upregulated in disease versus healthy tissue, or which pathways respond to a particular treatment, they must first use a tool like this one to rigorously identify statistically significant expression changes and filter out genes that vary due to experimental variation.\n",
+        "A key part of this process is understanding both the size and the reliability of changes in gene expression. The fold change tells us how many times higher or lower a gene’s expression is in one group compared to another, but to make these changes easier to interpret, we use the log2 fold change. This log scale means that a value of 1 represents a twofold increase, while -1 means a twofold decrease, making it straightforward to compare up- and down-regulation. However, not all observed changes are meaningful as random variation can make a gene appear different when it’s not. That’s why statistical tests, such as the t-test, are used to calculate a p-value, which estimates the likelihood that the observed difference happened by chance. By considering both the magnitude of change (log2 fold change) and its statistical significance (p-value), tools like these can help identify which genes are truly differentially expressed.\n",
+        "The data analysis was implemented entirely in Python using pandas for data manipulation, NumPy for numerical computations, and SciPy for statistical testing. For the user interface, I chose Streamlit to create an intuitive, web-based application to easily upload data, and explore results interactively. Users can also configure analysis parameters from the sidebar, featuring real-time feedback on data loading and processing status.\n",
+        "All visualizations use both static and interactive plotting libraries. The application generates clustered heatmaps using Seaborn and Matplotlib, while interactive volcano plots and gene-specific boxplots are powered by Plotly. This dual approach allows users to hover over data points, zoom into regions of interest, and export results for further analysis.\n",
+        "I implemented several quality-of-life functions, including intelligent file format detection for multiple input types (CSV, TSV, Excel, compressed files), error handling for malformed datasets, data caching for improved performance, and a modular code structure that separates data processing, statistical analysis, and visualization components. The result is a tool that makes differential expression analysis accessible while maintaining the statistical rigor required for high quality results."
       ],
-      bullets: [
-        "Developed a user-friendly website for Inscript Hindi typing.",
-        "Catered to the needs of Hindi writers in digital news and media.",
-        "Created a minimalistic and intuitive typing interface for the Inscript keyboard layout.",
-        "Mapped English and Hindi alphabets to provide a seamless typing experience.",
-        "Utilized HTML and CSS to design a user-friendly UI.",
-        "Implemented Local Storage to enable users to save and retrieve their work.",
-        "Contributed to the digital empowerment of Hindi typists by offering a simple tool.",
-        "Marked one of my first web development projects, showcasing technology's potential for addressing real-world needs.",
-      ],
+      bullets: [],
     },
   },
 ];

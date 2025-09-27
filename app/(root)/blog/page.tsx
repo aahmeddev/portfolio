@@ -1,8 +1,8 @@
 import { Metadata } from "next";
 
 import PageContainer from "@/components/common/page-container";
-import ContributionCard from "@/components/contributions/contribution-card";
-import { contributionsUnsorted } from "@/config/contributions";
+import BlogCard from "@/components/blogs/blog-card";
+import { blogsUnsorted } from "@/config/blogs";
 import { pagesConfig } from "@/config/pages";
 
 export const metadata: Metadata = {
@@ -10,15 +10,14 @@ export const metadata: Metadata = {
   description: pagesConfig.blog.metadata.description,
 };
 
-export default function ContributonsPage() {
+export default function BlogPage() {
   return (
     <PageContainer
       title={pagesConfig.blog.title}
       description={pagesConfig.blog.description}
     >
-      <ContributionCard
-        contributions={contributionsUnsorted}
-      />
+      <BlogCard blogs={blogsUnsorted} />
     </PageContainer>
   );
 }
+

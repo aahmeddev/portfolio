@@ -54,20 +54,12 @@ export const pagesConfig: PagesConfig = {
       description: "Ahmed Ahmed's blog on science and technology.",
     },
   },
-  resume: {
-    title: "Resume",
-    description: "Ahmed Ahmed's resume.",
+  CV: {
+    title: "CV",
+    description: "Ahmed Ahmed's CV.",
     metadata: {
-      title: "Resume",
-      description: "Ahmed Ahmed's resume.",
+      title: "CV",
+      description: "Ahmed Ahmed's CV.",
     },
-  },
-  career: {
-    title: "Career Timeline",
-    description: "Professional journey and experience timeline.",
-    metadata: {
-      title: "Career Timeline",
-      description: "Ahmed Ahmed's professional journey and career timeline.",
-    },
-  },
+  }
 };
