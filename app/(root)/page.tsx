@@ -11,13 +11,14 @@ import ContributionCard from "@/components/blogs/blog-card";
 import ProjectCard from "@/components/experience/project-card";
 import SkillsCard from "@/components/skills/skills-card";
 import { Button, buttonVariants } from "@/components/ui/button";
-import { featuredContributions } from "@/config/blogs";
+import { featuredBlogs } from "@/config/blogs";
 import { featuredExperiences } from "@/config/experience";
 import { pagesConfig } from "@/config/pages";
 import { siteConfig } from "@/config/site";
 import { featuredSkills } from "@/config/skills";
 import { cn } from "@/lib/utils";
 import profileImg from "@/public/profile-img.jpg";
+import BlogCard from "@/components/blogs/blog-card";
 
 export const metadata: Metadata = {
   title: `${pagesConfig.home.metadata.title}`,
@@ -227,7 +228,7 @@ export default function IndexPage() {
           </AnimatedText>
         </div>
         <div className="mx-auto justify-center gap-4 md:w-full lg:grid-cols-3">
-          <ContributionCard contributions={featuredContributions} />
+          <BlogCard blogs={featuredBlogs} />
         </div>
         <AnimatedText delay={0.4} className="flex justify-center">
           <Link href="/blog">

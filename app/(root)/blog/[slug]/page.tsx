@@ -149,6 +149,9 @@ export default async function BlogPage({ params }: BlogPageProps) {
                     }
                   }
 
+                  const validSizes = ['small', 'medium', 'large', 'full'] as const;
+                  type ValidSize = typeof validSizes[number];
+
                   const finalProps = {
                     size: 'large',
                     align: 'center',
@@ -162,7 +165,7 @@ export default async function BlogPage({ params }: BlogPageProps) {
                     <BlogImage
                       src={src}
                       alt={alt || ''}
-                      {...finalProps}
+                      {...finalProps as any}
                     />
                   );
                 },
