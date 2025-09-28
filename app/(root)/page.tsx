@@ -79,7 +79,6 @@ export default function IndexPage() {
               src={profileImg}
               height={192} // 192px for a big profile, matches Tailwind w-48 h-48
               width={192}
-              sizes="100vw"
               className="rounded-full object-cover object-center border-8 border-primary shadow-lg w-48 h-48 bg-primary"
               alt="Ahmed Ahmed Portfolio"
               priority
