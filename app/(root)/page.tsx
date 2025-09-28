@@ -78,7 +78,6 @@ export default function IndexPage() {
             w-full
             max-w-2xl
             flex flex-col items-center px-4
-            pt-5 sm:pt-8 md:pt-10
             pb-8
             space-y-5
           ">
