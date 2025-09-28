@@ -97,9 +97,16 @@ export default function IndexPage() {
           >
             Molecular Bioengineering Undergraduate Student
           </AnimatedText>
-          <div className="mt-4 max-w-[42rem] text-center">
-            <p className="leading-normal text-muted-foreground text-sm sm:text-base">
-              yadadadada
+          <div className="w-full mt-4 max-w-2xl mx-auto flex flex-col items-center space-y-3">
+            <p className="text-base sm:text-xl font-medium text-muted-foreground text-center">
+              Welcome to my portfolio website!
+            </p>
+            <hr className="border-muted-foreground mx-auto my-4 w-24" />
+            <p className="max-w-prose text-muted-foreground text-xs sm:text-base leading-relaxed text-left sm:text-justify">
+              I am seeking projects that let me combine analytical thinking with technical skills to develop impactful solutions in molecular bioengineering. My interests lie in leveraging bioinformatics within the biotech industry and exploring how computational methods can drive innovation in healthcare and biological research. I hope to pursue   opportunities—both within and beyond my studies—that bridge science, technology
+              <span className="block text-center w-full">
+                and industry needs.
+              </span>
             </p>
           </div>
 
