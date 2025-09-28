@@ -72,30 +72,27 @@ export default function IndexPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareSchema) }}
       />
 
-      <section className="space-y-6 pb-8 pt-6 mb-0 md:pb-12 md:py-20 lg:py-32 h-screen flex items-center">
+      <section className="space-y-7 pb-8 pt-6 mb-0 md:pb-12 md:py-20 lg:py-32 h-screen flex items-center">
         <div className="container flex max-w-[64rem] flex-col items-center gap-4 text-center -mt-20">
           <div className="flex justify-center items-center">
-            <div className="mt-16 md:mt-20 lg:mt-20"> {/* extra margin above image */}
+            <div className="  ">
               <Image
                 src={profileImg}
                 alt="Ahmed Ahmed Portfolio"
                 priority
-                width={256} // for Next.js (max tailwind lg:w-64 = 256px)
-                height={256}
+                width={250}
+                height={250}
                 className="
-                rounded-full
-                object-cover
-                object-center
-                border-8
-                border-primary
-                shadow-lg
-                w-40 h-40          // default: 160px
-                sm:w-52 sm:h-52    // tablets: 208px
-                md:w-64 md:h-64    // desktops: 256px
-                lg:w-80 lg:h-80    // large-desktops: 320px
-                mx-auto
+                  rounded-full
+                  object-cover
+                  object-center
+                  border-8
+                  border-primary
+                  shadow-lg
+                  mx-auto
+                  w-30 h-30
                 "
-                />
+              />
             </div>
           </div>
           <AnimatedText
