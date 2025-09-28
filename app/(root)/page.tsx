@@ -35,7 +35,7 @@ export default function IndexPage() {
     "@type": "Person",
     name: siteConfig.authorName,
     url: siteConfig.url,
-    image: siteConfig.ogImage,  
+    image: siteConfig.ogImage,
     jobTitle: "Molecular Bioengineering Undergraduate Student",
     sameAs: [siteConfig.links.github, siteConfig.links.twitter],
   };
@@ -72,88 +72,78 @@ export default function IndexPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareSchema) }}
       />
 
-      <section className="space-y-7 pb-8 pt-6 mb-0 md:pb-12 md:py-20 lg:py-32 h-screen flex items-center">
-        <div className="container flex max-w-[64rem] flex-col items-center gap-4 text-center -mt-20">
-          <div className="flex justify-center items-center">
-            <div className="  ">
-              <Image
-                src={profileImg}
-                alt="Ahmed Ahmed Portfolio"
-                priority
-                width={250}
-                height={250}
-                className="
-                  rounded-full
-                  object-cover
-                  object-center
-                  border-8
-                  border-primary
-                  shadow-lg
-                  mx-auto
-                  w-30 h-30
-                "
-              />
-            </div>
+      {/* HERO SECTION: Everything fits, responsive, clean */}
+      <section className="w-full flex justify-center items-center bg-background">
+        <div className="
+            w-full
+            max-w-2xl
+            flex flex-col items-center px-4
+            pt-5 sm:pt-8 md:pt-10
+            pb-8
+            space-y-5
+          ">
+          <div className="mb-0">
+            <Image
+              src={profileImg}
+              alt="Ahmed Ahmed Portfolio"
+              width={320}
+              height={320}
+              priority
+              className="
+                rounded-full
+                object-cover object-center
+                border-8 border-primary
+                shadow-lg
+                w-32 h-32 sm:w-44 sm:h-44 md:w-56 md:h-56 lg:w-72 lg:h-72
+                mx-auto
+              "
+            />
           </div>
-          <AnimatedText
-            as="h1"
-            delay={0.2}
-            className="font-heading text-3xl sm:text-5xl md:text-6xl lg:text-7xl"
-          >
+          <h1 className="font-heading text-3xl sm:text-5xl md:text-6xl lg:text-7xl text-center font-extrabold">
             Ahmed Ahmed
-          </AnimatedText>
-          <AnimatedText
-            as="h3"
-            delay={0.4}
-            className="font-heading text-base sm:text-xl md:text-xl lg:text-2xl"
-          >
+          </h1>
+          <h2 className="font-heading text-center text-lg sm:text-2xl md:text-2xl lg:text-3xl font-semibold mb-2">
             Molecular Bioengineering Undergraduate Student
-          </AnimatedText>
-          <div className="w-full mt-4 max-w-2xl mx-auto flex flex-col items-center space-y-3">
-            <p className="text-base sm:text-xl font-medium text-muted-foreground text-center">
-              Welcome to my portfolio website!
-            </p>
-            <hr className="border-muted-foreground mx-auto my-4 w-24" />
-            <p className="max-w-prose text-muted-foreground text-xs sm:text-base leading-relaxed text-left sm:text-justify">
-              I am seeking projects that let me combine analytical thinking with technical skills to develop impactful solutions in molecular bioengineering. My interests lie in leveraging bioinformatics within the biotech industry and exploring how computational methods can drive innovation in healthcare and biological research. I hope to pursue   opportunities—both within and beyond my studies—that bridge science, technology
-              <span className="block text-center w-full">
-                and industry needs.
-              </span>
+          </h2>
+          <p className="text-base sm:text-lg font-medium text-muted-foreground text-center">
+            Welcome to my portfolio website!
+          </p>
+          <hr className="border-muted-foreground mx-auto my-2 w-16" />
+          <div className="w-full">
+            <p className="
+                mx-auto
+                max-w-prose
+                text-muted-foreground
+                text-sm sm:text-base
+                leading-relaxed
+                text-left sm:text-justify
+              ">
+              I am seeking projects that let me combine analytical thinking with technical skills to develop impactful solutions in molecular bioengineering. My interests lie in leveraging bioinformatics within the biotech industry and exploring how computational methods can drive innovation in healthcare and biological research. I hope to pursue opportunities—both within and beyond my studies—that bridge science, technology and industry needs.
             </p>
           </div>
-
-          <div className="flex flex-col mt-10 items-center justify-center sm:flex-row sm:space-x-4 gap-3">
-            <AnimatedText delay={0.6}>
-              <Link
-                href={"https://github.com/aahmeddev"}
-                target="_blank"
-                className={cn(buttonVariants({ size: "lg" }))}
-                aria-label="View Ahmed Ahmed's GitHub profile"
-              >
-                <Icons.gitHub className="w-4 h-4 mr-2" /> GitHub
-              </Link>
-            </AnimatedText>
-            <AnimatedText delay={0.8}>
-              <Link
-                href={"https://www.linkedin.com/in/ahmed-ahmed-37554021a/"}
-                rel="noreferrer"
-                className={cn(
-                  buttonVariants({
-                    variant: "outline",
-                    size: "lg",
-                  })
-                )}
-                aria-label="View Ahmed's LinkedIn profile"
-              >
-                <Icons.linkedin className="w-4 h-4 mr-2" /> LinkedIn
-              </Link>
-            </AnimatedText>
+          <div className="flex flex-col sm:flex-row items-center gap-3 mt-6">
+            <Link
+              href="https://github.com/aahmeddev"
+              target="_blank"
+              className={cn(buttonVariants({ size: "lg" }))}
+              aria-label="View Ahmed Ahmed's GitHub profile"
+            >
+              <Icons.gitHub className="w-4 h-4 mr-2" /> GitHub
+            </Link>
+            <Link
+              href="https://www.linkedin.com/in/ahmed-ahmed-37554021a/"
+              target="_blank"
+              rel="noreferrer"
+              className={cn(buttonVariants({ variant: "outline", size: "lg" }))}
+              aria-label="View Ahmed's LinkedIn profile"
+            >
+              <Icons.linkedin className="w-4 h-4 mr-2" /> LinkedIn
+            </Link>
           </div>
-          <AnimatedText delay={1.2}>
-            <Icons.chevronDown className="h-6 w-6 mt-10" />
-          </AnimatedText>
         </div>
       </section>
+
+      {/* Skills Section */}
       <AnimatedSection
         className="container space-y-6 bg-muted py-10"
         id="skills"
@@ -182,6 +172,8 @@ export default function IndexPage() {
           </Link>
         </AnimatedText>
       </AnimatedSection>
+
+      {/* Experience Section */}
       <AnimatedSection
         direction="right"
         className="container space-y-6 py-10 my-14"
@@ -220,12 +212,9 @@ export default function IndexPage() {
             </Button>
           </Link>
         </AnimatedText>
-        {/* <div className="mx-auto text-center md:max-w-[58rem]">
-                    <p className="leading-normal text-muted-foreground sm:text-lg sm:leading-7">
-                        See all the relevant experiences.
-                    </p>
-                </div> */}
       </AnimatedSection>
+
+      {/* Blog Section */}
       <AnimatedSection
         direction="down"
         className="container space-y-6 bg-muted py-10 my-14"
