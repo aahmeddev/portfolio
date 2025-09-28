@@ -72,17 +72,19 @@ export default function IndexPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareSchema) }}
       />
 
-      <section className="space-y-6 pb-8 pt-6 mb-0 md:pb-12 md:py-20 lg:py-32 h-screen flex items-center">
+      <section className="space-y-7 pb-8 pt-6 mb-0 md:pb-12 md:py-20 lg:py-32 h-screen flex items-center">
         <div className="container flex max-w-[64rem] flex-col items-center gap-4 text-center -mt-20">
-          <Image
-            src={profileImg}
-            height={100}
-            width={100}
-            sizes="100vw"
-            className="bg-primary rounded-full mb-0 h-auto md:mb-2 w-[60%] max-w-[16rem] border-8 border-primary"
-            alt="Ahmed Ahmed Portfolio"
-            priority
-          />
+          <div className="flex justify-center items-center">
+            <Image
+              src={profileImg}
+              height={192} // 192px for a big profile, matches Tailwind w-48 h-48
+              width={192}
+              sizes="100vw"
+              className="rounded-full object-cover object-center border-8 border-primary shadow-lg w-48 h-48 bg-primary"
+              alt="Ahmed Ahmed Portfolio"
+              priority
+            />
+          </div>
           <AnimatedText
             as="h1"
             delay={0.2}
