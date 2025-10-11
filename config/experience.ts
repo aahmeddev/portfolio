@@ -12,7 +12,7 @@ interface DescriptionDetailsInterface {
   bullets: string[];
 }
 
-export interface ExperienceInterface {
+export interface ProjectInterface {
   id: string;
   type: ValidExpType;
   companyName: string;
@@ -27,9 +27,10 @@ export interface ExperienceInterface {
   descriptionDetails: DescriptionDetailsInterface;
   pagesInfoTitle?: string;
   pagesInfoArr: PagesInfoInterface[];
+  link?: string;
 }
 
-export const Experiences: ExperienceInterface[] = [
+export const Experiences: ProjectInterface[] = [
   {
     id: "dna-quality-control-toolkit",
     companyName: "DNA QC Toolkit",
@@ -130,6 +131,26 @@ export const Experiences: ExperienceInterface[] = [
       bullets: [],
     },
   },
+  {
+    id: "nanopore-basecalling",
+    link: "/blog/nanopore-basecalling",
+    companyName: "HMM Nanopore Basecaller",
+    type: "Personal Project",
+    category: ["Bioinformatics", "Computational Bioengineering","Blog"],
+    shortDescription:
+      "Explored and developed Hidden Markov Models for basecalling raw nanopore POD5 files.",
+    websiteLink: "https://github.com/aahmeddev/nanopore-sequencing/",
+    techStack: ["Python", "Biopython"],
+    startDate: new Date("2025-07-29"),
+    endDate: new Date("2025-08-15"),
+    companyLogoImg: "/portfolio/projects/nanopore-basecalling/img.png",
+    pagesInfoTitle: "",
+    pagesInfoArr: [],
+    descriptionDetails: {
+      paragraphs: [],
+      bullets: [],
+    },
+  }
 ];
 
 export const featuredExperiences = Experiences.slice(0, 3);

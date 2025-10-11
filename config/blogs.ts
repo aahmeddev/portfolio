@@ -10,22 +10,13 @@ export interface blogInterface {
 
 export const blogsUnsorted: blogInterface[] = [
   {
-    title: "AutoGen: Building the Future",
+    title: "Exploring Oxford Nanopore's Basecalling Algorithms",
     blogDescription:
-      "Improved the gallery component to showcase the community work. This involved restructuring the component architecture and implementing responsive design patterns.",
-    date: "10/09/2025",
-    link: "blog/autogen-building-future",
-    slug: "autogen-building-future",
-    tags: ["React", "Gallery", "Community"]
-  },
-  {
-    title: "Creative Commons Navbar Fix",
-    blogDescription:
-      "Closed Issue: Fixed navbar issue on the main website of creative common.",
+      "A hands-on, technical journey exploring how raw electrical signals become DNA sequences using open source data & algorithms— showcasing practical coding, data analysis, and exploring real-time genomics.",
     date: "15/08/2025",
-    link: "blog/creative-commons-navbar-fix",
-    slug: "creative-commons-navbar-fix",
-    tags: ["Open Source", "Bug Fix", "CSS"]
+    link: "blog/nanopore-basecalling",
+    slug: "nanopore-basecalling",
+    tags: ["Python", "Bioinformatics", "Nanopore-Sequencing"]
   }
 ];
 

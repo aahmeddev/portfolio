@@ -72,7 +72,7 @@ export default function IndexPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareSchema) }}
       />
 
-      {/* HERO SECTION: Everything fits, responsive, clean */}
+      {/* HERO SECTION */}
       <section className="w-full flex justify-center items-center bg-background">
         <div className="
             w-full

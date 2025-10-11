@@ -18,7 +18,7 @@ export type ValidCategory =
   | "Computational Bioengineering"
   | "UI/UX"
   | "Web Dev"
-  | "3D Modeling";
+  | "Blog";
 
 export type ValidExpType = "Personal Project" | "Professional";
 
