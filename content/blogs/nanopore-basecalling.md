@@ -1,6 +1,6 @@
-# Learning Oxford Nanopore's Basecalling Algorithms
-
---- 
+---
+title: Learning Oxford Nanopore's Basecalling Algorithms
+---
 
 # Introduction
 

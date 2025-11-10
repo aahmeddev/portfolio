@@ -1,11 +1,11 @@
 {
-  "name": "minimal-portfolio",
+  "name": "portfolio",
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build && touch out/.nojekyll",
-    "start": "next start",
+    "dev": "tinacms dev -c \"next dev\"",
+    "build": "tinacms build && next build",
+    "start": "tinacms build && next start",
     "lint": "next lint"
   },
   "dependencies": {
@@ -22,7 +22,7 @@
     "@sendgrid/mail": "^7.7.0",
     "@tailwindcss/line-clamp": "^0.4.4",
     "@tailwindcss/typography": "^0.5.19",
-    "@types/node": "20.4.5",
+    "@tinacms/datalayer": "^1.4.1",
     "@types/react": "18.2.18",
     "@types/react-dom": "18.2.7",
     "@vercel/analytics": "^1.0.2",
@@ -47,13 +47,18 @@
     "tailwind-merge": "^1.14.0",
     "tailwindcss": "3.3.3",
     "tailwindcss-animate": "^1.0.6",
+    "tinacms": "^2.9.1",
+    "tinacms-authjs": "^12.0.1",
     "types": "^0.1.1",
     "typescript": "5.1.6",
     "zod": "^3.21.4",
     "zustand": "^4.4.1"
   },
   "devDependencies": {
+    "@tinacms/cli": "^1.12.0",
+    "@types/node": "^24.10.0",
     "@types/nodemailer": "^6.4.9",
+    "cross-env": "^10.1.0",
     "prettier": "^3.3.3",
     "prettier-plugin-organize-imports": "^4.1.0"
   }
