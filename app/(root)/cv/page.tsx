@@ -112,7 +112,7 @@ export default function ResumePage() {
               <h4 className="text-xs font-semibold uppercase tracking-wider text-primary mb-2.5">
                 Year 2 Verified Marks (2025-2026 | Overall: 77.95%)
               </h4>
-              <div className="rounded-lg border border-border overflow-hidden">
+              <div className="rounded-lg border border-border overflow-x-auto">
                 <table className="w-full text-left text-xs sm:text-sm">
                   <thead className="bg-muted/60 text-muted-foreground">
                     <tr>
@@ -142,7 +142,7 @@ export default function ResumePage() {
               <h4 className="text-xs font-semibold uppercase tracking-wider text-primary mb-2.5">
                 Year 1 Verified Marks (2024-2025 | Overall: 81.57%)
               </h4>
-              <div className="rounded-lg border border-border overflow-hidden">
+              <div className="rounded-lg border border-border overflow-x-auto">
                 <table className="w-full text-left text-xs sm:text-sm">
                   <thead className="bg-muted/60 text-muted-foreground">
                     <tr>
@@ -193,7 +193,7 @@ export default function ResumePage() {
           <iframe
             src="/portfolio/Ahmed_Ahmed_CV.pdf"
             title="Ahmed Ahmed 1-Page CV PDF"
-            className="w-full h-[820px] rounded-lg border border-border bg-white"
+            className="w-full h-[480px] sm:h-[660px] lg:h-[820px] rounded-lg border border-border bg-white"
           />
         </div>
       </div>

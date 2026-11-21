@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import Image from "next/image";
 
 interface BlogImageProps {
   src: string;
@@ -6,58 +6,56 @@ interface BlogImageProps {
   width?: number;
   height?: number;
   caption?: string;
-  size?: 'small' | 'medium' | 'large' | 'full';
-  align?: 'left' | 'center' | 'right';
+  size?: "small" | "medium" | "large" | "full";
+  align?: "left" | "center" | "right";
   wrap?: boolean;
   rounded?: boolean;
   shadow?: boolean;
 }
 
 export default function BlogImage({
-                                    src,
-                                    alt,
-                                    width = 800,
-                                    height = 400,
-                                    caption,
-                                    size = 'medium',
-                                    align = 'center',
-                                    wrap = false,
-                                    rounded = true,
-                                    shadow = true
-                                  }: BlogImageProps) {
+  src,
+  alt,
+  width = 1000,
+  height = 560,
+  caption,
+  size = "large",
+  align = "center",
+  wrap = false,
+  rounded = true,
+  shadow = true,
+}: BlogImageProps) {
   const sizeClasses = {
-    small: 'w-48',
-    medium: 'w-64',
-    large: 'w-96',
-    full: 'w-full'
+    small: "max-w-sm w-full",
+    medium: "max-w-xl w-full",
+    large: "max-w-3xl w-full",
+    full: "w-full",
   };
 
-  // For non-wrapping (block) images - use span with block display
   if (!wrap) {
     const blockAlignClasses = {
-      left: 'mr-auto',
-      center: 'mx-auto',
-      right: 'ml-auto'
+      left: "mr-auto",
+      center: "mx-auto",
+      right: "ml-auto",
     };
 
     return (
-      <span className={`block my-8 ${blockAlignClasses[align]}`}>
-        <span className={`block ${sizeClasses[size]} ${blockAlignClasses[align]}`}>
+      <span className={`block my-7 ${blockAlignClasses[align]}`}>
+        <span
+          className={`block ${sizeClasses[size]} ${blockAlignClasses[align]} rounded-xl border border-border bg-white dark:bg-slate-950/85 p-2.5 ${
+            shadow ? "shadow-sm" : ""
+          }`}
+        >
           <Image
             src={src}
             alt={alt}
             width={width}
             height={height}
-            className={`
-              w-full h-auto
-              ${rounded ? 'rounded-lg' : ''}
-              ${shadow ? 'shadow-lg hover:shadow-xl' : ''}
-              transition-all duration-300 hover:scale-105
-            `}
+            className={`w-full h-auto object-contain ${rounded ? "rounded-lg" : ""}`}
             priority={false}
           />
           {caption && (
-            <span className="block text-sm text-muted-foreground text-center mt-2 italic">
+            <span className="block text-xs sm:text-sm text-muted-foreground text-center mt-2.5">
               {caption}
             </span>
           )}
@@ -66,11 +64,10 @@ export default function BlogImage({
     );
   }
 
-  // For wrapping (floating) images - use span with float
   const floatClasses = {
-    left: 'float-left mr-4 mb-2',
-    center: 'block mx-auto mb-4', // Center can't float
-    right: 'float-right ml-4 mb-2'
+    left: "float-left mr-4 mb-2",
+    center: "block mx-auto mb-4",
+    right: "float-right ml-4 mb-2",
   };
 
   return (
@@ -80,16 +77,11 @@ export default function BlogImage({
         alt={alt}
         width={width}
         height={height}
-        className={`
-          w-full h-auto
-          ${rounded ? 'rounded-lg' : ''}
-          ${shadow ? 'shadow-lg hover:shadow-xl' : ''}
-          transition-all duration-300 hover:scale-105
-        `}
+        className={`w-full h-auto object-contain ${rounded ? "rounded-lg" : ""}`}
         priority={false}
       />
       {caption && (
-        <span className="block text-sm text-muted-foreground text-center mt-2 italic">
+        <span className="block text-xs sm:text-sm text-muted-foreground text-center mt-2">
           {caption}
         </span>
       )}

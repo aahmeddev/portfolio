@@ -15,17 +15,17 @@ export const pagesConfig: PagesConfig = {
   home: {
     title: "Home",
     description:
-      "First Class MEng Molecular Bioengineering undergraduate at Imperial College London.",
+      "Molecular Bioengineering at Imperial College London.",
     metadata: {
       title: "Home",
       description:
-        "Ahmed Ahmed - MEng Molecular Bioengineering at Imperial College London. Nanopore sequencing, diagnostic bioassays, embedded instrumentation, and computational biology.",
+        "Ahmed Ahmed - Molecular Bioengineering at Imperial College London. Projects and research across nanopore sequencing, diagnostic bioassays, bioinstrumentation, and scientific software.",
     },
   },
   experience: {
     title: "Research & Industry Experience",
     description:
-      "Diagnostic assay development, multi-core chemical speciation pipelines, clinical shadowing, and executive budget governance.",
+      "Laboratory research, scientific software engineering, clinical shadowing, and departmental leadership.",
     metadata: {
       title: "Experience",
       description:
@@ -35,7 +35,7 @@ export const pagesConfig: PagesConfig = {
   projects: {
     title: "Engineering & Bioinformatics Projects",
     description:
-      "From-scratch nanopore basecalling, multi-threaded genomic quality control, prize-winning diagnostic hardware, and C++17 simulation engines.",
+      "Software tools, hardware prototypes, and experimental analyses built across sequencing, diagnostics, and bioinstrumentation.",
     metadata: {
       title: "Projects",
       description:
@@ -45,7 +45,7 @@ export const pagesConfig: PagesConfig = {
   skills: {
     title: "Technical Capabilities",
     description:
-      "Verified laboratory, computational, embedded hardware, and commercial skills built across Imperial research labs and industry R&D.",
+      "Laboratory techniques, programming languages, embedded instrumentation, and analytical tools used across my research and engineering work.",
     metadata: {
       title: "Skills",
       description:
@@ -53,29 +53,29 @@ export const pagesConfig: PagesConfig = {
     },
   },
   blog: {
-    title: "Technical Writing",
+    title: "Technical Articles & Lab Reports",
     description:
-      "Deep-dive engineering notes on nanopore signal processing, probabilistic basecalling, and molecular bioengineering.",
+      "Illustrated engineering writeups and laboratory research reports covering nanopore basecalling, optical CAD, epigenetics, nanomaterials, and biosignal processing.",
     metadata: {
-      title: "Blog",
+      title: "Articles & Reports",
       description:
-        "Ahmed Ahmed's technical articles on nanopore sequencing algorithms and bioengineering.",
+        "Ahmed Ahmed's technical articles and research reports on nanopore sequencing algorithms, spectrophotometry, epigenetics, and bioengineering.",
     },
   },
   CV: {
     title: "Curriculum Vitae",
     description:
-      "Verified Imperial College London academic transcript record, research history, and downloadable 1-page PDF CV.",
+      "Academic record, research timeline, and downloadable 1-page PDF curriculum vitae.",
     metadata: {
       title: "CV",
       description:
-        "Ahmed Ahmed's Curriculum Vitae, official Imperial College London module marks, and downloadable PDF.",
+        "Ahmed Ahmed's Curriculum Vitae, Imperial College London academic transcript, and downloadable PDF.",
     },
   },
   contact: {
     title: "Contact",
     description:
-      "Connect regarding biotech R&D, computational biology, nanopore sequencing, and 2027 placement opportunities.",
+      "Get in touch regarding research collaborations, biotech R&D, or placement opportunities.",
     metadata: {
       title: "Contact",
       description: "Contact Ahmed Ahmed for biotech, bioinformatics, and R&D roles.",

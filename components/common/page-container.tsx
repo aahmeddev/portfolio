@@ -15,9 +15,9 @@ export default function PageContainer({
 }: PageContainerProps) {
   return (
     <ClientPageWrapper>
-      <div>
+      <div className="w-full max-w-6xl mx-auto px-1 sm:px-2">
         <PageHeader title={title} description={description} />
-        <div className="mx-6">{children}</div>
+        <div className="w-full">{children}</div>
       </div>
     </ClientPageWrapper>
   );

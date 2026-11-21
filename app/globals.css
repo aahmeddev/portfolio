@@ -4,67 +4,67 @@
 
 @layer base {
   :root {
-    --background: 210 33% 99%;
-    --foreground: 220 45% 10%;
+    --background: 40 25% 98%;
+    --foreground: 222 38% 12%;
 
-    --muted: 210 30% 95%;
-    --muted-foreground: 215 18% 40%;
+    --muted: 38 18% 93%;
+    --muted-foreground: 218 15% 38%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 220 45% 10%;
+    --popover-foreground: 222 38% 12%;
 
-    --border: 214 28% 88%;
-    --input: 214 28% 88%;
+    --border: 35 16% 86%;
+    --input: 35 16% 86%;
 
     --card: 0 0% 100%;
-    --card-foreground: 220 45% 10%;
+    --card-foreground: 222 38% 12%;
 
-    --primary: 190 88% 32%;
-    --primary-foreground: 210 40% 99%;
+    --primary: 201 78% 28%;
+    --primary-foreground: 40 33% 99%;
 
-    --secondary: 210 30% 94%;
-    --secondary-foreground: 220 45% 12%;
+    --secondary: 38 20% 92%;
+    --secondary-foreground: 222 38% 14%;
 
-    --accent: 190 55% 93%;
-    --accent-foreground: 190 88% 24%;
+    --accent: 201 40% 93%;
+    --accent-foreground: 201 80% 22%;
 
-    --destructive: 0 84% 55%;
+    --destructive: 0 78% 52%;
     --destructive-foreground: 210 40% 98%;
 
-    --ring: 190 88% 32%;
-    --radius: 0.65rem;
+    --ring: 201 78% 28%;
+    --radius: 0.75rem;
   }
 
   .dark {
-    --background: 218 48% 5%;
-    --foreground: 210 33% 95%;
+    --background: 222 28% 8%;
+    --foreground: 40 20% 94%;
 
-    --muted: 217 36% 10%;
-    --muted-foreground: 215 18% 65%;
+    --muted: 222 22% 13%;
+    --muted-foreground: 215 16% 68%;
 
-    --accent: 215 34% 15%;
-    --accent-foreground: 186 90% 72%;
+    --accent: 215 26% 17%;
+    --accent-foreground: 196 80% 74%;
 
-    --popover: 218 46% 7%;
-    --popover-foreground: 210 33% 95%;
+    --popover: 222 28% 10%;
+    --popover-foreground: 40 20% 94%;
 
-    --border: 215 28% 17%;
-    --input: 215 28% 17%;
+    --border: 218 20% 19%;
+    --input: 218 20% 19%;
 
-    --card: 217 42% 8%;
-    --card-foreground: 210 33% 95%;
+    --card: 222 25% 11%;
+    --card-foreground: 40 20% 94%;
 
-    --primary: 186 86% 46%;
-    --primary-foreground: 218 55% 6%;
+    --primary: 196 76% 52%;
+    --primary-foreground: 222 35% 8%;
 
-    --secondary: 217 36% 12%;
-    --secondary-foreground: 210 33% 95%;
+    --secondary: 220 22% 15%;
+    --secondary-foreground: 40 20% 94%;
 
-    --destructive: 0 63% 40%;
+    --destructive: 0 63% 44%;
     --destructive-foreground: 210 40% 98%;
 
-    --ring: 186 86% 46%;
-    --radius: 0.65rem;
+    --ring: 196 76% 52%;
+    --radius: 0.75rem;
   }
 }
 
@@ -73,18 +73,22 @@
     @apply border-border;
   }
 
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground antialiased;
     font-feature-settings:
       "rlig" 1,
       "calt" 1;
   }
 }
 
-.biotech-grid-bg {
-  background-image:
-    radial-gradient(circle at 50% 0%, hsl(var(--primary) / 0.14), transparent 60%),
-    linear-gradient(to right, hsl(var(--border) / 0.32) 1px, transparent 1px),
-    linear-gradient(to bottom, hsl(var(--border) / 0.32) 1px, transparent 1px);
-  background-size: 100% 100%, 36px 36px, 36px 36px;
+.editorial-hero-bg {
+  background-image: radial-gradient(
+    ellipse 80% 60% at 50% 0%,
+    hsl(var(--primary) / 0.08),
+    transparent 70%
+  );
 }

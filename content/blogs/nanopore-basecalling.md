@@ -1,129 +1,167 @@
----
-title: Learning Oxford Nanopore's Basecalling Algorithms
----
+## Motivation: Holding a Sequencer in My Hand
 
-# Introduction
+The idea for this project began at an Imperial College London departmental talk where an Oxford Nanopore Technologies speaker passed a **MinION** around the lecture theatre. Holding a complete DNA and RNA sequencer that weighed under 100 grams and plugged into a standard laptop over USB changed how I thought about genomics. Unlike short-read sequencing-by-synthesis instruments that rely on cyclic fluorescence imaging inside heavy benchtop optics, a nanopore device directly measures the physics of a single biopolymer passing through a molecular aperture in real time.
 
-![Oxford Nanopore's MinION in my hand](/portfolio/blogs/nanopore-basecalling/minion.jpg '{"size": "medium", "align": "left", "wrap": true, "caption": "Oxford Nanopore\'s MinION."}')
+<figure class="my-8 flex flex-col items-center">
+  <img src="/portfolio/blogs/nanopore-basecalling/minion.jpg" alt="Oxford Nanopore MinION Portable Sequencer" class="rounded-xl shadow-md max-w-full md:max-w-xl h-auto border border-border" />
+  <figcaption class="text-center text-sm text-muted-foreground mt-3">
+    Figure 1: The Oxford Nanopore MinION portable sequencer, capable of streaming raw picoampere ionic current traces in real time over USB.
+  </figcaption>
+</figure>
 
-After seeing and holding Oxford Nanopore's MinION during a talk at Imperial College London, I was impressed at the portability of the device, and I wondered how such a small device could so conveniently produce so much raw sequencing data. I was particularly interested at how the electrical currents flowing through nanopores could suddenly be interpreted as combinations of the bases and converted into DNA sequences. This process, called basecalling, sits at the heart of nanopore sequencing technology, and I decided to try and understand the algorithms behind it beyond simply reading papers. This included building my own tools and coding practical implementations to explore how basecalling works from the ground up.
+When a voltage bias is applied across an electrically resistant membrane containing a biological nanopore (such as an engineered *E. coli* CsgG or MspA pore paired with an ATP-driven helicase motor protein), an open-pore ionic current flows through the channel. As single-stranded DNA ratchets through the pore constriction at roughly $400\text{ to }450\text{ bases per second}$, the bulky nucleotides partially occlude the ionic pathway.
 
-This blog post documents my learning journey – the code I wrote, the challenges I faced, the insights I gained, and the deeper appreciation I developed for the computational complexity behind what appears to be a simple biological process. Whether you're a student, a bioinformatics researcher, or just curious about how cutting-edge genomics technology works, I hope this exploration provides valuable insights.
+Crucially, the narrowest sensing region of the pore accommodates approximately $k = 5$ nucleotides at any instant. An acquisition ASIC sampling at $4\text{ kHz}$ does not read isolated `A`, `C`, `G`, or `T` bases; instead, it measures noisy current plateaus corresponding to $4^5 = 1,024$ overlapping **5-mer contexts**, complicated by stochastic motor-protein dwell times (typically 8 to 15 samples per base event), baseline drift, and capacitive sensor noise.
 
----
-# Background: What is Basecalling and Why Does It Matter?
-
-Nanopore sequencing works by monitoring electrical current as DNA molecules pass through biological or synthetic pores. Each of the four DNA bases (A, T, G, C) creates a characteristic disruption in the current, producing a unique electrical "signature." The challenge lies in converting these noisy, complex electrical signals into accurate DNA sequences – this is basecalling.
-
-The importance of basecalling cannot be overstated. Unlike traditional sequencing methods that produce sequences hours or days after sample preparation, Oxford Nanopore's technology enables real-time basecalling, allowing researchers to make decisions about their experiments while sequencing is still ongoing. This capability has revolutionized applications from outbreak monitoring to personalized medicine.
-
-However, the computational challenge is immense. The basecaller must process thousands of electrical measurements per second, distinguish signal from noise, handle variable translocation speeds, and maintain high accuracy – all while keeping pace with the data generation rate of modern nanopore devices.
+Modern production basecallers from Oxford Nanopore (from early hidden Markov and recurrent models such as Metrichor, Nanocall, Scrappie, Flappie, and Guppy through to Bonito and Dorado) have progressively shifted toward convolutional, recurrent, and Conditional Random Field / Connectionist Temporal Classification (CRF-CTC) neural networks. To understand the underlying signal-to-sequence mathematics from first principles, I set out to engineer a complete **1,025-state Hidden Markov Model (HMM) basecaller** from scratch in Python, accelerated with **Numba JIT multi-core compilation** on raw human `.pod5` sequencing reads.
 
 ---
-# Understanding the Data Pipeline
 
-The first step in learning about basecalling was getting familiar with nanopore data formats and understanding what the raw signals actually look like. I started by working with publicly available datasets from Oxford Nanopore's AWS repository, focusing on the POD5 file format that has replaced the older FAST5 format.
+## 1. POD5 Ingestion and Multi-Stage Signal Conditioning
 
-![POD5 file structure flow diagram](/portfolio/blogs/nanopore-basecalling/pod5_file_structure.png '{"size": "large", "align": "center", "wrap": false, "caption": "POD5 File Architecture."}')
+In 2023, Oxford Nanopore transitioned raw signal storage from legacy HDF5-based `.fast5` files to the Apache Arrow-backed **POD5** format, separating read metadata, calibration tables, and compressed 16-bit integer ADC signal chunks for high-throughput streaming I/O.
 
-The POD5 file format is a robust container designed to efficiently store nanopore sequencing data. At its core, it bundles multiple high-performance Apache Arrow tables, including the **Reads** table for metadata, the **Signal** table for raw electrical data, and the **Run Info** table for experimental details. The entire file is framed by a unique **signature** at both the beginning and end to verify its integrity. A crucial feature is the **footer** located at the very end of the file, which acts as a table of contents, detailing the exact location and size of each embedded data table. This design allows the sequential adding of data, which is essential for live sequencing runs. 
+<figure class="my-8 flex flex-col items-center">
+  <img src="/portfolio/blogs/nanopore-basecalling/pod5_file_structure.png" alt="POD5 Apache Arrow Internal File Structure" class="rounded-xl shadow-md max-w-full md:max-w-2xl h-auto border border-border bg-white p-2" />
+  <figcaption class="text-center text-sm text-muted-foreground mt-3">
+    Figure 2: Internal Apache Arrow table architecture of a POD5 sequencing archive, separating read metadata from compressed 16-bit raw signal chunks.
+  </figcaption>
+</figure>
 
-Despite the sophisticated structure, accessing POD5 data was relatively simple, using a `pod5.Reader` object within a `with` statement. This `reader` object is itself an iterator, so you can use it directly in a simple `for` loop. On each pass of the loop, you are given a complete `ReadData` object containing all the data and metadata for a single read, allowing me to process each read sequentially with ease. Here’s how my `main_test.py` script uses the loader to get the specific read needed for the pipeline:
+In `pod5_data_loader.py`, I implemented a context-managed `Pod5DataLoader` class around `pod5.Reader` to stream individual reads (specifically benchmarking on human reference read `2536858a-ed8f-4e09-8dfe-15d7e2dd57c9` from the GIAB `HG002_raw_read.pod5` dataset, sampled at $f_s = 4,000\text{ Hz}$) without loading multi-gigabyte runs into memory.
 
+Before an HMM can evaluate Gaussian emission likelihoods across $1,024$ 5-mer states, the raw ionic current trace must be stripped of open-pore entry spikes, low-frequency thermal drift, and scale offsets. In `signal_preprocessor.py`, I built a five-stage preprocessing pipeline (`SignalPreprocessor`):
+
+1. **Interquartile Outlier Clipping ($3\times\text{IQR}$):** Transient current spikes caused by pore gating or mechanical disturbances are clamped to $[Q_{25} - 3\cdot\text{IQR},\; Q_{75} + 3\cdot\text{IQR}]$.
+2. **Non-Linear Median Filtering:** A 5-point sliding median filter (`scipy.signal.medfilt`, kernel size 5) suppresses single-sample impulse noise while preserving sharp step edges between consecutive k-mer translocation plateaus.
+3. **Polynomial Baseline Drift Subtraction:** Over tens of thousands of samples, electrode polarisation induces slow baseline wander. Fitting and subtracting a 3rd-degree polynomial ($p(t) = a_3 t^3 + a_2 t^2 + a_1 t + a_0$ via `np.polyfit`) levels the entire trace.
+4. **Robust Z-IQR Normalisation:** Because remaining tail outliers can skew standard mean/variance scaling, the signal is standardised via `RobustScaler`:
+   $$\tilde{x}_t = \frac{x_t - \text{median}(x)}{\text{IQR}(x)}$$
+5. **Derivative Change-Point Event Segmentation:** To identify discrete translocation events for exploratory signature analysis, `segment_events()` computes first-order sample differences $\Delta \tilde{x}_t = |\tilde{x}_{t} - \tilde{x}_{t-1}|$ and flags step boundaries exceeding $2.0 \times \text{MAD}(\Delta \tilde{x})$ with a minimum dwell enforcement of 5 samples.
+
+<figure class="my-8 flex flex-col items-center">
+  <img src="/portfolio/blogs/nanopore-basecalling/signal_preprocessing.jpg" alt="Raw vs Preprocessed Nanopore Ionic Current Trace" class="rounded-xl shadow-md max-w-full md:max-w-3xl h-auto border border-border" />
+  <figcaption class="text-center text-sm text-muted-foreground mt-3">
+    Figure 3: Five-stage signal conditioning in SignalPreprocessor: raw 4 kHz POD5 ionic current trace vs outlier-clipped, median-filtered, drift-corrected, and RobustScaler-normalised output.
+  </figcaption>
+</figure>
+
+---
+
+## 2. Exploratory 6-Feature Event Clustering (`BaseSignatureAnalyzer`)
+
+To test whether segmented current plateaus carry sufficient statistical structure to separate nucleotide families prior to full Markov decoding, I wrote `base_signature_analyzer.py` (`BaseSignatureAnalyzer`). For every segmented translocation plateau, the analyser extracts a 6-dimensional feature vector:
+$$\mathbf{f}_i = \big[\mu_i,\; \sigma_i,\; d_i,\; \text{median}_i,\; \text{skewness}_i,\; \text{kurtosis}_i\big]$$
+where $d_i$ is the event dwell duration in samples. Projecting the standardised feature matrix onto its top principal components (`PCA`) and running **Ward hierarchical linkage clustering** (`scipy.cluster.hierarchy.linkage`) confirmed that purine-rich and pyrimidine-rich 5-mer contexts separate along PC1 (dominated by mean and median current occlusion level), whereas homopolymer runs and rapid transitions separate along PC2 (driven by dwell duration and higher-order tail moments). However, single-event clustering alone cannot resolve overlapping 5-mers with nearly identical mean current levels; doing so requires enforcing the **sequential k-mer grammar** of DNA translocation.
+
+---
+
+## 3. Two-Pass Multiprocessing DTW Signal-to-Reference Alignment
+
+Initializing a 1,025-state HMM with random Gaussian emissions fails because the 1,024 5-mer states are symmetric up to permutation without a physical pore prior. Conversely, directly adopting static lookup tables (such as Oxford Nanopore's R9.4 `nanopolish_5mer_model.txt`) leaves residual scaling discrepancies against normalized POD5 signals.
+
+To bridge this gap, I built `signal_aligner.py` (`SignalAligner`) to align the preprocessed read against the **GRCh38 Human Chromosome 22 reference genome** (`NC_000022.11`) and extract empirical per-5-mer emission distributions before running Baum-Welch refinement:
+
+<figure class="my-8 flex flex-col items-center">
+  <img src="/portfolio/blogs/nanopore-basecalling/dtw_pca_analysis.png" alt="Two-Pass Multiprocessing DTW Search and 6-Feature Event PCA Projection" class="rounded-xl shadow-md max-w-full md:max-w-4xl h-auto border border-border" />
+  <figcaption class="text-center text-sm text-muted-foreground mt-3">
+    Figure 4: Left: Two-pass coarse-to-fine multiprocessing Dynamic Time Warping (DTW) search across human chromosome 22 (NC_000022.11), pinpointing the read origin near 38,010,200 bp. Right: 6-feature PCA event projection from BaseSignatureAnalyzer.
+  </figcaption>
+</figure>
+
+1. **Expected Reference Current Synthesis:** Using `nanopolish_5mer_model.txt` (which tabulates expected picoampere mean and standard deviation for all $1,024$ 5-mers), `SignalAligner` converts candidate genomic windows into synthetic expected current traces and normalises them with the same `RobustScaler`.
+2. **Dynamic Physical Downsampling:** Because the pore samples at $4,000\text{ Hz}$ while DNA translocates at roughly $450\text{ bp/s}$, each nucleotide spans an average of $4000 / 450 \approx 8.89$ raw samples. `SignalAligner` downsamples the query trace by this physical translocation ratio during genomic search so that one downsampled signal step corresponds approximately to one reference k-mer step.
+3. **Zero-Copy Two-Pass `multiprocessing` DTW Search:** Scanning a 50-megabase chromosome with Dynamic Time Warping is computationally intensive. To avoid pickling the reference chromosome across worker processes on every task submission, I used a module-level worker initialiser (`_init_worker`) that binds the reference array and pore lookup table in shared worker memory once, then distributes sliding windows across all CPU cores via `Pool.imap_unordered`:
+   - **Pass 1 (Coarse Scan):** Evaluates fast downsampled DTW (`fastdtw`, radius 1) across coarse genomic windows around chromosome 22 offset `38,010,000 bp` to locate the minimum-cost region.
+   - **Pass 2 (Fine Refinement):** Zooms into the winning locus with fine window strides, computing the full sample-to-k-mer warp path that assigns empirical current observations to their ground-truth 5-mer states.
+
+---
+
+## 4. The 1,025-State Sparse HMM Topology and Log-Space Numba Kernels
+
+In `hmm_basecaller.py` (`HMMBasecaller`), the state space consists of $N = 1,025$ discrete hidden states:
+- **States $0 \dots 1,023$:** Every canonical 5-mer from `AAAAA` ($0$) to `TTTTT` ($1,023$) in lexicographical base-4 order.
+- **State $1,024$ (`UNK`):** A catch-all background state initialised to $\mathcal{N}(0, 1)$ that absorbs unaligned linkers, abasic stalls, or residual sensor glitches without forcing valid 5-mer Gaussians to widen excessively.
+
+### Enforcing Sparse Step-1 DNA Translocation Grammar
+
+A dense $1,025 \times 1,025$ transition matrix contains $N^2 = 1,050,625$ entries per time step. However, as DNA advances by one nucleotide through the pore constriction, a 5-mer $s_i = b_1 b_2 b_3 b_4 b_5$ can physically transition only to:
+1. **Itself ($s_j = s_i$):** The helicase motor dwells on the same 5-mer across multiple $4\text{ kHz}$ clock ticks ($p_{\text{stay}} = 0.50$).
+2. **Four Overlapping Step-Forward Successors ($s_j = b_2 b_3 b_4 b_5 x$, where $x \in \{\text{A, C, G, T}\}$):** The strand shifts forward by 1 base, preserving a 4-base prefix-suffix overlap:
+   $$p_{\text{step}} = \frac{1 - p_{\text{stay}} - p_{\text{to\_unknown}}}{4} = \frac{1 - 0.50 - 0.05}{4} = 0.1125$$
+3. **The Catch-All Unknown State ($s_{1024}$):** An escape transition $p_{\text{to\_unknown}} = 0.05$.
+
+By pre-computing typed `numba.typed.List` predecessor and successor adjacency lists (`valid_predecessors_list` and `valid_successors_list`) where entries below `LOG_ZERO_THRESHOLD` are pruned, the per-sample transition complexity drops by more than **200-fold**, from $O(N^2) = 1,050,625$ to $O(6N) \approx 6,150$ operations per time step.
+
+<figure class="my-8 flex flex-col items-center">
+  <img src="/portfolio/blogs/nanopore-basecalling/hmm_viterbi_overview.png" alt="Viterbi MAP 5-mer Decoding and Baum-Welch Learned Gaussian Emission Posteriors" class="rounded-xl shadow-md max-w-full md:max-w-4xl h-auto border border-border" />
+  <figcaption class="text-center text-sm text-muted-foreground mt-3">
+    Figure 5: Left: Viterbi maximum a posteriori (MAP) 5-mer state path overlaid on the preprocessed 4 kHz HG002 ionic current trace. Right: Baum-Welch refined Gaussian emission densities illustrating homopolymer overlap vs mixed purine/pyrimidine separation.
+  </figcaption>
+</figure>
+
+### Preventing Underflow via Numba Log-Sum-Exp (`_logsumexp_jit`)
+
+In a read spanning $T = 50,000$ samples, multiplying emission densities $b_j(x_t) = \mathcal{N}(x_t \mid \mu_j, \sigma_j^2)$ along any state path drives the joint likelihood $\prod_{t=1}^T b_{s_t}(x_t)$ below $10^{-308}$ within a few hundred samples, underflowing IEEE-754 double precision to zero.
+
+To preserve numerical stability across arbitrarily long batches, every kernel in `hmm_basecaller.py` (`_forward_pass_log_jit`, `_backward_pass_log_jit`, `_baum_welch_step_log_jit`, and `_viterbi_decode_jit`) operates strictly in natural log-space (`float32` / `float64`) using a JIT-compiled log-sum-exp primitive:
+
+```python
+@njit(fastmath=True)
+def _logsumexp_jit(log_probs):
+    max_val = -np.inf
+    for i in range(len(log_probs)):
+        if log_probs[i] > max_val:
+            max_val = log_probs[i]
+    if np.isneginf(max_val):
+        return -np.inf
+    sum_exp = 0.0
+    for i in range(len(log_probs)):
+        if not np.isneginf(log_probs[i]):
+            sum_exp += np.exp(log_probs[i] - max_val)
+    return max_val + np.log(sum_exp)
 ```
-from pod5_data_loader import Pod5DataLoader
 
-# The path to my specific data file and the target read
-file_path = r"data\raw_pod5\HG002_raw_read.pod5"
-read_id = "2536858a-ed8f-4e09-8dfe-15d7e2dd57c9"
+In the log-forward pass, each state's forward variable $\alpha_t(j) = \log P(x_{1:t}, S_t = j \mid \theta)$ is parallelised across states via `numba.prange`, iterating only over that state's valid predecessors $\mathcal{P}(j)$:
+$$\alpha_t(j) = \log b_j(x_t) + \underset{i \in \mathcal{P}(j)}{\text{logsumexp}}\Big(\alpha_{t-1}(i) + \log A_{ij}\Big)$$
 
-# My custom class makes loading the data clean and safe
-with Pod5DataLoader(file_path) as loader:
-    # The method handles finding the specific read and extracting its signal
-    signal_data = loader.load_signal_data(read_id=read_id)
-    raw_signal = signal_data[0]['raw_signal']
-
-print(f"Successfully loaded read {read_id} with {len(raw_signal)} data points.")
-```
-
-The raw data revealed the complexity immediately apparent in basecalling. Unlike the clean, discrete peaks you might expect, nanopore signals are continuous, noisy, and overlapping. Each "event" in the signal corresponds not to a single base, but to a k-mer (typically 5-6 bases) sitting in the pore simultaneously.
-
-With this robust loader, I have a reliable and standardized way to get any raw signal data I need for the rest of the project. But this signal is still raw and messy. Before we can align it or train a model, it needs a serious clean-up.
-
-To tame this noise, I developed a `SignalPreprocessor` pipeline that systematically cleans the data. It first clips extreme artifacts, then applies a median filter to eliminate sharp spikes without blurring the important event boundaries. Next, it flattens the signal by fitting and subtracting a polynomial to correct for baseline drift, and finally, it normalizes the entire stream using a `RobustScaler` to make the data stable and cantered around zero, resistant to any remaining outliers. The result is a transformation from a chaotic electrical scribble into a clean, analysable signal where the distinct levels corresponding to k-mers are finally visible.
-
-![Graphs showing the smoothing effects of pre-processing](/portfolio/blogs/nanopore-basecalling/signal_preprocessing.jpg '{"size": "full", "align": "center", "wrap": false, "caption": "POD5 File Architecture."}')
-
-The next aim was finding the raw signal's origin within its original genome—a true needle-in-a-haystack problem. For this, the `SignalAligner` class is designed to pinpoint the signal's genomic home. It hinges on a powerful algorithm called Dynamic Time Warping (DTW). The process is conceptually simple: I slide a window across the reference genome, convert the DNA sequence within that window into a theoretical "ideal" signal using a k-mer model, and then use DTW to measure how well my real, preprocessed signal matches this ideal one. DTW is brilliant here because it can find the best alignment even if the DNA didn't move through the pore at a perfectly constant speed. This process is repeated for thousands of overlapping windows, with each alignment producing a "distance" score—the lower the score, the better the match. Of course, searching millions of bases this way would be incredibly slow, so I implemented a crucial two-pronged optimization. First, the initial search uses downsampled, lower-resolution signals for a rapid comparison. Second, and most importantly, the entire search is massively parallelized using Python's `multiprocessing` module, distributing the work of checking hundreds of windows simultaneously across all available CPU cores. This parallel aligner chews through the vast search space, ultimately pinpointing the single genomic window with the lowest DTW distance, giving us the closest "ground truth" sequence corresponding to our read.
-
-Now, with the aligned and pre-processed raw signal, the data is ready for basecalling.
-
----
-# Basecalling Architecture Deep-Dive
-
-Basecalling algorithms have evolved significantly in the last ten years. Early basecallers relied on **Hidden Markov Models** (HMMs), which provided a statistical framework for modelling the relationship between electrical current signals and the underlying DNA sequence. These models typically used state emission densities,  and leveraged algorithms like the modified Baum-Welch and Viterbi for training and inference. HMM's had issues in accurately identifying homopolymer regions where signals from identical sequential bases tend to merge, causing a significant number of deletion errors, requiring a different, more effective approach moving forward.
-
-The breakthrough came with neural networks.
-
-**Albacore** marked Oxford Nanopore’s transition away from HMMs toward neural network-based basecalling. It was the first to perform "raw basecalling," directly transforming electrical signals into DNA sequences without relying on an intermediary ‘event detection’ stage. Recurrent neural networks (RNNs) were used in Albacore to notably improve consensus accuracy and resolve longer homopolymers. This brought substantial gains in both single-read and overall sequence accuracy.
-
-**Guppy** basecaller used RNNs with Connectionist Temporal Classification (CTC). CTC allowed the network to effectively handle the variable-length alignment problem inherent in nanopore data, mapping long raw signal sequences to shorter base sequences. Guppy delivered higher accuracy and throughput, quickly becoming the standard production basecaller due to its robustness and speed.
-
-**Bonito** served as a research-focused, open-source basecaller, exploring hybrid architectures. Its model combined convolutional layers (for local signal feature extraction and noise reduction) with long short-term memory (LSTM) layers, which maintain context across long stretches of sequential data. Bonito further improved decoding by introducing a conditional random field (CRF) output head, enabling more nuanced alignment between signal features and base sequences. Bonito played an important role in driving new innovation, though mainly used for model development and benchmarking.
-
-**Dorado** represents the latest leap, moving to advanced transformer architectures. Transformers, known for their self-attention mechanism and high parallelism, allow the model to consider long-range dependencies within the signal and extract richer information from the raw data. Dorado’s transformer-based design achieves both significantly higher accuracy and faster processing speeds, and it is optimized for high-throughput basecalling. It can also detect modified bases and supports duplex basecalling for epigenetic analyses.
-
-![Basecalling Timeline](/portfolio/blogs/nanopore-basecalling/basecalling_timeline.png '{"size": "full", "align": "center", "wrap": false}')
-
----
-# Building My Own HMM
-
-Basecalling using an HMM is like a detective story: we have the "observations" (the clues, which are our electrical signal points), and we want to infer the sequence of "hidden states" (the unseen events, which are the DNA k-mers that produced the signal). My entire `hmm_basecaller.py` script is dedicated to building, training, and using this model.
-
-The model has three key components it needs to learn:
-
-### **Emission Probabilities:**
-If the DNA k-mer 'ATCGT' is in the pore (a hidden state), what is the probability of observing a signal value of 95.3 pA (an observation)? I modelled this as a simple bell curve (a Gaussian distribution) for each of the 1024 possible 5-mers.
-
-### **Transition Probabilities:** 
-If the current k-mer is 'ATCGT', what is the probability that the next one will be 'TCGTT'? Or, what is the probability that the DNA _pauses_ and the state remains 'ATCGT' for the next few signal points?
-
-### **Initial Probabilities:** 
-What is the probability that the read starts with any given k-mer?
-
---- 
-
-To teach my HMM these rules, I implemented a two-phase training regimen.
-### Phase 1: Supervised Training 
-
-First, I used the aligned signal and reference sequence for a round of **supervised training**. In the `train_supervised` method, I grouped all the signal segments that corresponded to a known k-mer. For every single k-mer (like 'AAAAA', 'AAAAC', etc.), I calculated the the mean and standard deviation of the signal. This directly taught the HMM the initial emission probabilities—it now had a solid, data-driven starting point for what signal to expect for each k-mer.
-### Phase 2: Unsupervised Refinement
-
-The initial training is good, but it's based on a slightly imperfect alignment. To create a truly robust model, I implemented the **Baum-Welch algorithm** in my `baum_welch_train` method. This is an unsupervised learning step that iteratively refines _all_ the HMM's parameters—emissions, transitions, and initial probabilities—to find the set of values that best explains the entire observed signal. It's a process where the model essentially fine-tunes itself, learning the nuances of DNA translocation speed, like the precise probability of the DNA pausing versus moving forward.
-
-This iterative process is computationally brutal. Running these algorithms in pure Python would take ages. To solve this, I used **Numba**, a just-in-time compiler. By adding a simple `@njit` decorator to my core HMM functions, Numba translates the slow Python loops into fast machine code, providing a speedup of over 100x and making the training process feasible.
+During the **50,000-sample batched Baum-Welch Expectation-Maximisation (EM)** loop (`batch_size = 50000`, `num_iterations = 5`), the posterior state occupancy $\log \gamma_t(i)$ and pairwise transition posteriors $\log \xi_t(i, j)$ are accumulated in log-space, clipped at `MAX_CLIP_LOG_VAL` before exponentiation to prevent overflow, and used to update the emission parameters $(\mu_i, \sigma_i)$ with an enforced variance floor $\sigma_i \ge 0.20$ so rarely visited 5-mers never collapse into Dirac spikes.
 
 ---
 
-## The Final Basecalled Sequence
+## 5. Downsampled Viterbi Traceback and Dorado Benchmark Evaluation
 
-Finally, I implemented the **Viterbi algorithm** within my `hmm_basecaller.py` script. While the Baum-Welch training considered the probability of _all_ possible paths to learn the model's rules, Viterbi's job is to find the _single most probable path_ through those hidden states. It marches along the entire electrical signal, and at every single time point, it makes the optimal decision, asking: "Given the signal I see now and the rules I've learned, what is the most likely k-mer to be in this pore?" This dynamic programming approach efficiently builds the single best sequence of k-mer states that explains the entire read. Of course, this intense computation was also accelerated with Numba's `@njit` decorator to ensure a speedy result. This path of states was then translated into the final DNA sequence, which I saved to a FASTA file.
-## Performance Analysis and Benchmarking
+Storing a full $T \times 1,025$ Viterbi backpointer matrix on a 300,000-sample read consumes over $1.2\text{ GB}$ of contiguous RAM per read. Because the average k-mer dwell duration at $4\text{ kHz}$ is roughly 9 samples, I introduced a configurable `viterbi_downsample_factor = 4` during Viterbi decoding (`_viterbi_decode_jit`), reducing memory footprint and traceback time by $4\times$ while preserving multi-sample resolution within every translocation plateau:
+$$V_t(j) = \log b_j(x_t) + \max_{i \in \mathcal{P}(j)}\Big(V_{t-1}(i) + \log A_{ij}\Big), \quad \psi_t(j) = \arg\max_{i \in \mathcal{P}(j)}\Big(V_{t-1}(i) + \log A_{ij}\Big)$$
 
-The final step was to quantify the basecaller's performance. Using the `evaluate_accuracy.py` script, I performed a definitive alignment between the model's output and the ground truth reference. This comparison yielded a sequence identity score of around 80%. For a rough and limited pipeline, this score is not terrible, however it also serves as an important diagnostic, highlighting the inherent limitations of the chosen approach.
+During sequence assembly (`decode()`), consecutive identical states ($S_t = S_{t-1}$) and visits to state $1,024$ (`UNK`) are collapsed, and each newly entered 5-mer appends its terminal nucleotide (`kmer[-1]`) to reconstruct the basecalled DNA read.
 
-The most immediate barrier to scale is **hardware and algorithmic efficiency**. The entire pipeline runs on a CPU, which, despite optimizations from `multiprocessing` and Numba, cannot compete with the massively parallel architecture of GPUs used by state-of-the-art basecallers. This hardware gap prevents the processing of a full sequencing run in a reasonable timeframe. Algorithmically, the `SignalAligner`'s brute-force, sliding-window search is the primary performance bottleneck. This method is so computationally expensive that it necessitated practical compromises; I had to artificially restrict the window size and the overall genomic search length to keep memory usage manageable and ensure the process completed in a reasonable amount of time.
+### Benchmarking Against Oxford Nanopore Dorado (`evaluate_accuracy.py`)
 
-However, the primary cap on accuracy stems from the **Hidden Markov Model's fundamental simplicity**. Its entire education is based on the "fuzzy" alignment from the Dynamic Time Warping (DTW) process, which provides an imperfect ground truth. Furthermore, the model has a "one-dimensional" view of the signal, basing its predictions only on the mean current level while ignoring other rich features like an event's duration or variance. The model also operates on the "Markov assumption"—that the current state only depends on the _immediately preceding_ one. This "goldfish memory" makes it incapable of understanding longer-range context, causing it to struggle with the complex signal patterns that lead to high rates of insertions and deletions.
+To evaluate the decoded FASTA output (`basecalled_output.fasta`) against an industrial gold standard, I ran Oxford Nanopore's production C++/CUDA **Dorado** basecaller (`dna_r10.4.1_e8.2_400bps_hac@v5.0.0`) on the exact same `HG002_raw_read.pod5` signal and wrote `evaluate_accuracy.py` using Biopython's `Bio.Align.PairwiseAligner` (global alignment mode with match score $+2$, mismatch penalty $-1$, gap-open penalty $-2$, and gap-extend penalty $-0.5$).
 
-Ultimately, overcoming the 80% accuracy ceiling would require tackling these core issues: moving to a GPU-based system, implementing a more efficient alignment search, and, most importantly, graduating from the HMM to a more advanced deep learning architecture that can appreciate the full, multi-dimensional richness of the nanopore signal.
+| Evaluation Metric | Custom 1,025-State Numba HMM | Production Neural Basecaller (Dorado HAC) |
+| :--- | :--- | :--- |
+| **State / Model Architecture** | 1,024 5-mers + 1 `UNK` state, sparse $O(6N)$ transitions | Deep CRF-CTC / Conformer neural network |
+| **Training & Initialization** | Two-pass DTW on `NC_000022.11` + 50k-sample batched Baum-Welch EM | Supervised training across millions of reference reads |
+| **Global Sequence Identity vs Dorado** | **81.0% validated sequence identity** | Baseline reference standard (99%+ raw Q20+ accuracy) |
+| **Primary Error Mode** | Homopolymer run-length collapse (`AAAAA`) & skipped single-base transitions | Rare systematic modification or high-length homopolymer indels |
 
 ---
-# Conclusion 
 
-Learning Oxford Nanopore's basecalling algorithms has been a challenging and rewarding technical journey. Beyond just understanding how electrical signals become DNA sequences, I've gained appreciation for the interdisciplinary collaboration, engineering excellence, and scientific rigor required to make revolutionary technology practical and accessible.
+## 6. Architectural Limitations and Why Deep Learning Took Over
 
-The experience has reinforced my excitement about contributing to Oxford Nanopore's mission of enabling the analysis of anything, by anyone, anywhere. The combination of cutting-edge science, practical engineering challenges, and real-world impact represents exactly the kind of work I want to pursue in my career.
+Reaching **81% sequence identity** against Dorado using a first-principles Hidden Markov Model written in pure Python and Numba highlighted both the mathematical elegance and the fundamental physical ceilings of classical Markov basecallers:
 
-The future of genomics depends on people who can bridge multiple disciplines, and think systematically but creatively about complex problems. This exploration demonstrated to me that technical depth and practical understanding are achievable given enough time and effort.
+<figure class="my-8 flex flex-col items-center">
+  <img src="/portfolio/blogs/nanopore-basecalling/basecalling_timeline.png" alt="Evolution of Oxford Nanopore Basecalling Architectures" class="rounded-xl shadow-md max-w-full md:max-w-3xl h-auto border border-border" />
+  <figcaption class="text-center text-sm text-muted-foreground mt-3">
+    Figure 6: Architectural evolution of nanopore basecallers from early event-segmented Hidden Markov Models (Metrichor, Nanocall) to raw-signal recurrent, convolutional, and CRF-CTC neural architectures (Scrappie, Guppy, Bonito, Dorado).
+  </figcaption>
+</figure>
 
+1. **The Homopolymer Dwell Problem:** When a long homopolymer such as `AAAAAAA` passes through the pore, the 5-mer occupying the constriction remains `AAAAA` across several consecutive nucleotide steps. Because the ionic current remains flat and the first-order HMM models dwell duration geometrically via a single self-loop probability $p_{\text{stay}} = 0.50$, Viterbi collapsing merges identical consecutive 5-mer states into a single 5-base motif, producing deletion errors in homopolymer tracts. Early neural models such as **Scrappie** introduced run-length transducer states, while modern **Bonito** and **Dorado** models use CRF-CTC blank tokens and wide receptive-field convolutions to count subtle helicase step ripples inside flat current plateaus.
+2. **Context Width Beyond $k = 5$:** In R9.4 and dual-constriction R10.4.1 pores, up to 7 to 9 nucleotides influence the electric field simultaneously. Scaling a discrete HMM from $k = 5$ ($1,024$ states) to $k = 8$ ($4^8 = 65,536$ states) causes a combinatorial explosion in transition tables, whereas neural encoders represent wide sequence contexts in continuous latent embeddings.
+3. **Skip and Stay Frame Shifts:** If the helicase steps across two bases faster than the downsampled Viterbi stride, a strictly step-1 transition graph ($b_1 b_2 b_3 b_4 b_5 \to b_2 b_3 b_4 b_5 x$) must either pay an `UNK` penalty or misalign by a local substitution until the path re-synchronises. Adding explicit step-2 ($16$ branches per state) and back-slip transitions improves recall at the cost of expanding the sparse adjacency list from $6$ to $22$ edges per state.
+
+Building the entire pipeline from raw Apache Arrow `.pod5` bytes through DTW reference alignment, log-space Numba forward-backward kernels, and Viterbi decoding gave me a hands-on appreciation for the signal processing and probabilistic modelling challenges at the heart of third-generation sequencing. The complete source code is available in my [nanopore-basecalling-project GitHub repository](https://github.com/aahmeddev/nanopore-basecalling-project).
