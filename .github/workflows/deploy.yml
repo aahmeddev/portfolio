@@ -22,7 +22,7 @@ jobs:
           node-version: "20"
           cache: 'npm'
       - name: Install dependencies
-        run: npm ci
+        run: npm ci --legacy-peer-deps
       - name: Build with Next.js
         # This 'env' block makes the secret available to the 'npm run build' command
         env:

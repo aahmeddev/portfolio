@@ -45,7 +45,7 @@ export const blogsUnsorted: blogInterface[] = [
     slug: "custom-ccd-spectrophotometer",
     category: "Optical Bioinstrumentation & CAD",
     readTime: "9 min read",
-    coverImage: "/portfolio/projects/pulse-oximeter-spectrophotometer/cad_isometric.png",
+    coverImage: "/portfolio/projects/pulse-oximeter-spectrophotometer/cad_lid_grating.png",
     tags: ["SolidWorks CAD", "STM32", "TCD1304 CCD", "Optics", "Python"],
   },
   {
@@ -57,7 +57,7 @@ export const blogsUnsorted: blogInterface[] = [
     slug: "myowave-ehg-diagnostics",
     category: "Medtech Hardware & Full-Stack DSP",
     readTime: "10 min read",
-    coverImage: "/portfolio/projects/myowave-ehg/pcb_angled_3d.png",
+    coverImage: "/portfolio/projects/myowave-ehg/pcb_top_3d.png",
     tags: ["KiCad PCB", "ADS1299", "SciPy DSP", "NiceGUI", "Arduino Due"],
   },
   {

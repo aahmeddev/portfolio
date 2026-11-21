@@ -64,7 +64,7 @@ export const Experiences: ProjectInterface[] = [
     ],
     startDate: new Date("2025-07-29"),
     endDate: new Date("2025-08-15"),
-    companyLogoImg: "/portfolio/blogs/nanopore-basecalling/minion.jpg",
+    companyLogoImg: "/portfolio/projects/nanopore-hmm-basecaller/nanopore_mk1c_photo.jpg",
     keyMetrics: [
       {
         label: "Validated Accuracy",
