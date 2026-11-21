@@ -8,9 +8,9 @@ import { ClientPageWrapper } from "@/components/common/client-page-wrapper";
 import { Icons } from "@/components/common/icons";
 import ProjectCard from "@/components/experience/project-card";
 import { Button, buttonVariants } from "@/components/ui/button";
-import { blogsUnsorted } from "@/config/blogs";
+import { blogsUnsorted, featuredBlogs } from "@/config/blogs";
 import { careerExperiences } from "@/config/career";
-import { featuredExperiences } from "@/config/experience";
+import { Experiences, featuredExperiences } from "@/config/experience";
 import { pagesConfig } from "@/config/pages";
 import { siteConfig } from "@/config/site";
 import { skillPillars } from "@/config/skills";
@@ -27,28 +27,32 @@ export const metadata: Metadata = {
 
 const visualShowcase = [
   {
-    title: "1,025-State HMM Nanopore Basecaller",
-    caption: "Viterbi 5-mer decoding & Gaussian emission posteriors on 4 kHz POD5 reads",
-    img: "/portfolio/projects/nanopore-hmm-basecaller/hmm_viterbi_overview.png",
+    title: "Oxford Nanopore MinION Basecalling",
+    caption: "1,025-state Numba HMM decoding raw 4 kHz POD5 signals (81% identity vs Dorado)",
+    img: "/portfolio/blogs/nanopore-basecalling/minion.jpg",
     href: "/blog/nanopore-basecalling",
+    isPhoto: true,
   },
   {
     title: "MYOWAVE 24-Bit Biopotential PCB",
     caption: "Custom KiCad ADS1299-6PAGR acquisition shield for uterine EHG diagnostics",
     img: "/portfolio/projects/myowave-ehg/pcb_angled_3d.png",
     href: "/projects/myowave-ehg-platform",
+    isPhoto: false,
   },
   {
     title: "Custom Linear CCD Spectrophotometer",
-    caption: "SolidWorks asymmetrical sawtooth ceiling baffle & 45-degree specular V-trap",
-    img: "/portfolio/projects/pulse-oximeter-spectrophotometer/cad_improvements_breakdown.png",
+    caption: "SolidWorks 3D optical enclosure with sawtooth baffle & 45-degree V-trap",
+    img: "/portfolio/projects/pulse-oximeter-spectrophotometer/cad_isometric.png",
     href: "/blog/custom-ccd-spectrophotometer",
+    isPhoto: false,
   },
   {
-    title: "Diabetic Wound Epigenetics (p = 0.002)",
-    caption: "COL1A1 promoter CpG bisulphite sequencing & 35-cycle RT-PCR remodeling",
-    img: "/portfolio/projects/diabetic-wound-epigenetics/cpg_methylation_summary.png",
-    href: "/blog/diabetic-wound-epigenetics",
+    title: "Quantum Dots & Plasmonic Nanorods",
+    caption: "Colloidal nanocrystals under 365 nm UV & oleylamine surface trap passivation",
+    img: "/portfolio/blogs/nanorods-qds/quantum_dots_uv_photo.jpg",
+    href: "/blog/nanorods-and-quantum-dots",
+    isPhoto: true,
   },
 ];
 
@@ -115,7 +119,7 @@ export default function IndexPage() {
                 href="/blog"
                 className={cn(buttonVariants({ variant: "outline", size: "default" }))}
               >
-                Articles &amp; Lab Reports
+                Development &amp; Lab Blogs
               </Link>
               <Link
                 href="/cv"
@@ -134,7 +138,7 @@ export default function IndexPage() {
             </div>
           </div>
 
-          {/* Right column: 2x2 Visual Showcase of Real Figures & Hardware */}
+          {/* Right column: 2x2 Visual Showcase of Real Photos, 3D CAD & PCB Renders */}
           <div className="lg:col-span-6 grid grid-cols-1 sm:grid-cols-2 gap-3.5">
             {visualShowcase.map((item, idx) => (
               <Link
@@ -147,7 +151,10 @@ export default function IndexPage() {
                     src={item.img}
                     alt={item.title}
                     fill
-                    className="object-contain p-1.5 group-hover:scale-[1.02] transition-transform duration-300"
+                    className={cn(
+                      "group-hover:scale-[1.02] transition-transform duration-300",
+                      item.isPhoto ? "object-cover" : "object-contain p-1.5"
+                    )}
                     sizes="(max-width: 768px) 100vw, 25vw"
                   />
                 </div>
@@ -165,12 +172,12 @@ export default function IndexPage() {
         </div>
       </section>
 
-      {/* FEATURED PROJECTS SECTION */}
+      {/* 3 LATEST PROJECTS (SINGLE HORIZONTAL ROW ON DESKTOP/TABLET) */}
       <section className="space-y-6 py-6" id="projects">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-border pb-4">
           <div className="space-y-1">
             <span className="text-xs font-semibold uppercase tracking-wider text-primary">
-              Selected Engineering &amp; Bioinformatics Work
+              Technical Specifications, Code &amp; Results
             </span>
             <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl text-foreground">
               {pagesConfig.projects.title}
@@ -181,25 +188,25 @@ export default function IndexPage() {
           </div>
           <Link href="/projects" className="shrink-0">
             <Button variant="outline" size="sm">
-              View All {featuredExperiences.length + 2} Projects
+              View All {Experiences.length} Projects
               <Icons.chevronRight className="ml-1.5 h-4 w-4" />
             </Button>
           </Link>
         </div>
 
-        <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+        <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:[&>*:nth-child(3)]:hidden lg:[&>*:nth-child(3)]:flex">
           {featuredExperiences.map((exp) => (
             <ProjectCard key={exp.id} project={exp} />
           ))}
         </div>
       </section>
 
-      {/* TECHNICAL ARTICLES & LAB REPORTS SECTION */}
+      {/* 3 LATEST DEVELOPMENT & LAB BLOGS (SINGLE HORIZONTAL ROW ON DESKTOP/TABLET) */}
       <section className="space-y-6 rounded-2xl border border-border bg-card p-6 sm:p-9 my-12 shadow-sm" id="blog">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-border pb-4">
           <div className="space-y-1">
             <span className="text-xs font-semibold uppercase tracking-wider text-primary">
-              Research Writeups &amp; Laboratory Reports
+              Behind-the-Scenes Engineering &amp; Wet-Lab Stories
             </span>
             <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl text-foreground">
               {pagesConfig.blog.title}
@@ -210,16 +217,16 @@ export default function IndexPage() {
           </div>
           <Link href="/blog" className="shrink-0">
             <Button variant="default" size="sm">
-              Browse All {blogsUnsorted.length} Articles
+              Read All {blogsUnsorted.length} Articles
               <Icons.chevronRight className="ml-1.5 h-4 w-4" />
             </Button>
           </Link>
         </div>
 
-        <BlogCard blogs={blogsUnsorted.slice(0, 6)} />
+        <BlogCard blogs={featuredBlogs} singleRowOnDesktop />
       </section>
 
-      {/* RESEARCH & INDUSTRY EXPERIENCE SECTION */}
+      {/* 3 LATEST RESEARCH & INDUSTRY EXPERIENCES (SINGLE HORIZONTAL ROW) */}
       <section className="space-y-6 py-6" id="experience">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-border pb-4">
           <div className="space-y-1">
@@ -235,13 +242,13 @@ export default function IndexPage() {
           </div>
           <Link href="/experience" className="shrink-0">
             <Button variant="outline" size="sm">
-              Full Timeline
+              Full Timeline ({careerExperiences.length} Roles)
               <Icons.chevronRight className="ml-1.5 h-4 w-4" />
             </Button>
           </Link>
         </div>
 
-        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-5 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:[&>*:nth-child(3)]:hidden lg:[&>*:nth-child(3)]:flex">
           {careerExperiences.slice(0, 3).map((role) => (
             <div
               key={role.id}
@@ -278,7 +285,7 @@ export default function IndexPage() {
         </div>
       </section>
 
-      {/* TECHNICAL CAPABILITIES (4 BUBBLE GROUPS) */}
+      {/* 4 TECHNICAL CAPABILITY GROUPS (SINGLE HORIZONTAL ROW ON WIDE DESKTOP) */}
       <section className="space-y-6 py-8" id="skills">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-border pb-4">
           <div className="space-y-1">
@@ -300,27 +307,27 @@ export default function IndexPage() {
           </Link>
         </div>
 
-        <div className="grid gap-6 md:grid-cols-2">
+        <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 xl:grid-cols-4">
           {skillPillars.map((pillar) => (
             <div
               key={pillar.id}
-              className="rounded-2xl border border-border bg-card p-6 sm:p-7 space-y-4 hover:border-primary/40 transition-colors shadow-sm"
+              className="rounded-xl border border-border bg-card p-5 flex flex-col justify-between space-y-3.5 hover:border-primary/40 transition-colors shadow-sm"
             >
               <div className="space-y-1">
-                <span className="inline-block rounded-full bg-primary/10 border border-primary/25 px-3 py-1 text-xs font-semibold text-primary">
+                <span className="inline-block rounded-full bg-primary/10 border border-primary/25 px-2.5 py-0.5 text-[11px] font-semibold text-primary">
                   {pillar.highlight}
                 </span>
-                <h3 className="font-heading text-xl sm:text-2xl text-foreground pt-1">
+                <h3 className="font-heading text-lg text-foreground pt-1 leading-snug">
                   {pillar.title}
                 </h3>
               </div>
-              <div className="flex flex-wrap gap-2.5 pt-1">
-                {pillar.skills.map((skill, idx) => (
+              <div className="flex flex-wrap gap-1.5 pt-1">
+                {pillar.skills.slice(0, 6).map((skill, idx) => (
                   <span
                     key={idx}
-                    className="inline-flex items-center gap-2 rounded-full border border-border bg-muted/60 px-4 py-2 text-xs sm:text-sm font-medium text-foreground"
+                    className="inline-flex items-center gap-1.5 rounded-full border border-border bg-muted/60 px-2.5 py-1 text-xs font-medium text-foreground"
                   >
-                    <span className="h-2 w-2 rounded-full bg-primary" />
+                    <span className="h-1.5 w-1.5 rounded-full bg-primary" />
                     {skill}
                   </span>
                 ))}
