@@ -3,60 +3,61 @@ import Image from "next/image";
 import Link from "next/link";
 import Script from "next/script";
 
-import { AnimatedSection } from "@/components/common/animated-section";
-import { AnimatedText } from "@/components/common/animated-text";
+import BlogCard from "@/components/blogs/blog-card";
 import { ClientPageWrapper } from "@/components/common/client-page-wrapper";
 import { Icons } from "@/components/common/icons";
-import ContributionCard from "@/components/blogs/blog-card";
 import ProjectCard from "@/components/experience/project-card";
 import SkillsCard from "@/components/skills/skills-card";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { featuredBlogs } from "@/config/blogs";
+import { careerExperiences } from "@/config/career";
 import { featuredExperiences } from "@/config/experience";
 import { pagesConfig } from "@/config/pages";
 import { siteConfig } from "@/config/site";
-import { featuredSkills } from "@/config/skills";
+import { skillPillars } from "@/config/skills";
 import { cn } from "@/lib/utils";
 import profileImg from "@/public/profile-img.jpg";
-import BlogCard from "@/components/blogs/blog-card";
 
 export const metadata: Metadata = {
-  title: `${pagesConfig.home.metadata.title}`,
-  description: `${pagesConfig.home.metadata.description}`,
+  title: pagesConfig.home.metadata.title,
+  description: pagesConfig.home.metadata.description,
   alternates: {
     canonical: siteConfig.url,
   },
 };
 
+const impactMetrics = [
+  {
+    value: "81.57% / 77.95%",
+    label: "First Class Honours (Yr 1 & Yr 2)",
+    detail: "2x Dean's List (Top 10%), Imperial College London",
+  },
+  {
+    value: "81% Identity",
+    label: "From-Scratch HMM Basecaller",
+    detail: "1,025-state Numba JIT decoder on raw POD5 reads vs Dorado",
+  },
+  {
+    value: "30% Assay Gain",
+    label: "miRFlow Cancer Diagnostics",
+    detail: "50+ RP-HPLC conjugates & CytoFlex gating (Ladame Lab spinout)",
+  },
+  {
+    value: "£40,000 Grant",
+    label: "Parallel PHREEQC Speciation",
+    detail: "35,232 sensor records & 3 corporate R&D partnerships (Nanolyse)",
+  },
+];
+
 export default function IndexPage() {
-  // Structured data for personal portfolio
   const personSchema = {
     "@context": "https://schema.org",
     "@type": "Person",
     name: siteConfig.authorName,
     url: siteConfig.url,
     image: siteConfig.ogImage,
-    jobTitle: "Molecular Bioengineering Undergraduate Student",
-    sameAs: [siteConfig.links.github, siteConfig.links.twitter],
-  };
-
-  // Structured data for website as a software application (template)
-  const softwareSchema = {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    name: "Ahmed Portfolio",
-    applicationCategory: "DeveloperApplication",
-    operatingSystem: "Web",
-    offers: {
-      "@type": "Offer",
-      price: "0",
-      priceCurrency: "USD",
-    },
-    author: {
-      "@type": "Person",
-      name: siteConfig.authorName,
-      url: siteConfig.url,
-    },
+    jobTitle: "MEng Molecular Bioengineering Undergraduate, Imperial College London",
+    sameAs: [siteConfig.links.github, siteConfig.links.linkedin],
   };
 
   return (
@@ -66,185 +67,252 @@ export default function IndexPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
       />
-      <Script
-        id="schema-software"
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareSchema) }}
-      />
 
       {/* HERO SECTION */}
-      <section className="w-full flex justify-center items-center bg-background">
-        <div className="
-            w-full
-            max-w-2xl
-            flex flex-col items-center px-4
-            pb-8
-            space-y-5
-          ">
-          <div className="mb-0">
-            <Image
-              src={profileImg}
-              alt="Ahmed Ahmed Portfolio"
-              width={320}
-              height={320}
-              priority
-              className="
-                rounded-full
-                object-cover object-center
-                border-8 border-primary
-                shadow-lg
-                w-32 h-32 sm:w-44 sm:h-44 md:w-56 md:h-56 lg:w-72 lg:h-72
-                mx-auto
-              "
-            />
+      <section className="relative overflow-hidden rounded-2xl border border-border/70 biotech-grid-bg px-4 py-10 sm:px-8 sm:py-14 mb-12">
+        <div className="mx-auto max-w-4xl flex flex-col items-center text-center space-y-5">
+          <div className="inline-flex items-center gap-2 rounded-full border border-primary/40 bg-primary/10 px-3.5 py-1 text-xs font-semibold text-primary">
+            <span>Imperial College London</span>
+            <span>•</span>
+            <span>MEng Molecular Bioengineering</span>
+            <span>•</span>
+            <span>2x Dean&apos;s List</span>
           </div>
-          <h1 className="font-heading text-3xl sm:text-5xl md:text-6xl lg:text-7xl text-center font-extrabold">
-            Ahmed Ahmed
-          </h1>
-          <h2 className="font-heading text-center text-lg sm:text-2xl md:text-2xl lg:text-3xl font-semibold mb-2">
-            Molecular Bioengineering Undergraduate Student
-          </h2>
-          <p className="text-base sm:text-lg font-medium text-muted-foreground text-center">
-            Welcome to my portfolio website!
-          </p>
-          <hr className="border-muted-foreground mx-auto my-2 w-16" />
-          <div className="w-full">
-            <p className="
-                mx-auto
-                max-w-prose
-                text-muted-foreground
-                text-sm sm:text-base
-                leading-relaxed
-                text-left sm:text-justify
-              ">
-              I am seeking projects that let me combine analytical thinking with technical skills to develop impactful solutions in molecular bioengineering. My interests lie in leveraging bioinformatics within the biotech industry and exploring how computational methods can drive innovation in healthcare and biological research. I hope to pursue opportunities—both within and beyond my studies—that bridge science, technology and industry needs.
+
+          <Image
+            src={profileImg}
+            alt="Ahmed Ahmed"
+            width={176}
+            height={176}
+            priority
+            className="rounded-full object-cover object-center border-4 border-primary/70 shadow-xl w-28 h-28 sm:w-36 sm:h-36"
+          />
+
+          <div className="space-y-2">
+            <h1 className="font-heading text-3xl sm:text-5xl md:text-6xl font-extrabold tracking-tight">
+              Ahmed Ahmed
+            </h1>
+            <p className="text-base sm:text-xl font-medium text-primary">
+              Nanopore Sequencing Algorithms, Diagnostic Bioassays &amp; Embedded Bioinstrumentation
             </p>
           </div>
-          <div className="flex flex-col sm:flex-row items-center gap-3 mt-6">
+
+          <p className="max-w-2xl text-sm sm:text-base text-muted-foreground leading-relaxed">
+            First Class Molecular Bioengineering undergraduate at Imperial College London (81.57% Year 1, 77.95% Year 2, 93.75% in Programming 2) building at the intersection of wet-lab assay chemistry and high-performance scientific software. My recent work spans a 1,025-state Numba Hidden Markov Model basecaller for raw Oxford Nanopore POD5 signals, thiol-maleimide PNA-backfiller chemistry for the miRFlow cancer diagnostic spinout, multi-core Python/C++ geochemical speciation pipelines at Nanolyse Technologies, and prize-winning ADS1299 biopotential hardware.
+          </p>
+
+          <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
             <Link
-              href="https://github.com/aahmeddev"
-              target="_blank"
+              href="/projects"
               className={cn(buttonVariants({ size: "lg" }))}
-              aria-label="View Ahmed Ahmed's GitHub profile"
+            >
+              Explore Projects
+              <Icons.chevronRight className="w-4 h-4 ml-1.5" />
+            </Link>
+            <Link
+              href="/cv"
+              className={cn(buttonVariants({ variant: "outline", size: "lg" }))}
+            >
+              View CV &amp; Transcript
+            </Link>
+            <Link
+              href={siteConfig.links.github}
+              target="_blank"
+              rel="noreferrer"
+              className={cn(buttonVariants({ variant: "outline", size: "lg" }))}
             >
               <Icons.gitHub className="w-4 h-4 mr-2" /> GitHub
             </Link>
             <Link
-              href="https://www.linkedin.com/in/ahmed-ahmed-37554021a/"
+              href={siteConfig.links.linkedin}
               target="_blank"
               rel="noreferrer"
               className={cn(buttonVariants({ variant: "outline", size: "lg" }))}
-              aria-label="View Ahmed's LinkedIn profile"
             >
               <Icons.linkedin className="w-4 h-4 mr-2" /> LinkedIn
             </Link>
           </div>
+
+          {/* 4-METRIC IMPACT STRIP */}
+          <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 pt-6 text-left">
+            {impactMetrics.map((m, idx) => (
+              <div
+                key={idx}
+                className="rounded-xl border border-border/80 bg-card/90 backdrop-blur p-4 space-y-1"
+              >
+                <p className="font-heading text-xl sm:text-2xl text-primary">
+                  {m.value}
+                </p>
+                <p className="text-xs sm:text-sm font-semibold text-foreground">
+                  {m.label}
+                </p>
+                <p className="text-xs text-muted-foreground leading-snug">
+                  {m.detail}
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* Skills Section */}
-      <AnimatedSection
-        className="container space-y-6 bg-muted py-10"
-        id="skills"
-      >
-        <div className="mx-auto flex max-w-[58rem] flex-col items-center space-y-4 text-center">
-          <AnimatedText
-            as="h2"
-            className="font-heading text-3xl leading-[1.1] sm:text-3xl md:text-6xl"
-          >
-            {pagesConfig.skills.title}
-          </AnimatedText>
-          <AnimatedText
-            as="p"
-            delay={0.2}
-            className="max-w-[85%] leading-normal text-muted-foreground sm:text-lg sm:leading-7"
-          >
-            {pagesConfig.skills.description}
-          </AnimatedText>
-        </div>
-        <SkillsCard skills={featuredSkills} />
-        <AnimatedText delay={0.4} className="flex justify-center">
-          <Link href="/skills">
-            <Button variant={"outline"} className="rounded-xl">
-              <Icons.chevronDown className="mr-2 h-4 w-4" /> View All
-            </Button>
-          </Link>
-        </AnimatedText>
-      </AnimatedSection>
-
-      {/* Experience Section */}
-      <AnimatedSection
-        direction="right"
-        className="container space-y-6 py-10 my-14"
-        id="experience"
-      >
-        <div className="mx-auto flex max-w-[58rem] flex-col items-center space-y-4 text-center">
-          <AnimatedText
-            as="h2"
-            className="font-heading text-3xl leading-[1.1] sm:text-3xl md:text-6xl"
-          >
+      {/* FEATURED PROJECTS SECTION */}
+      <section className="space-y-6 py-8" id="projects">
+        <div className="mx-auto flex max-w-[58rem] flex-col items-center space-y-3 text-center">
+          <span className="text-xs font-semibold uppercase tracking-widest text-primary">
+            Sequencing, Hardware &amp; Systems
+          </span>
+          <h2 className="font-heading text-3xl leading-[1.1] sm:text-4xl md:text-5xl">
             {pagesConfig.projects.title}
-          </AnimatedText>
-          <AnimatedText
-            as="p"
-            delay={0.2}
-            className="max-w-[85%] leading-normal text-muted-foreground sm:text-lg sm:leading-7"
-          >
+          </h2>
+          <p className="max-w-[85%] text-muted-foreground sm:text-lg">
             {pagesConfig.projects.description}
-          </AnimatedText>
+          </p>
         </div>
-        <div className="mx-auto grid justify-center gap-4 md:w-full lg:grid-cols-3">
-          {featuredExperiences.map((exp, index) => (
-            <AnimatedSection
-              key={exp.id}
-              delay={0.1 * (index + 1)}
-              direction="up"
-            >
-              <ProjectCard project={exp} />
-            </AnimatedSection>
+
+        <div className="mx-auto grid justify-center gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {featuredExperiences.map((exp) => (
+            <ProjectCard key={exp.id} project={exp} />
           ))}
         </div>
-        <AnimatedText delay={0.4} className="flex justify-center">
+
+        <div className="flex justify-center pt-2">
           <Link href="/projects">
-            <Button variant={"outline"} className="rounded-xl">
-              <Icons.chevronDown className="mr-2 h-4 w-4" /> View All
+            <Button variant="outline" className="rounded-xl">
+              View All 8 Engineering Projects
+              <Icons.chevronRight className="ml-2 h-4 w-4" />
             </Button>
           </Link>
-        </AnimatedText>
-      </AnimatedSection>
-
-      {/* Blog Section */}
-      <AnimatedSection
-        direction="down"
-        className="container space-y-6 bg-muted py-10 my-14"
-        id="blog"
-      >
-        <div className="mx-auto flex max-w-[58rem] flex-col items-center space-y-4 text-center">
-          <AnimatedText
-            as="h2"
-            className="font-heading text-3xl leading-[1.1] sm:text-3xl md:text-6xl"
-          >
-            {pagesConfig.blog.title}
-          </AnimatedText>
-          <AnimatedText
-            as="p"
-            delay={0.2}
-            className="max-w-[85%] leading-normal text-muted-foreground sm:text-lg sm:leading-7"
-          >
-            {pagesConfig.blog.description}
-          </AnimatedText>
         </div>
-        <div className="mx-auto justify-center gap-4 md:w-full lg:grid-cols-3">
+      </section>
+
+      {/* FEATURED RESEARCH & INDUSTRY EXPERIENCE */}
+      <section className="space-y-6 rounded-2xl border border-border bg-muted/30 p-6 sm:p-10 my-12" id="experience">
+        <div className="mx-auto flex max-w-[58rem] flex-col items-center space-y-3 text-center">
+          <span className="text-xs font-semibold uppercase tracking-widest text-primary">
+            Wet Lab, Scientific Software &amp; Clinical Translation
+          </span>
+          <h2 className="font-heading text-3xl leading-[1.1] sm:text-4xl md:text-5xl">
+            {pagesConfig.experience.title}
+          </h2>
+          <p className="max-w-[85%] text-muted-foreground sm:text-lg">
+            {pagesConfig.experience.description}
+          </p>
+        </div>
+
+        <div className="grid gap-4 md:grid-cols-3">
+          {careerExperiences.slice(0, 3).map((role) => (
+            <div
+              key={role.id}
+              className="rounded-xl border border-border bg-card p-5 flex flex-col justify-between space-y-4"
+            >
+              <div className="space-y-2">
+                <div className="flex items-center justify-between gap-2">
+                  <span className="rounded-md bg-primary/15 px-2.5 py-0.5 text-xs font-semibold text-primary">
+                    {role.badge}
+                  </span>
+                  <span className="text-xs text-muted-foreground">
+                    {role.period}
+                  </span>
+                </div>
+                <h3 className="text-lg font-bold text-foreground">
+                  {role.position}
+                </h3>
+                <p className="text-sm font-medium text-muted-foreground">
+                  {role.company}
+                </p>
+                <p className="text-sm text-muted-foreground leading-relaxed pt-1">
+                  {role.summary}
+                </p>
+              </div>
+              <ul className="list-disc pl-4 space-y-1 border-t border-border/60 pt-3">
+                {role.achievements.slice(0, 2).map((a, i) => (
+                  <li key={i} className="text-xs text-foreground leading-relaxed">
+                    {a}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+
+        <div className="flex justify-center pt-2">
+          <Link href="/experience">
+            <Button variant="default" className="rounded-xl">
+              View Full Research &amp; Industry Timeline
+              <Icons.chevronRight className="ml-2 h-4 w-4" />
+            </Button>
+          </Link>
+        </div>
+      </section>
+
+      {/* TECHNICAL CAPABILITIES SECTION */}
+      <section className="space-y-6 py-8" id="skills">
+        <div className="mx-auto flex max-w-[58rem] flex-col items-center space-y-3 text-center">
+          <span className="text-xs font-semibold uppercase tracking-widest text-primary">
+            Verified Stack
+          </span>
+          <h2 className="font-heading text-3xl leading-[1.1] sm:text-4xl md:text-5xl">
+            {pagesConfig.skills.title}
+          </h2>
+          <p className="max-w-[85%] text-muted-foreground sm:text-lg">
+            {pagesConfig.skills.description}
+          </p>
+        </div>
+        <div className="grid gap-6 md:grid-cols-2">
+          {skillPillars.map((pillar) => (
+            <div
+              key={pillar.id}
+              className="rounded-2xl border border-border bg-card p-6 sm:p-7 space-y-4 hover:border-primary/45 transition-colors"
+            >
+              <div className="space-y-1">
+                <span className="inline-block rounded-full bg-primary/15 border border-primary/35 px-3 py-1 text-xs font-semibold text-primary">
+                  {pillar.highlight}
+                </span>
+                <h3 className="font-heading text-xl sm:text-2xl text-foreground pt-1">
+                  {pillar.title}
+                </h3>
+              </div>
+              <div className="flex flex-wrap gap-2.5 pt-1">
+                {pillar.skills.map((skill, idx) => (
+                  <span
+                    key={idx}
+                    className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-2 text-xs sm:text-sm font-semibold text-foreground"
+                  >
+                    <span className="h-2 w-2 rounded-full bg-primary" />
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+        <div className="flex justify-center pt-2">
+          <Link href="/skills">
+            <Button variant="outline" className="rounded-xl">
+              Open Full Technical Capabilities View
+              <Icons.chevronRight className="ml-2 h-4 w-4" />
+            </Button>
+          </Link>
+        </div>
+      </section>
+
+      {/* TECHNICAL WRITING / BLOG SECTION */}
+      <section className="space-y-6 rounded-2xl border border-border bg-muted/30 p-6 sm:p-10 my-12" id="blog">
+        <div className="mx-auto flex max-w-[58rem] flex-col items-center space-y-3 text-center">
+          <span className="text-xs font-semibold uppercase tracking-widest text-primary">
+            Engineering Deep Dives
+          </span>
+          <h2 className="font-heading text-3xl leading-[1.1] sm:text-4xl md:text-5xl">
+            {pagesConfig.blog.title}
+          </h2>
+          <p className="max-w-[85%] text-muted-foreground sm:text-lg">
+            {pagesConfig.blog.description}
+          </p>
+        </div>
+        <div className="mx-auto max-w-4xl">
           <BlogCard blogs={featuredBlogs} />
         </div>
-        <AnimatedText delay={0.4} className="flex justify-center">
-          <Link href="/blog">
-            <Button variant={"outline"} className="rounded-xl">
-              <Icons.chevronDown className="mr-2 h-4 w-4" /> View All
-            </Button>
-          </Link>
-        </AnimatedText>
-      </AnimatedSection>
+      </section>
     </ClientPageWrapper>
   );
 }

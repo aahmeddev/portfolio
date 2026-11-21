@@ -9,15 +9,21 @@ interface SocialInterface {
 
 export const SocialLinks: SocialInterface[] = [
   {
-    name: "Github",
+    name: "GitHub",
     username: "@aahmeddev",
     icon: Icons.gitHub,
     link: "https://github.com/aahmeddev",
   },
   {
     name: "LinkedIn",
-    username: "Ahmed Ahmed",
+    username: "in/ahmediaahmed",
     icon: Icons.linkedin,
-    link: "https://www.linkedin.com/in/ahmed-ahmed-37554021a/",
-  }
+    link: "https://www.linkedin.com/in/ahmediaahmed",
+  },
+  {
+    name: "Email",
+    username: "ahmed.ia.ahmed@gmail.com",
+    icon: Icons.gmail,
+    link: "mailto:ahmed.ia.ahmed@gmail.com",
+  },
 ];

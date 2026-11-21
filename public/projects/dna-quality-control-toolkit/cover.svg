@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450">
+  <defs>
+    <linearGradient id="qbg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#07131a"/><stop offset="100%" stop-color="#0e2733"/></linearGradient>
+  </defs>
+  <rect width="800" height="450" fill="url(#qbg)"/>
+  <g stroke="#193c4d" stroke-width="1" opacity="0.45">
+    <line x1="0" y1="100" x2="800" y2="100"/><line x1="0" y1="190" x2="800" y2="190"/><line x1="0" y1="280" x2="800" y2="280"/>
+    <line x1="180" y1="0" x2="180" y2="450"/><line x1="380" y1="0" x2="380" y2="450"/><line x1="580" y1="0" x2="580" y2="450"/>
+  </g>
+  <!-- Phred Q30 pass threshold line -->
+  <line x1="60" y1="195" x2="740" y2="195" stroke="#10b981" stroke-width="2" stroke-dasharray="7 5"/>
+  <text x="735" y="185" font-family="monospace" font-size="13" fill="#34d399" text-anchor="end">Phred Q30 Threshold</text>
+  <!-- Per-base quality boxplots -->
+  <g stroke="#38bdf8" stroke-width="2.5" fill="#0284c7" fill-opacity="0.35">
+    <rect x="95" y="115" width="36" height="48" rx="4"/><line x1="113" y1="95" x2="113" y2="180"/>
+    <rect x="175" y="118" width="36" height="50" rx="4"/><line x1="193" y1="98" x2="193" y2="185"/>
+    <rect x="255" y="122" width="36" height="52" rx="4"/><line x1="273" y1="102" x2="273" y2="190"/>
+    <rect x="335" y="128" width="36" height="55" rx="4"/><line x1="353" y1="108" x2="353" y2="200"/>
+    <rect x="415" y="135" width="36" height="58" rx="4"/><line x1="433" y1="114" x2="433" y2="212"/>
+    <rect x="495" y="145" width="36" height="62" rx="4"/><line x1="513" y1="122" x2="513" y2="226"/>
+    <rect x="575" y="158" width="36" height="68" rx="4"/><line x1="593" y1="132" x2="593" y2="245"/>
+    <rect x="655" y="172" width="36" height="72" rx="4"/><line x1="673" y1="145" x2="673" y2="262"/>
+  </g>
+  <path d="M 113 138 L 193 141 L 273 146 L 353 153 L 433 162 L 513 174 L 593 190 L 673 206" fill="none" stroke="#2dd4bf" stroke-width="3.5"/>
+  <rect x="48" y="38" width="265" height="34" rx="17" fill="#0d2b38" stroke="#38bdf8" stroke-width="1.5"/>
+  <text x="180" y="60" font-family="system-ui, sans-serif" font-size="14" font-weight="700" fill="#7dd3fc" text-anchor="middle">MULTI-THREADED FASTQ ENGINE</text>
+  <text x="48" y="370" font-family="system-ui, sans-serif" font-size="34" font-weight="800" fill="#f8fafc">DNA QC Toolkit (QCToolkit)</text>
+  <text x="48" y="404" font-family="monospace" font-size="16" fill="#94a3b8">Java 22 &amp; JavaFX  |  ExecutorService  |  Python Matplotlib &amp; HTML Export</text>
+</svg>

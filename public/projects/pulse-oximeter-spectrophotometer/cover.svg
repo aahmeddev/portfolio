@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450">
+  <defs>
+    <linearGradient id="bg3" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#0b1120"/><stop offset="100%" stop-color="#172554"/></linearGradient>
+  </defs>
+  <rect width="800" height="450" fill="url(#bg3)"/>
+  <path d="M 50 220 L 120 220 L 145 145 L 175 275 L 205 190 L 235 220 L 330 220 L 355 145 L 385 275 L 415 190 L 445 220" fill="none" stroke="#38bdf8" stroke-width="4" stroke-linecap="round"/>
+  <polygon points="520,235 585,140 650,235" fill="none" stroke="#cbd5e1" stroke-width="2.5"/>
+  <line x1="465" y1="210" x2="552" y2="188" stroke="#f8fafc" stroke-width="3"/>
+  <line x1="585" y1="188" x2="730" y2="145" stroke="#a855f7" stroke-width="3"/>
+  <line x1="585" y1="188" x2="730" y2="185" stroke="#22c55e" stroke-width="3"/>
+  <line x1="585" y1="188" x2="730" y2="225" stroke="#ef4444" stroke-width="3"/>
+  <rect x="48" y="38" width="260" height="34" rx="17" fill="#172554" stroke="#38bdf8" stroke-width="1.5"/>
+  <text x="178" y="60" font-family="system-ui, sans-serif" font-size="14" font-weight="700" fill="#7dd3fc" text-anchor="middle">BIOINSTRUMENTATION &amp; OPTICS</text>
+  <text x="48" y="370" font-family="system-ui, sans-serif" font-size="31" font-weight="800" fill="#f8fafc">8-Ch Pulse Oximeter &amp; CCD Spectrometer</text>
+  <text x="48" y="404" font-family="monospace" font-size="16" fill="#94a3b8">Embedded C  |  ADS1299 SPI  |  STM32 + TCD1304 CCD  |  SolidWorks CAD</text>
+</svg>

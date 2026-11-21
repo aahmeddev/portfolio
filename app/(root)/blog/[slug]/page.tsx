@@ -179,7 +179,7 @@ export default async function BlogPage({ params }: BlogPageProps) {
         <footer className="mt-12 pt-8 border-t clear-both">
           <div className="flex justify-between items-center">
             <Link
-              href="/portfolio/blog"
+              href="/blog"
               className="flex items-center space-x-2 text-muted-foreground hover:text-foreground transition-colors"
             >
               <span>←</span>

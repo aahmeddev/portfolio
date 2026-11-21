@@ -2,39 +2,24 @@ import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "Ahmed Ahmed Portfolio",
-    short_name: "Ahmed's Portfolio",
+    name: "Ahmed Ahmed | Molecular Bioengineering Portfolio",
+    short_name: "Ahmed Ahmed",
     description:
-      "Ahmed Ahmed's modern developer portfolio built with Next.js",
-    start_url: "/",
+      "First Class MEng Molecular Bioengineering undergraduate at Imperial College London. Nanopore sequencing, diagnostic bioassays, and embedded bioinstrumentation.",
+    start_url: "/portfolio/",
     display: "standalone",
-    background_color: "#ffffff",
-    theme_color: "#000000",
+    background_color: "#070c14",
+    theme_color: "#11b5c9",
     icons: [
       {
-        src: "/favicon.ico",
+        src: "/portfolio/favicon.ico",
         sizes: "64x64",
         type: "image/png",
       },
-      {
-        src: "/favicon.ico",
-        sizes: "64x64",
-        type: "image/png",
-        purpose: "maskable",
-      },
     ],
-    categories: [
-      "portfolio",
-      "template",
-      "development",
-      "nextjs",
-      "react",
-      "developer",
-      "web development",
-      "open source",
-    ],
-    lang: "en",
+    categories: ["bioengineering", "bioinformatics", "portfolio", "science"],
+    lang: "en-GB",
     dir: "ltr",
-    scope: "/",
+    scope: "/portfolio/",
   };
 }

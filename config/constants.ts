@@ -1,31 +1,57 @@
 export type ValidSkills =
-  | "Javascript"
-  | "JavaFX"
-  | "HTML 5"
-  | "C++"
-  | "Java"
   | "Python"
-  | "Git"
+  | "C++17"
+  | "Embedded C"
+  | "Java"
+  | "JavaFX"
+  | "MATLAB"
+  | "Simulink"
+  | "TypeScript"
+  | "JavaScript"
+  | "HTML 5"
+  | "Next.js"
+  | "NiceGUI"
+  | "Streamlit"
+  | "Numba JIT"
   | "Biopython"
+  | "POD5 / FASTQ"
+  | "Hidden Markov Models"
+  | "Pandas / NumPy / SciPy"
+  | "PHREEQC"
+  | "Reverse-Phase HPLC"
+  | "CytoFlex Flow Cytometry"
+  | "FlowJo"
+  | "RT-PCR & Bisulphite Seq"
+  | "Mammalian Cell Culture"
+  | "KiCad PCB"
+  | "SolidWorks 3D CAD"
+  | "ADS1299 / SPI"
+  | "Arduino / STM32"
   | "Firebase"
-  | "Figma"
-  | "Streamlit";
+  | "Git"
+  | "Figma";
 
 export type ValidCategory =
-  | "Full Stack"
+  | "Sequencing & Bioinformatics"
+  | "Hardware & Medtech"
+  | "Wet Lab & Systems"
   | "Bioinformatics"
-  | "Backend"
   | "Computational Bioengineering"
-  | "UI/UX"
-  | "Web Dev"
-  | "Blog";
+  | "Embedded Systems"
+  | "Diagnostics & Assays"
+  | "High-Performance C++"
+  | "Full-Stack Bioengineering";
 
-export type ValidExpType = "Personal Project" | "Professional";
+export type ValidExpType =
+  | "Sequencing & Bioinformatics"
+  | "Hardware & Medtech"
+  | "Wet Lab & Systems";
 
 export type ValidPages =
   | "home"
-  | "skills"
+  | "experience"
   | "projects"
-  | "contact"
+  | "skills"
   | "blog"
-  | "CV";
+  | "CV"
+  | "contact";

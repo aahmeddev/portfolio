@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450">
+  <defs>
+    <linearGradient id="bg5" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#0c1322"/><stop offset="100%" stop-color="#1e1b4b"/></linearGradient>
+  </defs>
+  <rect width="800" height="450" fill="url(#bg5)"/>
+  <line x1="70" y1="220" x2="430" y2="220" stroke="#64748b" stroke-width="4"/>
+  <g stroke="#94a3b8" stroke-width="3">
+    <line x1="115" y1="220" x2="115" y2="155"/><circle cx="115" cy="145" r="12" fill="#f43f5e" stroke="none"/>
+    <line x1="175" y1="220" x2="175" y2="155"/><circle cx="175" cy="145" r="12" fill="#f43f5e" stroke="none"/>
+    <line x1="235" y1="220" x2="235" y2="155"/><circle cx="235" cy="145" r="12" fill="#1e293b" stroke="#64748b" stroke-width="2"/>
+    <line x1="295" y1="220" x2="295" y2="155"/><circle cx="295" cy="145" r="12" fill="#f43f5e" stroke="none"/>
+    <line x1="355" y1="220" x2="355" y2="155"/><circle cx="355" cy="145" r="12" fill="#f43f5e" stroke="none"/>
+  </g>
+  <path d="M 480 260 Q 540 255 570 190 Q 600 95 625 95 Q 650 95 680 190 Q 710 255 755 260" fill="none" stroke="#2dd4bf" stroke-width="4"/>
+  <rect x="48" y="38" width="265" height="34" rx="17" fill="#1e1b4b" stroke="#f43f5e" stroke-width="1.5"/>
+  <text x="180" y="60" font-family="system-ui, sans-serif" font-size="14" font-weight="700" fill="#fda4af" text-anchor="middle">MOLECULAR &amp; NANOMATERIAL ASSAYS</text>
+  <text x="48" y="370" font-family="system-ui, sans-serif" font-size="31" font-weight="800" fill="#f8fafc">Epigenetic Senescence &amp; Nanomaterials</text>
+  <text x="48" y="404" font-family="monospace" font-size="16" fill="#94a3b8">Bisulphite Sequencing (p=0.002)  |  RT-PCR  |  CdSe Quantum Dots &amp; AuNRs</text>
+</svg>

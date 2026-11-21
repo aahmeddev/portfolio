@@ -1,7 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { Gochi_Hand  } from "next/font/google";
 import Link from "next/link";
 import { usePathname, useSelectedLayoutSegment } from "next/navigation";
 import * as React from "react";
@@ -16,27 +14,6 @@ interface MainNavProps {
   children?: React.ReactNode;
 }
 
-const norican = Gochi_Hand({
-  weight: ["400"],
-  style: ["normal"],
-  subsets: ["latin"],
-  display: "swap",
-});
-
-// Animation variants for the navigation items
-const navItemVariants = {
-  hidden: { opacity: 0, y: -20 },
-  visible: (i: number) => ({
-    opacity: 1,
-    y: 0,
-    transition: {
-      delay: 0.1 * i,
-      duration: 0.5,
-      ease: "easeOut",
-    },
-  }),
-};
-
 export function MainNav({ items, children }: MainNavProps) {
   const segment = useSelectedLayoutSegment();
   const [showMobileMenu, setShowMobileMenu] = React.useState<boolean>(false);
@@ -48,54 +25,48 @@ export function MainNav({ items, children }: MainNavProps) {
 
   return (
     <div className="flex gap-6 items-center md:gap-10">
-      <motion.div
-        initial={{ opacity: 0, scale: 0.9 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.5 }}
-      >
-        <Link href="/" className="hidden items-center space-x-2 md:flex">
-          <span className={cn(norican.className, "text-2xl")}>
+      <Link href="/" className="hidden items-center space-x-2.5 md:flex group">
+        <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/15 border border-primary/40 font-heading text-sm font-bold text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
+          AA
+        </span>
+        <div className="flex flex-col">
+          <span className="font-heading text-lg tracking-tight leading-none">
             {siteConfig.authorName}
           </span>
-        </Link>
-      </motion.div>
+          <span className="text-[11px] text-muted-foreground leading-tight">
+            Imperial Bioengineering
+          </span>
+        </div>
+      </Link>
       {items?.length ? (
-        <nav className="hidden gap-6 md:flex items-center">
-          {items?.map((item, index) => (
-            <motion.div
-              key={index}
-              custom={index}
-              initial="hidden"
-              animate="visible"
-              variants={navItemVariants}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
+        <nav className="hidden gap-1 md:flex items-center">
+          {items?.map((item, index) => {
+            const isActive = segment && item.href.startsWith(`/${segment}`);
+            return (
               <Link
+                key={index}
                 href={item.disabled ? "#" : item.href}
                 className={cn(
-                  "flex items-center text-lg font-medium transition-colors hover:text-foreground/80 sm:text-sm",
-                  item.href.startsWith(`/${segment}`)
-                    ? "text-foreground"
-                    : "text-foreground/60",
+                  "px-3 py-1.5 rounded-md text-sm font-medium transition-colors",
+                  isActive
+                    ? "bg-primary/15 text-primary font-semibold"
+                    : "text-muted-foreground hover:text-foreground hover:bg-muted/60",
                   item.disabled && "cursor-not-allowed opacity-80"
                 )}
               >
                 {item.title}
               </Link>
-            </motion.div>
-          ))}
+            );
+          })}
         </nav>
       ) : null}
-      <motion.button
+      <button
         className="flex items-center space-x-2 md:hidden"
         onClick={() => setShowMobileMenu(!showMobileMenu)}
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
       >
         {showMobileMenu ? <Icons.close /> : <Icons.menu />}
-        <span className="font-bold">Menu</span>
-      </motion.button>
+        <span className="font-heading text-sm">Menu</span>
+      </button>
       {showMobileMenu && items && (
         <MobileNav items={items}>{children}</MobileNav>
       )}

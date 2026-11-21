@@ -4,10 +4,9 @@ const { fontFamily } = require("tailwindcss/defaultTheme");
 module.exports = {
   darkMode: ["class"],
   content: [
-    "./pages/**/*.{ts,tsx}",
     "./components/**/*.{ts,tsx}",
     "./app/**/*.{ts,tsx}",
-    "./src/**/*.{ts,tsx}",
+    "./config/**/*.{ts,tsx}",
   ],
   theme: {
     container: {
@@ -80,38 +79,6 @@ module.exports = {
   },
   plugins: [
     require("tailwindcss-animate"),
-    require('@tailwindcss/typography'),
-  ],
-  safelist: [
-    "dark",
-    "retro",
-    "cyberpunk",
-    "paper",
-    "aurora",
-    "synthwave",
-    {
-      pattern:
-        /^(.*?)(dark|retro|cyberpunk|paper|aurora|synthwave)([:.])(.*?)$/,
-    },
-
-    // Profile image & container classes
-    "rounded-full",
-    "object-cover",
-    "object-center",
-    "border-8",
-    "border-primary",
-    "shadow-lg",
-    "mx-auto",
-    "mt-16",
-    "md:mt-20",
-    "lg:mt-24",
-    "w-40",
-    "h-40",
-    "sm:w-60",
-    "sm:h-60",
-    "md:w-80",
-    "md:h-80",
-    "lg:w-[24rem]",
-    "lg:h-[24rem]"
+    require("@tailwindcss/typography"),
   ],
 };
