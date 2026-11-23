@@ -26,6 +26,7 @@ export const skillPillars: SkillPillarInterface[] = [
     highlight: "81% HMM Nanopore Basecaller (vs Dorado) & Multi-Threaded FASTQ QC Suite",
     skills: [
       "Python 3 (Numba JIT, multiprocessing)",
+      "PyTorch, Deep Learning & Computer Vision (MedResNet CNN, Grad-CAM)",
       "POD5 / FASTQ / FASTA Signal & Read Parsing",
       "Hidden Markov Models (Baum-Welch, Viterbi)",
       "Dynamic Time Warping (DTW) Signal Alignment",
@@ -104,6 +105,15 @@ export const skillsUnsorted: skillsInterface[] = [
     description:
       "Log-space 1,025-state HMM nanopore basecaller, multi-core PHREEQC batch runners, and SciPy 250 Hz biosignal pipelines.",
     evidence: "93.75% in Programming 2 | 81% HMM Basecaller",
+    rating: 5,
+    icon: Icons.python,
+  },
+  {
+    name: "PyTorch, Deep Learning & Computer Vision",
+    category: "Medical Imaging & AI",
+    description:
+      "Custom residual CNN architectures (MedResNet), class-weighted training with AdamW and cosine annealing, and pure-PyTorch Grad-CAM saliency maps.",
+    evidence: "0.9673 Held-Out Test ROC-AUC (PneumoniaMNIST)",
     rating: 5,
     icon: Icons.python,
   },

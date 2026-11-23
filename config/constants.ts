@@ -1,5 +1,9 @@
 export type ValidSkills =
   | "Python"
+  | "PyTorch"
+  | "Deep Learning"
+  | "Computer Vision"
+  | "Grad-CAM"
   | "C++17"
   | "Embedded C"
   | "Java"

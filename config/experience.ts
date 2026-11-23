@@ -42,6 +42,80 @@ export interface ProjectInterface {
 
 export const Experiences: ProjectInterface[] = [
   {
+    id: "medmnist-pytorch-classifier",
+    companyName: "MedMNIST PyTorch Classifier & Grad-CAM",
+    subtitle: "Residual CNN & Pure-PyTorch Grad-CAM Explainability for 2D Medical Imaging",
+    badge: "0.9673 Held-Out Test ROC-AUC",
+    type: "Sequencing & Bioinformatics",
+    category: ["Sequencing & Bioinformatics", "Computational Bioengineering", "Diagnostics & Assays"],
+    shortDescription:
+      "Built a modular PyTorch 2D medical image classification pipeline (MedResNet residual CNN) with inverse-frequency class-weighted CrossEntropyLoss, AdamW, cosine annealing, and a pure-PyTorch Grad-CAM saliency implementation using forward and backward hooks, achieving 0.9673 held-out test ROC-AUC on PneumoniaMNIST.",
+    githubLink: "https://github.com/aahmeddev/medmnist-pytorch-classifier",
+    techStack: [
+      "PyTorch",
+      "Deep Learning",
+      "Computer Vision",
+      "Grad-CAM",
+      "Python",
+      "Pandas / NumPy / SciPy",
+      "Git",
+    ],
+    startDate: new Date("2026-11-22"),
+    endDate: new Date("2026-11-23"),
+    companyLogoImg: "/portfolio/projects/medmnist-pytorch-classifier/gradcam_grid.png",
+    keyMetrics: [
+      {
+        label: "Held-Out Test ROC-AUC",
+        value: "0.9673",
+        detail: "Evaluated once on 624 untouched PneumoniaMNIST paediatric chest X-rays",
+      },
+      {
+        label: "Validation ROC-AUC",
+        value: "0.9968",
+        detail: "97.14% validation accuracy and 0.9637 Macro F1 on best checkpoint",
+      },
+      {
+        label: "Explainability",
+        value: "Pure-PyTorch Grad-CAM",
+        detail: "Forward and full backward hooks on stage3.conv2 with bilinear upsampling",
+      },
+      {
+        label: "Test Coverage",
+        value: "3/3 Pytest Passing",
+        detail: "Automated checks for forward shapes, [0, 1] saliency bounds, and weight updates",
+      },
+    ],
+    pagesInfoTitle: "ROC Curve, Confusion Matrix & Grad-CAM Saliency Overlays",
+    pagesInfoArr: [
+      {
+        title: "Grad-CAM Saliency Overlays on Held-Out Test Chest X-Rays",
+        description:
+          "Class-discriminative Grad-CAM heatmaps generated from the final convolutional layer of MedResNet, highlighting lung opacity regions driving each prediction.",
+        imgArr: ["/portfolio/projects/medmnist-pytorch-classifier/gradcam_grid.png"],
+      },
+      {
+        title: "Held-Out Test ROC Curve & Confusion Matrix",
+        description:
+          "0.9673 held-out test ROC-AUC, 88.78% test accuracy, and 0.8729 Macro F1 across 624 paediatric chest X-rays using class-weighted CrossEntropyLoss.",
+        imgArr: [
+          "/portfolio/projects/medmnist-pytorch-classifier/roc_curve.png",
+          "/portfolio/projects/medmnist-pytorch-classifier/confusion_matrix.png",
+        ],
+      },
+    ],
+    descriptionDetails: {
+      paragraphs: [
+        "Modular PyTorch deep learning repository (`src/data.py`, `src/model.py`, `src/gradcam.py`, `src/train.py`, `src/evaluate.py`) supporting greyscale and RGB 2D MedMNIST clinical imaging benchmarks (`PneumoniaMNIST`, `BreastMNIST`, `PathMNIST`, `OrganAMNIST`).",
+        "Designed to address medical class imbalance and black-box interpretability through inverse-frequency weighted CrossEntropyLoss, validation ROC-AUC checkpointing, and a custom hook-based Grad-CAM implementation.",
+      ],
+      bullets: [
+        "**Residual CNN Architecture (`src/model.py`):** 3-stage MedResNet with projection skip connections, BatchNorm, global average pooling, and dropout, exposing `stage3.conv2` as the Grad-CAM target layer.",
+        "**Pure-PyTorch Grad-CAM (`src/gradcam.py`):** Captures spatial activations and class-score gradients via forward and full backward hooks, global-average-pools gradients into channel weights, applies ReLU, and upsamples to input resolution.",
+        "**Reproducible Training & Evaluation (`src/train.py`, `src/evaluate.py`):** Deterministic seeding, AdamW with CosineAnnealingLR, JSON metrics logging, and automated ROC, confusion matrix, and saliency grid generation.",
+      ],
+    },
+  },
+  {
     id: "nanopore-basecalling",
     companyName: "HMM Nanopore Basecaller",
     subtitle: "Numba-Accelerated 1,025-State 5-Mer Basecaller on Raw POD5 Signals",
