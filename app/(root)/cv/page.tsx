@@ -49,7 +49,7 @@ export default function ResumePage() {
           <div className="flex flex-wrap gap-3 shrink-0">
             <Button asChild size="lg">
               <a
-                href="/portfolio/Ahmed_Ahmed_CV.pdf"
+                href="/Ahmed_Ahmed_CV.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -191,7 +191,7 @@ export default function ResumePage() {
             </Link>
           </div>
           <iframe
-            src="/portfolio/Ahmed_Ahmed_CV.pdf"
+            src="/Ahmed_Ahmed_CV.pdf"
             title="Ahmed Ahmed 1-Page CV PDF"
             className="w-full h-[480px] sm:h-[660px] lg:h-[820px] rounded-lg border border-border bg-white"
           />

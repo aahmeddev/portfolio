@@ -5,7 +5,7 @@ One of the most striking clinical puzzles in regenerative medicine is **metaboli
 Why would a fibroblast "remember" high glucose weeks after the glucose is gone, and pass that dysfunctional state down to its daughter cells? The prime suspect is **epigenetic modification**, specifically **DNA cytosine methylation ($5\text{-mC}$)** across the CpG islands of matrix-building gene promoters, coupled with stress-induced **cellular senescence**.
 
 <figure class="my-8 flex flex-col items-center">
-  <img src="/portfolio/blogs/diabetic-wound-epigenetics/fibroblasts_microscopy_photo.jpg" alt="Fluorescence Microscopy of Cultured Fibroblast Actin Cytoskeleton" class="rounded-xl shadow-md max-w-full md:max-w-3xl h-auto border border-border" />
+  <img src="/blogs/diabetic-wound-epigenetics/fibroblasts_microscopy_photo.jpg" alt="Fluorescence Microscopy of Cultured Fibroblast Actin Cytoskeleton" class="rounded-xl shadow-md max-w-full md:max-w-3xl h-auto border border-border" />
   <figcaption class="text-center text-sm text-muted-foreground mt-3">
     Fluorescence microscopy of fibroblast cytoskeletal architecture: under chronic hyperglycaemic stress, primary human dermal fibroblasts transition from spindle-shaped matrix-depositing cells into enlarged, flattened senescent phenotypes.
   </figcaption>
@@ -31,7 +31,7 @@ To make sure our downstream RT-PCR measured genuine messenger RNA rather than co
    - ***GAPDH*:** Our constitutive housekeeping loading control.
 
 <figure class="my-8 flex flex-col items-center">
-  <img src="/portfolio/projects/diabetic-wound-epigenetics/rtpcr_gel_results.jpg" alt="Our Group 7 UV Transilluminator 2% Agarose Gel of 35-Cycle RT-PCR Amplicons" class="rounded-xl shadow-md max-w-full md:max-w-3xl h-auto border border-border" />
+  <img src="/projects/diabetic-wound-epigenetics/rtpcr_gel_results.jpg" alt="Our Group 7 UV Transilluminator 2% Agarose Gel of 35-Cycle RT-PCR Amplicons" class="rounded-xl shadow-md max-w-full md:max-w-3xl h-auto border border-border" />
   <figcaption class="text-center text-sm text-muted-foreground mt-3">
     Our raw UV transilluminator photograph (Group 7 results) of the 2% agarose gel resolving 35-cycle RT-PCR products across normoglycaemic (5 mM) and hyperglycaemic (80.5 mM) human dermal fibroblasts.
   </figcaption>
@@ -54,7 +54,7 @@ We amplified the bisulphite-converted proximal promoter of *COL1A1*, ligated the
 Why clone into bacteria before Sanger sequencing rather than sequencing the PCR product directly? Because every cell in a tissue population can have a slightly different binary methylation pattern across its promoter CpG sites. Direct PCR sequencing averages all cells into mixed `C/T` chromatogram peaks, whereas bacterial cloning isolates a **single DNA molecule per colony**, letting you count exact methylated vs unmethylated CpG dinucleotides across individual alleles.
 
 <figure class="my-8 flex flex-col items-center">
-  <img src="/portfolio/projects/diabetic-wound-epigenetics/cpg_methylation_summary.png" alt="Bisulphite Sequencing CpG Methylation Profile Across the COL1A1 Promoter and RT-PCR Expression Shifts" class="rounded-xl shadow-md max-w-full md:max-w-4xl h-auto border border-border" />
+  <img src="/projects/diabetic-wound-epigenetics/cpg_methylation_summary.png" alt="Bisulphite Sequencing CpG Methylation Profile Across the COL1A1 Promoter and RT-PCR Expression Shifts" class="rounded-xl shadow-md max-w-full md:max-w-4xl h-auto border border-border" />
   <figcaption class="text-center text-sm text-muted-foreground mt-3">
     Quantifying our CodonCode Aligner bisulphite clone alignments in Python: mean CpG cytosine methylation across the COL1A1 promoter jumped nearly three-fold from 13.1% ± 3.0% in normoglycaemic controls to 36.4% ± 6.3% in hyperglycaemic fibroblasts (p = 0.002), mirroring the transcriptional shutdown of COL1A1.
   </figcaption>

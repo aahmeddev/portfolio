@@ -5,7 +5,7 @@ Every molecular bioengineering lab has a benchtop UV-Vis spectrophotometer tucke
 Our goal in this project was to design, 3D-print in black PLA, wire, and calibrate a combined **transmission absorbance and $90^\circ$ fluorescence spectrophotometer** from scratch. We had a **900 lines/mm transmission diffraction grating**, a few ThorLabs and Newport optical post mounts, an **STM32 Nucleo-F401RE** microcontroller board, and a **Toshiba `TCD1304` linear CCD array** ($3,648$ silicon photodiodes spaced at an $8\,\mu\text{m}$ pixel pitch across a $29.1\text{ mm}$ sensor window).
 
 <figure class="my-8 flex flex-col items-center">
-  <img src="/portfolio/projects/pulse-oximeter-spectrophotometer/cad_isometric.png" alt="SolidWorks Isometric 3D CAD Assembly of Our Custom Spectrophotometer Housing" class="rounded-xl shadow-md max-w-full md:max-w-3xl h-auto border border-border bg-white p-2" />
+  <img src="/projects/pulse-oximeter-spectrophotometer/cad_isometric.png" alt="SolidWorks Isometric 3D CAD Assembly of Our Custom Spectrophotometer Housing" class="rounded-xl shadow-md max-w-full md:max-w-3xl h-auto border border-border bg-white p-2" />
   <figcaption class="text-center text-sm text-muted-foreground mt-3">
     SolidWorks isometric 3D CAD assembly (Ahmed_Casing.SLDASM) showing the complete optical housing, dual-excitation cuvette tower, internal steering mirror, diffraction grating mount, and linear CCD detector slot.
   </figcaption>
@@ -34,7 +34,7 @@ When we ran our first dark-room tests with a bright broadband source, two major 
 2. **Ceiling Grazing Reflections:** Divergent rays exiting the cuvette holder skimmed along the flat top lid of the housing and bounced straight down onto the detector pixels.
 
 <figure class="my-8 flex flex-col items-center">
-  <img src="/portfolio/projects/pulse-oximeter-spectrophotometer/cad_improvements_breakdown.png" alt="Annotated SolidWorks CAD Breakdown of Our Stray-Light Baffle and V-Trap Improvements" class="rounded-xl shadow-md max-w-full md:max-w-4xl h-auto border border-border" />
+  <img src="/projects/pulse-oximeter-spectrophotometer/cad_improvements_breakdown.png" alt="Annotated SolidWorks CAD Breakdown of Our Stray-Light Baffle and V-Trap Improvements" class="rounded-xl shadow-md max-w-full md:max-w-4xl h-auto border border-border" />
   <figcaption class="text-center text-sm text-muted-foreground mt-3">
     Iterating on the SolidWorks housing to kill stray internal reflections: adding an asymmetrical sawtooth ceiling baffle, a concave 45-degree zero-order V-trap, and light-tight tongue-and-groove lid joints.
   </figcaption>
@@ -47,13 +47,13 @@ To fix both problems mechanically without adding bulky external optics, I redesi
 
 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-8">
   <figure class="flex flex-col items-center">
-    <img src="/portfolio/projects/pulse-oximeter-spectrophotometer/cad_lid_grating.png" alt="SolidWorks Cross-Section of the Asymmetrical Ceiling Sawtooth Baffle" class="rounded-xl shadow-md w-full h-auto border border-border bg-white p-2" />
+    <img src="/projects/pulse-oximeter-spectrophotometer/cad_lid_grating.png" alt="SolidWorks Cross-Section of the Asymmetrical Ceiling Sawtooth Baffle" class="rounded-xl shadow-md w-full h-auto border border-border bg-white p-2" />
     <figcaption class="text-center text-xs sm:text-sm text-muted-foreground mt-2">
       Cross-section of the upper lid CAD showing the asymmetrical sawtooth baffle ridges and grating recess.
     </figcaption>
   </figure>
   <figure class="flex flex-col items-center">
-    <img src="/portfolio/projects/pulse-oximeter-spectrophotometer/cad_v_trap.png" alt="SolidWorks Detail View of the Concave 45-Degree Zero-Order V-Trap" class="rounded-xl shadow-md w-full h-auto border border-border bg-white p-2" />
+    <img src="/projects/pulse-oximeter-spectrophotometer/cad_v_trap.png" alt="SolidWorks Detail View of the Concave 45-Degree Zero-Order V-Trap" class="rounded-xl shadow-md w-full h-auto border border-border bg-white p-2" />
     <figcaption class="text-center text-xs sm:text-sm text-muted-foreground mt-2">
       Close-up CAD view of the concave 45-degree V-trap engineered to extinguish the undiffracted zero-order beam.
     </figcaption>
@@ -71,7 +71,7 @@ To calibrate the dispersion axis, we shone three monochromatic diode lasers into
 $$\lambda(p) = m_{\text{cal}} \cdot p + \lambda_0$$
 
 <figure class="my-8 flex flex-col items-center">
-  <img src="/portfolio/projects/pulse-oximeter-spectrophotometer/laser_calibration.png" alt="Three-Laser Pixel-to-Wavelength Calibration Curve Across 405, 532, and 650 nm" class="rounded-xl shadow-md max-w-full md:max-w-3xl h-auto border border-border" />
+  <img src="/projects/pulse-oximeter-spectrophotometer/laser_calibration.png" alt="Three-Laser Pixel-to-Wavelength Calibration Curve Across 405, 532, and 650 nm" class="rounded-xl shadow-md max-w-full md:max-w-3xl h-auto border border-border" />
   <figcaption class="text-center text-sm text-muted-foreground mt-3">
     Anchoring pixel indices to physical wavelengths using 405 nm, 532 nm, and 650 nm laser peaks across the 3,648-pixel TCD1304 linear CCD array.
   </figcaption>
@@ -90,13 +90,13 @@ Once calibrated, we switched between two optical configurations:
 
 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-8">
   <figure class="flex flex-col items-center">
-    <img src="/portfolio/projects/pulse-oximeter-spectrophotometer/absorbance_combined.png" alt="Normalised Transmission Absorbance Spectra Captured on Our Spectrophotometer" class="rounded-xl shadow-md w-full h-auto border border-border" />
+    <img src="/projects/pulse-oximeter-spectrophotometer/absorbance_combined.png" alt="Normalised Transmission Absorbance Spectra Captured on Our Spectrophotometer" class="rounded-xl shadow-md w-full h-auto border border-border" />
     <figcaption class="text-center text-xs sm:text-sm text-muted-foreground mt-2">
       Normalised transmission absorbance profiles (n = 5 replicates with ±1 SD bands).
     </figcaption>
   </figure>
   <figure class="flex flex-col items-center">
-    <img src="/portfolio/projects/pulse-oximeter-spectrophotometer/fluorescence_combined.png" alt="Normalised 90-Degree Fluorescence Emission Spectra" class="rounded-xl shadow-md w-full h-auto border border-border" />
+    <img src="/projects/pulse-oximeter-spectrophotometer/fluorescence_combined.png" alt="Normalised 90-Degree Fluorescence Emission Spectra" class="rounded-xl shadow-md w-full h-auto border border-border" />
     <figcaption class="text-center text-xs sm:text-sm text-muted-foreground mt-2">
       Orthogonal 90-degree fluorescence emission curves resolving clean Stokes-shifted peaks.
     </figcaption>
@@ -106,7 +106,7 @@ Once calibrated, we switched between two optical configurations:
 When given blind chemical unknowns, overlaying our Python-calibrated spectra against reference library profiles allowed us to identify every unknown dye and fluorophore unambiguously:
 
 <figure class="my-8 flex flex-col items-center">
-  <img src="/portfolio/projects/pulse-oximeter-spectrophotometer/chemical_id_proof.png" alt="Blind Chemical Unknown Identification Against Reference Spectrophotometer Curves" class="rounded-xl shadow-md max-w-full md:max-w-3xl h-auto border border-border" />
+  <img src="/projects/pulse-oximeter-spectrophotometer/chemical_id_proof.png" alt="Blind Chemical Unknown Identification Against Reference Spectrophotometer Curves" class="rounded-xl shadow-md max-w-full md:max-w-3xl h-auto border border-border" />
   <figcaption class="text-center text-sm text-muted-foreground mt-3">
     Overlaying our custom spectrophotometer's calibrated output against commercial reference profiles to prove unknown dye and fluorophore identity.
   </figcaption>

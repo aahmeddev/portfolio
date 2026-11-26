@@ -5,7 +5,7 @@ Most of the time in physical chemistry, quantum confinement feels like an abstra
 Every vial in the rack contained the exact same bulk chemical compound, $\text{CdSe}$, drawn from the exact same reaction flask. Yet simply because we had quenched each aliquot at a different number of seconds after hot injection, the vials glowed in a vivid, continuous rainbow from deep blue through emerald green, canary yellow, and sunset orange as the nanocrystal radius stepped from roughly $1.8\text{ nm}$ up to $4.2\text{ nm}$.
 
 <figure class="my-8 flex flex-col items-center">
-  <img src="/portfolio/blogs/nanorods-qds/quantum_dots_uv_photo.jpg" alt="Colloidal Semiconducting Quantum Dot Vials Glowing Under 365 nm UV Illumination" class="rounded-xl shadow-md max-w-full md:max-w-3xl h-auto border border-border" />
+  <img src="/blogs/nanorods-qds/quantum_dots_uv_photo.jpg" alt="Colloidal Semiconducting Quantum Dot Vials Glowing Under 365 nm UV Illumination" class="rounded-xl shadow-md max-w-full md:max-w-3xl h-auto border border-border" />
   <figcaption class="text-center text-sm text-muted-foreground mt-3">
     Size-tunable photoluminescence of colloidal semiconducting nanocrystals under 365 nm UV excitation: smaller nanocrystals (left) experience stronger spatial exciton confinement and emit higher-energy blue photons, while larger nanocrystals (right) shift toward the red bulk band edge.
   </figcaption>
@@ -24,7 +24,7 @@ When we prepared our gold nanorod growth solutions, the trickiest practical step
 Why does a cubic face-centred metal like gold grow into an anisotropic cylinder instead of just expanding into a bigger sphere? In the lab, we had to keep the water bath above $27\text{ to }30\,^\circ\text{C}$ because CTAB crystallises out of solution at cool room temperatures. Above its critical micelle temperature, CTAB forms a dense bilayer selectively packed along the lateral $\{100\}$ crystal facets of the growing gold seed, assisted by underpotential deposition of $\text{Ag}^+$ ions. That surfactant sleeve acts like a molecular zip-tie around the waist of the crystal, forcing newly reduced $\text{Au}^0$ atoms to deposit preferentially onto the less sterically hindered $\{111\}$ end caps.
 
 <figure class="my-8 flex flex-col items-center">
-  <img src="/portfolio/blogs/nanorods-qds/gold_nanorods_vials_photo.jpg" alt="Transmission Electron Micrographs, Solution Vials, and Longitudinal SPR Red-Shift Across Gold Nanorod Aspect Ratios" class="rounded-xl shadow-md max-w-full md:max-w-3xl h-auto border border-border bg-white p-2" />
+  <img src="/blogs/nanorods-qds/gold_nanorods_vials_photo.jpg" alt="Transmission Electron Micrographs, Solution Vials, and Longitudinal SPR Red-Shift Across Gold Nanorod Aspect Ratios" class="rounded-xl shadow-md max-w-full md:max-w-3xl h-auto border border-border bg-white p-2" />
   <figcaption class="text-center text-sm text-muted-foreground mt-3">
     How geometry steers colour in gold nanorods: as the aspect ratio R = L/D increases from spherical seeds (left) to elongated rods (right), the transverse plasmon peak near 520 nm remains fixed while the longitudinal plasmon resonance shifts across the visible and near-infrared spectrum.
   </figcaption>
@@ -43,7 +43,7 @@ $$P_A = \frac{1 - e^2}{e^2}\left[\frac{1}{2e}\ln\!\left(\frac{1+e}{1-e}\right) -
 Resonance occurs whenever the denominator's real bracket vanishes, $\epsilon_1(\lambda_L) = -\!\left(\frac{1 - P_A}{P_A}\right)\epsilon_m$. Because the real permittivity of gold $\epsilon_1(\lambda)$ becomes linearly more negative across the red and near-infrared window, solving that resonance equation let us translate our measured longitudinal peak wavelengths directly into nanorod aspect ratios ($R \approx 2.4\text{ to }4.1$).
 
 <figure class="my-8 flex flex-col items-center">
-  <img src="/portfolio/projects/diabetic-wound-epigenetics/nanorod_qd_absorbance.png" alt="High-Resolution UV-Vis Absorbance and Fluorescence Spectra from Our Nanorod and Quantum Dot Synthesis" class="rounded-xl shadow-md max-w-full md:max-w-4xl h-auto border border-border" />
+  <img src="/projects/diabetic-wound-epigenetics/nanorod_qd_absorbance.png" alt="High-Resolution UV-Vis Absorbance and Fluorescence Spectra from Our Nanorod and Quantum Dot Synthesis" class="rounded-xl shadow-md max-w-full md:max-w-4xl h-auto border border-border" />
   <figcaption class="text-center text-sm text-muted-foreground mt-3">
     Our high-resolution optical characterisation plots: split transverse and longitudinal plasmon modes across our CTAB gold nanorod batches alongside the absorbance and fluorescence emission profiles of our CdSe quantum dots before and after surface ligand passivation.
   </figcaption>
@@ -64,7 +64,7 @@ $$\Delta G(r) = 4\pi r^2 \gamma + \frac{4}{3}\pi r^3 \Delta G_v, \quad \Delta G_
 Differentiating with respect to $r$ gives the critical nucleus radius $r^* = -\frac{2\gamma}{\Delta G_v}$ and the thermodynamic barrier $\Delta G^* = \frac{16\pi \gamma^3}{3(\Delta G_v)^2}$. However, plugging a naive Boltzmann factor $\exp(-\Delta G^* / k_B T)$ into a differential equation solver overpredicted the nucleation rate by nearly two orders of magnitude.
 
 <figure class="my-8 flex flex-col items-center">
-  <img src="/portfolio/projects/diabetic-wound-epigenetics/nucleation_model_comparison.png" alt="Python Kinetic Simulation Comparing Classical LaMer Burst Nucleation and Diffusional Growth" class="rounded-xl shadow-md max-w-full md:max-w-3xl h-auto border border-border" />
+  <img src="/projects/diabetic-wound-epigenetics/nucleation_model_comparison.png" alt="Python Kinetic Simulation Comparing Classical LaMer Burst Nucleation and Diffusional Growth" class="rounded-xl shadow-md max-w-full md:max-w-3xl h-auto border border-border" />
   <figcaption class="text-center text-sm text-muted-foreground mt-3">
     Python kinetic trajectory simulations comparing monomer supersaturation collapse, critical radius evolution, and final size dispersity across burst nucleation and Ostwald ripening regimes.
   </figcaption>
@@ -77,7 +77,7 @@ $$J = Z \cdot \beta^* \cdot N_0 \exp\!\left(-\frac{\Delta G^*}{k_B T}\right), \q
 Plotting $Z$ and $J$ across realistic interfacial tension and supersaturation ranges in Python made it immediately obvious why temperature stability during hot injection is so unforgiving: a $5\,^\circ\text{C}$ drop across the reaction flask alters $S$ and $\Delta G^*$ exponentially, smearing the nucleation burst into continuous secondary nucleation.
 
 <figure class="my-8 flex flex-col items-center">
-  <img src="/portfolio/projects/diabetic-wound-epigenetics/nucleation_zeldovich_plot.png" alt="Sensitivity Analysis of the Zeldovich Non-Equilibrium Factor and Nucleation Rate" class="rounded-xl shadow-md max-w-full md:max-w-3xl h-auto border border-border" />
+  <img src="/projects/diabetic-wound-epigenetics/nucleation_zeldovich_plot.png" alt="Sensitivity Analysis of the Zeldovich Non-Equilibrium Factor and Nucleation Rate" class="rounded-xl shadow-md max-w-full md:max-w-3xl h-auto border border-border" />
   <figcaption class="text-center text-sm text-muted-foreground mt-3">
     Parametric sensitivity plots generated from our Python nucleation model showing how the Zeldovich correction factor Z damps equilibrium nucleation flux across supersaturation regimes.
   </figcaption>
@@ -96,7 +96,7 @@ When we measured the fluorescence spectrum of our unpassivated CdSe aliquot, how
 Why? At a radius of $2\text{ nm}$, over 35% of the atoms in a CdSe nanocrystal sit directly on the exterior surface. Those surface $\text{Cd}^{2+}$ and $\text{Se}^{2-}$ ions have unsatisfied, dangling coordination orbitals that act as mid-gap **deep surface trap states**. When a UV photon excites an electron-hole pair inside the core, the carrier frequently falls into a surface vacancy before it can recombine across the band edge, emitting a lower-energy trap photon.
 
 <figure class="my-8 flex flex-col items-center">
-  <img src="/portfolio/projects/diabetic-wound-epigenetics/qd_characterisation_table.png" alt="Quantitative Optical Characterisation Table of Our CdSe Quantum Dots Before and After Oleylamine Passivation" class="rounded-xl shadow-md max-w-full md:max-w-3xl h-auto border border-border" />
+  <img src="/projects/diabetic-wound-epigenetics/qd_characterisation_table.png" alt="Quantitative Optical Characterisation Table of Our CdSe Quantum Dots Before and After Oleylamine Passivation" class="rounded-xl shadow-md max-w-full md:max-w-3xl h-auto border border-border" />
   <figcaption class="text-center text-sm text-muted-foreground mt-3">
     Summary of our experimental CdSe quantum dot measurements: passivating under-coordinated surface sites with oleylamine halved the fluorescence FWHM from 185.2 nm down to 91.9 nm.
   </figcaption>

@@ -3,7 +3,7 @@
 The idea for this project began at an Imperial College London departmental talk where an Oxford Nanopore Technologies speaker passed a **MinION** around the lecture theatre. Holding a complete DNA and RNA sequencer that weighed under 100 grams and plugged into a standard laptop over USB changed how I thought about genomics. Unlike short-read sequencing-by-synthesis instruments that rely on cyclic fluorescence imaging inside heavy benchtop optics, a nanopore device directly measures the physics of a single biopolymer passing through a molecular aperture in real time.
 
 <figure class="my-8 flex flex-col items-center">
-  <img src="/portfolio/blogs/nanopore-basecalling/minion.jpg" alt="Oxford Nanopore MinION Portable Sequencer" class="rounded-xl shadow-md max-w-full md:max-w-xl h-auto border border-border" />
+  <img src="/blogs/nanopore-basecalling/minion.jpg" alt="Oxford Nanopore MinION Portable Sequencer" class="rounded-xl shadow-md max-w-full md:max-w-xl h-auto border border-border" />
   <figcaption class="text-center text-sm text-muted-foreground mt-3">
     Figure 1: The Oxford Nanopore MinION portable sequencer, capable of streaming raw picoampere ionic current traces in real time over USB.
   </figcaption>
@@ -22,7 +22,7 @@ Modern production basecallers from Oxford Nanopore (from early hidden Markov and
 In 2023, Oxford Nanopore transitioned raw signal storage from legacy HDF5-based `.fast5` files to the Apache Arrow-backed **POD5** format, separating read metadata, calibration tables, and compressed 16-bit integer ADC signal chunks for high-throughput streaming I/O.
 
 <figure class="my-8 flex flex-col items-center">
-  <img src="/portfolio/blogs/nanopore-basecalling/pod5_file_structure.png" alt="POD5 Apache Arrow Internal File Structure" class="rounded-xl shadow-md max-w-full md:max-w-2xl h-auto border border-border bg-white p-2" />
+  <img src="/blogs/nanopore-basecalling/pod5_file_structure.png" alt="POD5 Apache Arrow Internal File Structure" class="rounded-xl shadow-md max-w-full md:max-w-2xl h-auto border border-border bg-white p-2" />
   <figcaption class="text-center text-sm text-muted-foreground mt-3">
     Figure 2: Internal Apache Arrow table architecture of a POD5 sequencing archive, separating read metadata from compressed 16-bit raw signal chunks.
   </figcaption>
@@ -40,7 +40,7 @@ Before an HMM can evaluate Gaussian emission likelihoods across $1,024$ 5-mer st
 5. **Derivative Change-Point Event Segmentation:** To identify discrete translocation events for exploratory signature analysis, `segment_events()` computes first-order sample differences $\Delta \tilde{x}_t = |\tilde{x}_{t} - \tilde{x}_{t-1}|$ and flags step boundaries exceeding $2.0 \times \text{MAD}(\Delta \tilde{x})$ with a minimum dwell enforcement of 5 samples.
 
 <figure class="my-8 flex flex-col items-center">
-  <img src="/portfolio/blogs/nanopore-basecalling/signal_preprocessing.jpg" alt="Raw vs Preprocessed Nanopore Ionic Current Trace" class="rounded-xl shadow-md max-w-full md:max-w-3xl h-auto border border-border" />
+  <img src="/blogs/nanopore-basecalling/signal_preprocessing.jpg" alt="Raw vs Preprocessed Nanopore Ionic Current Trace" class="rounded-xl shadow-md max-w-full md:max-w-3xl h-auto border border-border" />
   <figcaption class="text-center text-sm text-muted-foreground mt-3">
     Figure 3: Five-stage signal conditioning in SignalPreprocessor: raw 4 kHz POD5 ionic current trace vs outlier-clipped, median-filtered, drift-corrected, and RobustScaler-normalised output.
   </figcaption>
@@ -63,7 +63,7 @@ Initializing a 1,025-state HMM with random Gaussian emissions fails because the 
 To bridge this gap, I built `signal_aligner.py` (`SignalAligner`) to align the preprocessed read against the **GRCh38 Human Chromosome 22 reference genome** (`NC_000022.11`) and extract empirical per-5-mer emission distributions before running Baum-Welch refinement:
 
 <figure class="my-8 flex flex-col items-center">
-  <img src="/portfolio/blogs/nanopore-basecalling/dtw_pca_analysis.png" alt="Two-Pass Multiprocessing DTW Search and 6-Feature Event PCA Projection" class="rounded-xl shadow-md max-w-full md:max-w-4xl h-auto border border-border" />
+  <img src="/blogs/nanopore-basecalling/dtw_pca_analysis.png" alt="Two-Pass Multiprocessing DTW Search and 6-Feature Event PCA Projection" class="rounded-xl shadow-md max-w-full md:max-w-4xl h-auto border border-border" />
   <figcaption class="text-center text-sm text-muted-foreground mt-3">
     Figure 4: Left: Two-pass coarse-to-fine multiprocessing Dynamic Time Warping (DTW) search across human chromosome 22 (NC_000022.11), pinpointing the read origin near 38,010,200 bp. Right: 6-feature PCA event projection from BaseSignatureAnalyzer.
   </figcaption>
@@ -94,7 +94,7 @@ A dense $1,025 \times 1,025$ transition matrix contains $N^2 = 1,050,625$ entrie
 By pre-computing typed `numba.typed.List` predecessor and successor adjacency lists (`valid_predecessors_list` and `valid_successors_list`) where entries below `LOG_ZERO_THRESHOLD` are pruned, the per-sample transition complexity drops by more than **200-fold**, from $O(N^2) = 1,050,625$ to $O(6N) \approx 6,150$ operations per time step.
 
 <figure class="my-8 flex flex-col items-center">
-  <img src="/portfolio/blogs/nanopore-basecalling/hmm_viterbi_overview.png" alt="Viterbi MAP 5-mer Decoding and Baum-Welch Learned Gaussian Emission Posteriors" class="rounded-xl shadow-md max-w-full md:max-w-4xl h-auto border border-border" />
+  <img src="/blogs/nanopore-basecalling/hmm_viterbi_overview.png" alt="Viterbi MAP 5-mer Decoding and Baum-Welch Learned Gaussian Emission Posteriors" class="rounded-xl shadow-md max-w-full md:max-w-4xl h-auto border border-border" />
   <figcaption class="text-center text-sm text-muted-foreground mt-3">
     Figure 5: Left: Viterbi maximum a posteriori (MAP) 5-mer state path overlaid on the preprocessed 4 kHz HG002 ionic current trace. Right: Baum-Welch refined Gaussian emission densities illustrating homopolymer overlap vs mixed purine/pyrimidine separation.
   </figcaption>
@@ -154,7 +154,7 @@ To evaluate the decoded FASTA output (`basecalled_output.fasta`) against an indu
 Reaching **81% sequence identity** against Dorado using a first-principles Hidden Markov Model written in pure Python and Numba highlighted both the mathematical elegance and the fundamental physical ceilings of classical Markov basecallers:
 
 <figure class="my-8 flex flex-col items-center">
-  <img src="/portfolio/blogs/nanopore-basecalling/basecalling_timeline.png" alt="Evolution of Oxford Nanopore Basecalling Architectures" class="rounded-xl shadow-md max-w-full md:max-w-3xl h-auto border border-border" />
+  <img src="/blogs/nanopore-basecalling/basecalling_timeline.png" alt="Evolution of Oxford Nanopore Basecalling Architectures" class="rounded-xl shadow-md max-w-full md:max-w-3xl h-auto border border-border" />
   <figcaption class="text-center text-sm text-muted-foreground mt-3">
     Figure 6: Architectural evolution of nanopore basecallers from early event-segmented Hidden Markov Models (Metrichor, Nanocall) to raw-signal recurrent, convolutional, and CRF-CTC neural architectures (Scrappie, Guppy, Bonito, Dorado).
   </figcaption>

@@ -50,15 +50,15 @@
   </div>
 
   <div id="gradcam" class="panel active">
-    <img src="/portfolio/projects/medmnist-pytorch-classifier/gradcam_grid.png" alt="Grad-CAM Saliency Grid" />
+    <img src="/projects/medmnist-pytorch-classifier/gradcam_grid.png" alt="Grad-CAM Saliency Grid" />
     <p class="caption">Pure-PyTorch Grad-CAM heatmaps extracted from <code>stage3.conv2</code> via forward and full backward hooks, global-average-pooling class-score gradients into channel weights and upsampling to input resolution to audit which lung opacity regions drive each clinical prediction.</p>
   </div>
   <div id="roc" class="panel">
-    <img src="/portfolio/projects/medmnist-pytorch-classifier/roc_curve.png" alt="ROC Curve" />
+    <img src="/projects/medmnist-pytorch-classifier/roc_curve.png" alt="ROC Curve" />
     <p class="caption">Evaluated once on 624 untouched PneumoniaMNIST held-out test images using inverse-frequency class-weighted CrossEntropyLoss, AdamW, and cosine annealing.</p>
   </div>
   <div id="cm" class="panel">
-    <img src="/portfolio/projects/medmnist-pytorch-classifier/confusion_matrix.png" alt="Confusion Matrix" />
+    <img src="/projects/medmnist-pytorch-classifier/confusion_matrix.png" alt="Confusion Matrix" />
     <p class="caption">Balanced sensitivity and specificity across Normal vs Pneumonia paediatric chest radiographs, verified by deterministic seeding and 3/3 passing pytest checks.</p>
   </div>
 </div>

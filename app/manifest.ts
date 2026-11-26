@@ -6,13 +6,13 @@ export default function manifest(): MetadataRoute.Manifest {
     short_name: "Ahmed Ahmed",
     description:
       "First Class MEng Molecular Bioengineering undergraduate at Imperial College London. Nanopore sequencing, diagnostic bioassays, and embedded bioinstrumentation.",
-    start_url: "/portfolio/",
+    start_url: "/",
     display: "standalone",
     background_color: "#070c14",
     theme_color: "#11b5c9",
     icons: [
       {
-        src: "/portfolio/favicon.ico",
+        src: "/favicon.ico",
         sizes: "64x64",
         type: "image/png",
       },
@@ -20,6 +20,6 @@ export default function manifest(): MetadataRoute.Manifest {
     categories: ["bioengineering", "bioinformatics", "portfolio", "science"],
     lang: "en-GB",
     dir: "ltr",
-    scope: "/portfolio/",
+    scope: "/",
   };
 }

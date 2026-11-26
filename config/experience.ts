@@ -50,7 +50,7 @@ export const Experiences: ProjectInterface[] = [
     category: ["Sequencing & Bioinformatics", "Computational Bioengineering", "Diagnostics & Assays"],
     shortDescription:
       "Built an end-to-end clinical trial feasibility informatics pipeline ingesting 200 live UK and EU4 oncology and immunology studies from the ClinicalTrials.gov API v2 into a normalised SQLite warehouse (7,538 active sites, 410,731 target patients), running analytical SQL queries for site density and sponsor recruitment burden, and generating an interactive HTML dashboard.",
-    websiteLink: "/portfolio/demos/clinical-trial-feasibility.html",
+    websiteLink: "/demos/clinical-trial-feasibility.html",
     techStack: [
       "Python",
       "SQL (SQLite)",
@@ -61,7 +61,7 @@ export const Experiences: ProjectInterface[] = [
     ],
     startDate: new Date("2026-11-26"),
     endDate: new Date("2026-11-26"),
-    companyLogoImg: "/portfolio/projects/clinical-trial-feasibility/feasibility_overview.png",
+    companyLogoImg: "/projects/clinical-trial-feasibility/feasibility_overview.png",
     keyMetrics: [
       {
         label: "Live Trials Ingested",
@@ -90,13 +90,13 @@ export const Experiences: ProjectInterface[] = [
         title: "Global Site Footprint & Clinical Phase Enrolment Overview",
         description:
           "Top 10 recruiting countries by active site count alongside clinical phase volume and mean target enrolment across 200 live ClinicalTrials.gov studies.",
-        imgArr: ["/portfolio/projects/clinical-trial-feasibility/feasibility_overview.png"],
+        imgArr: ["/projects/clinical-trial-feasibility/feasibility_overview.png"],
       },
       {
         title: "UK vs EU4 Site Density & Sponsor Recruitment Burden",
         description:
           "Direct comparison of UK, Germany, France, Spain, and Italy site footprints paired with mean target patients per site across industry and academic sponsors.",
-        imgArr: ["/portfolio/projects/clinical-trial-feasibility/uk_eu_site_density.png"],
+        imgArr: ["/projects/clinical-trial-feasibility/uk_eu_site_density.png"],
       },
     ],
     descriptionDetails: {
@@ -120,7 +120,7 @@ export const Experiences: ProjectInterface[] = [
     category: ["Sequencing & Bioinformatics", "Computational Bioengineering", "Diagnostics & Assays"],
     shortDescription:
       "Built a modular PyTorch 2D medical image classification pipeline (MedResNet residual CNN) with inverse-frequency class-weighted CrossEntropyLoss, AdamW, cosine annealing, and a pure-PyTorch Grad-CAM saliency implementation using forward and backward hooks, achieving 0.9673 held-out test ROC-AUC on PneumoniaMNIST.",
-    websiteLink: "/portfolio/demos/medmnist-gradcam-explorer.html",
+    websiteLink: "/demos/medmnist-gradcam-explorer.html",
     githubLink: "https://github.com/aahmeddev/medmnist-pytorch-classifier",
     techStack: [
       "PyTorch",
@@ -133,7 +133,7 @@ export const Experiences: ProjectInterface[] = [
     ],
     startDate: new Date("2026-11-22"),
     endDate: new Date("2026-11-23"),
-    companyLogoImg: "/portfolio/projects/medmnist-pytorch-classifier/gradcam_grid.png",
+    companyLogoImg: "/projects/medmnist-pytorch-classifier/gradcam_grid.png",
     keyMetrics: [
       {
         label: "Held-Out Test ROC-AUC",
@@ -162,15 +162,15 @@ export const Experiences: ProjectInterface[] = [
         title: "Grad-CAM Saliency Overlays on Held-Out Test Chest X-Rays",
         description:
           "Class-discriminative Grad-CAM heatmaps generated from the final convolutional layer of MedResNet, highlighting lung opacity regions driving each prediction.",
-        imgArr: ["/portfolio/projects/medmnist-pytorch-classifier/gradcam_grid.png"],
+        imgArr: ["/projects/medmnist-pytorch-classifier/gradcam_grid.png"],
       },
       {
         title: "Held-Out Test ROC Curve & Confusion Matrix",
         description:
           "0.9673 held-out test ROC-AUC, 88.78% test accuracy, and 0.8729 Macro F1 across 624 paediatric chest X-rays using class-weighted CrossEntropyLoss.",
         imgArr: [
-          "/portfolio/projects/medmnist-pytorch-classifier/roc_curve.png",
-          "/portfolio/projects/medmnist-pytorch-classifier/confusion_matrix.png",
+          "/projects/medmnist-pytorch-classifier/roc_curve.png",
+          "/projects/medmnist-pytorch-classifier/confusion_matrix.png",
         ],
       },
     ],
@@ -195,7 +195,7 @@ export const Experiences: ProjectInterface[] = [
     category: ["Sequencing & Bioinformatics", "Bioinformatics", "Computational Bioengineering"],
     shortDescription:
       "Built a 1,025-state 5-mer Hidden Markov Model (log-space Baum-Welch EM and 4x downsampled Viterbi decoding) in Python with Numba JIT multi-core execution to decode raw nanopore POD5 ionic current reads, achieving 81% sequence identity against Oxford Nanopore Dorado.",
-    websiteLink: "/portfolio/blog/nanopore-basecalling",
+    websiteLink: "/blog/nanopore-basecalling",
     githubLink: "https://github.com/aahmeddev/nanopore-basecalling-project",
     blogLink: "/blog/nanopore-basecalling",
     techStack: [
@@ -209,7 +209,7 @@ export const Experiences: ProjectInterface[] = [
     ],
     startDate: new Date("2025-07-29"),
     endDate: new Date("2025-08-15"),
-    companyLogoImg: "/portfolio/projects/nanopore-hmm-basecaller/nanopore_mk1c_photo.jpg",
+    companyLogoImg: "/projects/nanopore-hmm-basecaller/nanopore_mk1c_photo.jpg",
     keyMetrics: [
       {
         label: "Validated Accuracy",
@@ -238,21 +238,21 @@ export const Experiences: ProjectInterface[] = [
         title: "Viterbi MAP 5-Mer Decoding & Baum-Welch Gaussian Emission Posteriors",
         description:
           "Left: Piecewise 5-mer Viterbi state sequence decoded over RobustScaler-normalised 4 kHz ionic current (HG002 read 2536858a). Right: Learned Gaussian emission densities (sigma >= 0.20 floor) showing homopolymer overlap vs mixed purine/pyrimidine separation.",
-        imgArr: ["/portfolio/projects/nanopore-hmm-basecaller/hmm_viterbi_overview.png"],
+        imgArr: ["/projects/nanopore-hmm-basecaller/hmm_viterbi_overview.png"],
       },
       {
         title: "Two-Pass Multiprocessing DTW Alignment & 6-Feature Event PCA Projection",
         description:
           "Left: Coarse-to-fine fastdtw cost landscape across human chromosome 22 using the Nanopolish R9.4 5-mer pore model. Right: BaseSignatureAnalyzer 6-feature PCA projection (mean, std, dwell duration, median, skewness, kurtosis).",
-        imgArr: ["/portfolio/projects/nanopore-hmm-basecaller/dtw_pca_analysis.png"],
+        imgArr: ["/projects/nanopore-hmm-basecaller/dtw_pca_analysis.png"],
       },
       {
         title: "Five-Stage POD5 Signal Conditioning & Apache Arrow Architecture",
         description:
           "3x IQR outlier clipping, 5-point median filtering, 3rd-order polynomial drift subtraction, and RobustScaler normalisation streamed directly from Apache Arrow POD5 tables.",
         imgArr: [
-          "/portfolio/blogs/nanopore-basecalling/signal_preprocessing.jpg",
-          "/portfolio/blogs/nanopore-basecalling/pod5_file_structure.png",
+          "/blogs/nanopore-basecalling/signal_preprocessing.jpg",
+          "/blogs/nanopore-basecalling/pod5_file_structure.png",
         ],
       },
     ],
@@ -279,7 +279,7 @@ export const Experiences: ProjectInterface[] = [
     category: ["Hardware & Medtech", "Diagnostics & Assays", "Embedded Systems", "Full-Stack Bioengineering"],
     shortDescription:
       "Won the Year 2 Molecular Bioengineering Prize for Best Design Group Project. Owned all electronic hardware (KiCad ADS1299 PCB, Arduino Due DAC generator) and software (250 Hz SciPy Butterworth/Welch DSP engine, NiceGUI + Firebase clinical and patient portals) for the ENDO1000 endometriosis study.",
-    websiteLink: "/portfolio/blog/myowave-ehg-diagnostics",
+    websiteLink: "/blog/myowave-ehg-diagnostics",
     githubLink: "https://github.com/aahmeddev/DAPP2_MOL_Group_F-MYOWAVE",
     blogLink: "/blog/myowave-ehg-diagnostics",
     techStack: [
@@ -296,7 +296,7 @@ export const Experiences: ProjectInterface[] = [
     ],
     startDate: new Date("2025-10-01"),
     endDate: new Date("2026-05-30"),
-    companyLogoImg: "/portfolio/projects/myowave-ehg/pcb_angled_3d.png",
+    companyLogoImg: "/projects/myowave-ehg/pcb_angled_3d.png",
     keyMetrics: [
       {
         label: "Departmental Award",
@@ -325,15 +325,15 @@ export const Experiences: ProjectInterface[] = [
         title: "250 Hz Butterworth Bandpass Recovery & Welch FWL/FWH Spectral Density",
         description:
           "Left: Zero-phase 4th-order Butterworth bandpass filtering (0.34 to 1.0 Hz) isolating uterine myometrial bursts from 50 Hz mains noise and respiration drift. Right: Welch Power Spectral Density across Fast Wave Low (0.13 - 0.34 Hz) and Fast Wave High (0.34 - 1.0 Hz) diagnostic bands.",
-        imgArr: ["/portfolio/projects/myowave-ehg/ehg_dsp_pipeline.png"],
+        imgArr: ["/projects/myowave-ehg/ehg_dsp_pipeline.png"],
       },
       {
         title: "3D KiCad Renders of the Custom ADS1299-6PAGR Biopotential Acquisition Shield",
         description:
           "Isometric and top 3D board renders showing the 64-pin TQFP ADS1299-6PAGR front-end, differential Ag/AgCl electrode headers, passive RC input filters, and isolated +2.5V/+3.3V/+5V supply regulation.",
         imgArr: [
-          "/portfolio/projects/myowave-ehg/pcb_angled_3d.png",
-          "/portfolio/projects/myowave-ehg/pcb_top_3d.png",
+          "/projects/myowave-ehg/pcb_angled_3d.png",
+          "/projects/myowave-ehg/pcb_top_3d.png",
         ],
       },
       {
@@ -341,8 +341,8 @@ export const Experiences: ProjectInterface[] = [
         description:
           "PCB copper layout separating microvolt differential analog input networks from high-speed SPI digital clock lines.",
         imgArr: [
-          "/portfolio/projects/myowave-ehg/pcb_top_layout.png",
-          "/portfolio/projects/myowave-ehg/pcb_angled_layout.png",
+          "/projects/myowave-ehg/pcb_top_layout.png",
+          "/projects/myowave-ehg/pcb_angled_layout.png",
         ],
       },
     ],
@@ -367,7 +367,7 @@ export const Experiences: ProjectInterface[] = [
     category: ["Hardware & Medtech", "Embedded Systems", "Computational Bioengineering"],
     shortDescription:
       "Designed and built an 8-channel ADS1299/Arduino biopotential pulse oximeter over SPI using Embedded C and Python, alongside a custom SolidWorks stray-light-baffled STM32 + Toshiba TCD1304 linear CCD spectrophotometer calibrated via 405/532/650 nm laser regression.",
-    websiteLink: "/portfolio/blog/custom-ccd-spectrophotometer",
+    websiteLink: "/blog/custom-ccd-spectrophotometer",
     blogLink: "/blog/custom-ccd-spectrophotometer",
     techStack: [
       "Embedded C",
@@ -380,7 +380,7 @@ export const Experiences: ProjectInterface[] = [
     ],
     startDate: new Date("2025-10-01"),
     endDate: new Date("2026-03-30"),
-    companyLogoImg: "/portfolio/projects/pulse-oximeter-spectrophotometer/cad_isometric.png",
+    companyLogoImg: "/projects/pulse-oximeter-spectrophotometer/cad_isometric.png",
     keyMetrics: [
       {
         label: "Optical Grating Angle",
@@ -410,8 +410,8 @@ export const Experiences: ProjectInterface[] = [
         description:
           "Left: Linear pixel-to-wavelength regression across violet (405 nm), green (532 nm), and red (650 nm) laser peaks. Right: Quantitative spectral matching of unknown chromophores and fluorophores against commercial reference baselines.",
         imgArr: [
-          "/portfolio/projects/pulse-oximeter-spectrophotometer/laser_calibration.png",
-          "/portfolio/projects/pulse-oximeter-spectrophotometer/chemical_id_proof.png",
+          "/projects/pulse-oximeter-spectrophotometer/laser_calibration.png",
+          "/projects/pulse-oximeter-spectrophotometer/chemical_id_proof.png",
         ],
       },
       {
@@ -419,8 +419,8 @@ export const Experiences: ProjectInterface[] = [
         description:
           "Multi-replicate absorbance and orthogonal fluorescence emission curves with ±1 SD bands captured on the custom 3D-printed spectrophotometer.",
         imgArr: [
-          "/portfolio/projects/pulse-oximeter-spectrophotometer/absorbance_combined.png",
-          "/portfolio/projects/pulse-oximeter-spectrophotometer/fluorescence_combined.png",
+          "/projects/pulse-oximeter-spectrophotometer/absorbance_combined.png",
+          "/projects/pulse-oximeter-spectrophotometer/fluorescence_combined.png",
         ],
       },
       {
@@ -428,8 +428,8 @@ export const Experiences: ProjectInterface[] = [
         description:
           "Internal CAD cross-sections showing the asymmetrical sawtooth lid baffle teeth and the concave 45-degree specular V-trap engineered to extinguish zero-order (m = 0) and grazing reflections.",
         imgArr: [
-          "/portfolio/projects/pulse-oximeter-spectrophotometer/cad_improvements_breakdown.png",
-          "/portfolio/projects/pulse-oximeter-spectrophotometer/cad_lid_grating.png",
+          "/projects/pulse-oximeter-spectrophotometer/cad_improvements_breakdown.png",
+          "/projects/pulse-oximeter-spectrophotometer/cad_lid_grating.png",
         ],
       },
     ],
@@ -453,7 +453,7 @@ export const Experiences: ProjectInterface[] = [
     category: ["Sequencing & Bioinformatics", "Bioinformatics", "Computational Bioengineering"],
     shortDescription:
       "Engineered a multi-threaded desktop application in Java 22, JavaFX 24, and Python to stream .fastq and .fastq.gz sequencing archives, grade 9 FastQC diagnostic modules, execute sliding-window read trimming, and export standalone interactive Plotly.js HTML reports.",
-    websiteLink: "/portfolio/projects/dna-quality-control-toolkit/SRR490124_2_quality_report.html",
+    websiteLink: "/projects/dna-quality-control-toolkit/SRR490124_2_quality_report.html",
     githubLink: "https://github.com/aahmeddev/QC-Toolkit",
     techStack: [
       "Java",
@@ -467,7 +467,7 @@ export const Experiences: ProjectInterface[] = [
     ],
     startDate: new Date("2025-07-01"),
     endDate: new Date("2025-07-27"),
-    companyLogoImg: "/portfolio/projects/dna-quality-control-toolkit/welcome_page.png",
+    companyLogoImg: "/projects/dna-quality-control-toolkit/welcome_page.png",
     keyMetrics: [
       {
         label: "Diagnostic Coverage",
@@ -497,8 +497,8 @@ export const Experiences: ProjectInterface[] = [
         description:
           "Left: Per-base Phred quality and base composition summary validated on E. coli K-12 MG1655 (SRR490124). Right: Headless Matplotlib diagnostic plots piped over stdin into the JavaFX plotNodeCache.",
         imgArr: [
-          "/portfolio/projects/dna-quality-control-toolkit/base_statistics.png",
-          "/portfolio/projects/dna-quality-control-toolkit/data_examples.png",
+          "/projects/dna-quality-control-toolkit/base_statistics.png",
+          "/projects/dna-quality-control-toolkit/data_examples.png",
         ],
       },
       {
@@ -506,8 +506,8 @@ export const Experiences: ProjectInterface[] = [
         description:
           "Left: Multi-tab FASTQ workspace with persistent recent-file history. Right: Sliding-window Phred quality and adapter trimming UI with immediate re-analysis.",
         imgArr: [
-          "/portfolio/projects/dna-quality-control-toolkit/welcome_page.png",
-          "/portfolio/projects/dna-quality-control-toolkit/trimming.png",
+          "/projects/dna-quality-control-toolkit/welcome_page.png",
+          "/projects/dna-quality-control-toolkit/trimming.png",
         ],
       },
       {
@@ -515,7 +515,7 @@ export const Experiences: ProjectInterface[] = [
         description:
           "Inspect a real standalone HTML quality control report generated by HtmlReportGenerator.java.",
         imgArr: [],
-        linkURL: "/portfolio/projects/dna-quality-control-toolkit/SRR490124_2_quality_report.html",
+        linkURL: "/projects/dna-quality-control-toolkit/SRR490124_2_quality_report.html",
       },
     ],
     descriptionDetails: {
@@ -544,7 +544,7 @@ export const Experiences: ProjectInterface[] = [
     techStack: ["Python", "Streamlit", "Pandas / NumPy / SciPy", "Git"],
     startDate: new Date("2025-08-22"),
     endDate: new Date("2025-09-27"),
-    companyLogoImg: "/portfolio/projects/gene-expression-explorer/clustered_heatmap.png",
+    companyLogoImg: "/projects/gene-expression-explorer/clustered_heatmap.png",
     keyMetrics: [
       {
         label: "Supported Formats",
@@ -573,13 +573,13 @@ export const Experiences: ProjectInterface[] = [
         title: "Volcano Plot & Row Z-Score Differential Expression Matrix",
         description:
           "Simultaneous fold-change vs statistical significance filtering (-log10 p-value against log2 fold change) paired with row-wise Z-score standardisation across case and control cohorts.",
-        imgArr: ["/portfolio/projects/gene-expression-explorer/volcano_heatmap_overview.png"],
+        imgArr: ["/projects/gene-expression-explorer/volcano_heatmap_overview.png"],
       },
       {
         title: "Seaborn Hierarchical Ward Clustermap with Cohort Annotation Tracks",
         description:
           "300 DPI row-normalised (z_score = 0) RdBu_r hierarchical clustered heatmap with colour-coded sample cohort bars.",
-        imgArr: ["/portfolio/projects/gene-expression-explorer/clustered_heatmap.png"],
+        imgArr: ["/projects/gene-expression-explorer/clustered_heatmap.png"],
       },
       {
         title: "Launch Gene Expression Explorer Live on Streamlit Cloud",
@@ -614,7 +614,7 @@ export const Experiences: ProjectInterface[] = [
     techStack: ["Python", "PHREEQC", "MATLAB", "Pandas / NumPy / SciPy", "Git"],
     startDate: new Date("2025-06-01"),
     endDate: new Date("2026-01-31"),
-    companyLogoImg: "/portfolio/projects/phreeqc-speciation/water_quality_sampling_photo.jpg",
+    companyLogoImg: "/projects/phreeqc-speciation/water_quality_sampling_photo.jpg",
     keyMetrics: [
       {
         label: "Commercial Impact",
@@ -643,13 +643,13 @@ export const Experiences: ProjectInterface[] = [
         title: "Aqueous Ammonia/Carbonate Equilibrium Speciation & Multi-Core Throughput Scaling",
         description:
           "Left: Non-linear thermodynamic distribution of un-ionised NH3(aq) vs NH4+ across pH. Right: Multi-core throughput scaling using persistent per-worker IPhreeqc C++ instances.",
-        imgArr: ["/portfolio/projects/phreeqc-speciation/phreeqc_parallel_benchmark.png"],
+        imgArr: ["/projects/phreeqc-speciation/phreeqc_parallel_benchmark.png"],
       },
       {
         title: "Empirical River Catchment Un-Ionised Ammonia (NH3) Speciation Output",
         description:
           "Direct speciation trajectory generated by phreeqc-python-tool across multi-parameter river telemetry.",
-        imgArr: ["/portfolio/projects/phreeqc-speciation/NH3_speciation_plot.png"],
+        imgArr: ["/projects/phreeqc-speciation/NH3_speciation_plot.png"],
       },
     ],
     descriptionDetails: {
@@ -672,7 +672,7 @@ export const Experiences: ProjectInterface[] = [
     category: ["Wet Lab & Systems", "Diagnostics & Assays", "Bioinformatics"],
     shortDescription:
       "Investigated hyperglycaemia-induced dermal fibroblast senescence via Qiagen RNeasy RNA extraction, 35-cycle RT-PCR, and CodonCode Aligner bisulphite sequencing (confirming COL1A1 promoter hypermethylation from 13.1% to 36.4%, p = 0.002), alongside CdSe quantum dot passivation and MATLAB enzyme kinetics.",
-    websiteLink: "/portfolio/blog/diabetic-wound-epigenetics",
+    websiteLink: "/blog/diabetic-wound-epigenetics",
     blogLink: "/blog/diabetic-wound-epigenetics",
     techStack: [
       "Mammalian Cell Culture",
@@ -683,7 +683,7 @@ export const Experiences: ProjectInterface[] = [
     ],
     startDate: new Date("2025-10-15"),
     endDate: new Date("2026-05-15"),
-    companyLogoImg: "/portfolio/projects/diabetic-wound-epigenetics/rtpcr_gel_results.jpg",
+    companyLogoImg: "/projects/diabetic-wound-epigenetics/rtpcr_gel_results.jpg",
     keyMetrics: [
       {
         label: "COL1A1 Hypermethylation",
@@ -712,21 +712,21 @@ export const Experiences: ProjectInterface[] = [
         title: "COL1A1 Promoter CpG Hypermethylation (p = 0.002) & RT-PCR Transcriptional Remodelling",
         description:
           "Left: Bisulphite sequencing across 20 bacterial clones showing a 2.78x jump in COL1A1 promoter methylation under 80.5 mM hyperglycaemia. Right: Relative RT-PCR expression shifts across COL1A1, MMP1, NOX4, and IL6 normalised to GAPDH.",
-        imgArr: ["/portfolio/projects/diabetic-wound-epigenetics/cpg_methylation_summary.png"],
+        imgArr: ["/projects/diabetic-wound-epigenetics/cpg_methylation_summary.png"],
       },
       {
         title: "2% Agarose Gel Electrophoresis of 35-Cycle RT-PCR Amplicons (Group 7)",
         description:
           "Experimental UV transilluminator gel photograph resolving GAPDH, COL1A1, MMP1, NOX4, and IL6 amplicons from 14-day primary human dermal fibroblast cultures.",
-        imgArr: ["/portfolio/projects/diabetic-wound-epigenetics/rtpcr_gel_results.jpg"],
+        imgArr: ["/projects/diabetic-wound-epigenetics/rtpcr_gel_results.jpg"],
       },
       {
         title: "Gold Nanorod Gans Plasmon Modes, Zeldovich Nucleation & CdSe Quantum Dot Passivation",
         description:
           "High-resolution UV-Vis absorbance and photoluminescence profiles alongside non-equilibrium Zeldovich burst nucleation kinetic models.",
         imgArr: [
-          "/portfolio/projects/diabetic-wound-epigenetics/nanorod_qd_absorbance.png",
-          "/portfolio/projects/diabetic-wound-epigenetics/nucleation_model_comparison.png",
+          "/projects/diabetic-wound-epigenetics/nanorod_qd_absorbance.png",
+          "/projects/diabetic-wound-epigenetics/nucleation_model_comparison.png",
         ],
       },
     ],
@@ -754,7 +754,7 @@ export const Experiences: ProjectInterface[] = [
     techStack: ["C++17", "Git"],
     startDate: new Date("2025-06-15"),
     endDate: new Date("2025-09-10"),
-    companyLogoImg: "/portfolio/projects/cpp-physics-boids-engine/boids_softbody_sim.png",
+    companyLogoImg: "/projects/cpp-physics-boids-engine/boids_softbody_sim.png",
     keyMetrics: [
       {
         label: "Neighbour Lookup",
@@ -783,7 +783,7 @@ export const Experiences: ProjectInterface[] = [
         title: "O(N) Spatial-Hash Grid Partitioning & 2D Hookean Spring-Mass Deformation",
         description:
           "Left: 3x3 spatial-hash cell queries enabling 2,500+ autonomous agents at 60+ FPS. Right: 2D Hookean structural, shear, and bend spring-mass lattice deforming under penalty boundary impact.",
-        imgArr: ["/portfolio/projects/cpp-physics-boids-engine/boids_softbody_sim.png"],
+        imgArr: ["/projects/cpp-physics-boids-engine/boids_softbody_sim.png"],
       },
     ],
     descriptionDetails: {

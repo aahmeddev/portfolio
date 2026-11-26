@@ -21,7 +21,7 @@ export const blogsUnsorted: blogInterface[] = [
     slug: "nanopore-basecalling",
     category: "Sequencing & Algorithms",
     readTime: "12 min read",
-    coverImage: "/portfolio/blogs/nanopore-basecalling/minion.jpg",
+    coverImage: "/blogs/nanopore-basecalling/minion.jpg",
     tags: ["Python", "Numba JIT", "Hidden Markov Models", "POD5", "Oxford Nanopore"],
   },
   {
@@ -33,7 +33,7 @@ export const blogsUnsorted: blogInterface[] = [
     slug: "nanorods-and-quantum-dots",
     category: "Nanomaterials & Physical Chemistry",
     readTime: "10 min read",
-    coverImage: "/portfolio/blogs/nanorods-qds/quantum_dots_uv_photo.jpg",
+    coverImage: "/blogs/nanorods-qds/quantum_dots_uv_photo.jpg",
     tags: ["Quantum Dots", "Gold Nanorods", "Gans Theory", "Nucleation", "Python"],
   },
   {
@@ -45,7 +45,7 @@ export const blogsUnsorted: blogInterface[] = [
     slug: "custom-ccd-spectrophotometer",
     category: "Optical Bioinstrumentation & CAD",
     readTime: "9 min read",
-    coverImage: "/portfolio/projects/pulse-oximeter-spectrophotometer/cad_lid_grating.png",
+    coverImage: "/projects/pulse-oximeter-spectrophotometer/cad_lid_grating.png",
     tags: ["SolidWorks CAD", "STM32", "TCD1304 CCD", "Optics", "Python"],
   },
   {
@@ -57,7 +57,7 @@ export const blogsUnsorted: blogInterface[] = [
     slug: "myowave-ehg-diagnostics",
     category: "Medtech Hardware & Full-Stack DSP",
     readTime: "10 min read",
-    coverImage: "/portfolio/projects/myowave-ehg/pcb_top_3d.png",
+    coverImage: "/projects/myowave-ehg/pcb_top_3d.png",
     tags: ["KiCad PCB", "ADS1299", "SciPy DSP", "NiceGUI", "Arduino Due"],
   },
   {
@@ -69,7 +69,7 @@ export const blogsUnsorted: blogInterface[] = [
     slug: "diabetic-wound-epigenetics",
     category: "Molecular & Cellular Bioengineering",
     readTime: "9 min read",
-    coverImage: "/portfolio/blogs/diabetic-wound-epigenetics/fibroblasts_microscopy_photo.jpg",
+    coverImage: "/blogs/diabetic-wound-epigenetics/fibroblasts_microscopy_photo.jpg",
     tags: ["Bisulphite Sequencing", "RT-PCR", "Epigenetics", "Cell Culture", "Python"],
   },
   {
@@ -81,7 +81,7 @@ export const blogsUnsorted: blogInterface[] = [
     slug: "digital-biosignal-processing",
     category: "Biomedical Signal Processing",
     readTime: "11 min read",
-    coverImage: "/portfolio/blogs/digital-biosignals/biosignal_oscilloscope_photo.jpg",
+    coverImage: "/blogs/digital-biosignals/biosignal_oscilloscope_photo.jpg",
     tags: ["MATLAB", "Digital Signal Processing", "EMG / EEG / ECG", "Welch PSD", "Z-Transform"],
   },
   {
@@ -93,7 +93,7 @@ export const blogsUnsorted: blogInterface[] = [
     slug: "analytical-spectroscopy-and-kinetics",
     category: "Analytical Chemistry & Mathematical Biology",
     readTime: "10 min read",
-    coverImage: "/portfolio/blogs/analytical-kinetics/nmr_spectrometer_photo.jpg",
+    coverImage: "/blogs/analytical-kinetics/nmr_spectrometer_photo.jpg",
     tags: ["600 MHz NMR", "FTIR", "Enzyme Kinetics", "ODE Bifurcations", "MATLAB"],
   },
 ];

@@ -88,7 +88,7 @@ export default function ContactPage() {
 
           <div className="pt-4 border-t border-border/60">
             <a
-              href="/portfolio/Ahmed_Ahmed_CV.pdf"
+              href="/Ahmed_Ahmed_CV.pdf"
               target="_blank"
               rel="noopener noreferrer"
               className={cn(buttonVariants({ variant: "secondary", size: "sm" }), "w-full")}

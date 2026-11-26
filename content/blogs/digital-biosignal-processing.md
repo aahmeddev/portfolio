@@ -5,7 +5,7 @@ When you first study digital signal processing on textbook synthetic sine waves,
 Across four biomedical signal processing modules at Imperial College London, I worked through the full hierarchy of clinical surface recordings in **MATLAB**: **high-density surface electromyography (sEMG)** on contracting skeletal muscle, **occipital electroencephalography (EEG)** during visual cortex Alpha blocking, and **electrocardiography (ECG)** corrupted by respiration baseline wander and $50\text{ Hz}$ power-line interference. This article brings together the story of how I built each signal processing pipeline, why naive textbook estimators failed on the raw recordings, and how those lessons later fed directly into the DSP engine I wrote for **MYOWAVE**.
 
 <figure class="my-8 flex flex-col items-center">
-  <img src="/portfolio/blogs/digital-biosignals/biosignal_oscilloscope_photo.jpg" alt="Biopotential Pulse Acquisition and Digital Storage Oscilloscope Bench Setup" class="rounded-xl shadow-md max-w-full md:max-w-3xl h-auto border border-border" />
+  <img src="/blogs/digital-biosignals/biosignal_oscilloscope_photo.jpg" alt="Biopotential Pulse Acquisition and Digital Storage Oscilloscope Bench Setup" class="rounded-xl shadow-md max-w-full md:max-w-3xl h-auto border border-border" />
   <figcaption class="text-center text-sm text-muted-foreground mt-3">
     Benchtop biopotential signal acquisition and digital oscilloscope verification: before any digital Z-plane filter or spectral estimator can extract a biomarker, the analog front-end and sampling rate must preserve phase and transient pulse morphology.
   </figcaption>
@@ -28,7 +28,7 @@ $$\text{MSE}(m) = \frac{1}{N}\sum_{n=0}^{N-1}\big(x_2[n] - x_1[n - m]\big)^2 = \
 Writing out that algebraic expansion in MATLAB was a neat "aha" moment: minimising the squared amplitude difference $\text{MSE}(m)$ is mathematically identical to maximising the discrete **cross-correlation** $\hat{R}_{x_1 x_2}[m]$ when the channel powers are stationary.
 
 <figure class="my-8 flex flex-col items-center">
-  <img src="/portfolio/blogs/digital-biosignals/emg_delay_combined.png" alt="Phase-Shifted Bipolar sEMG Waveforms, MSE Minimisation, and Delay-Aligned Overlay" class="rounded-xl shadow-md max-w-full md:max-w-4xl h-auto border border-border" />
+  <img src="/blogs/digital-biosignals/emg_delay_combined.png" alt="Phase-Shifted Bipolar sEMG Waveforms, MSE Minimisation, and Delay-Aligned Overlay" class="rounded-xl shadow-md max-w-full md:max-w-4xl h-auto border border-border" />
   <figcaption class="text-center text-sm text-muted-foreground mt-3">
     Estimating muscle fibre propagation delay across a linear sEMG electrode array: raw phase-delayed motor-unit action potential trains (top), parabolic MSE minimisation (middle), and phase-aligned overlay after delay compensation (bottom).
   </figcaption>
@@ -39,7 +39,7 @@ Writing out that algebraic expansion in MATLAB was a neat "aha" moment: minimisi
 Here is the catch we ran into when we actually plugged in physical distances: if two electrodes sit $\Delta d = 10\text{ mm}$ apart and action potentials travel along skeletal muscle at roughly $4.1\text{ m/s}$, the true propagation delay is only $\tau_0 \approx 2.44\text{ ms}$. At a $1,000\text{ Hz}$ sampling rate ($\Delta t = 1.0\text{ ms}$), an integer lag search can only return $m = 2\text{ samples}$ ($5.0\text{ m/s}$) or $m = 3\text{ samples}$ ($3.33\text{ m/s}$), which is a huge $\pm 20\%$ velocity quantization error!
 
 <figure class="my-8 flex flex-col items-center">
-  <img src="/portfolio/blogs/digital-biosignals/emg_mse_vs_delay.png" alt="Mean Squared Error Objective Landscape Across Candidate Sample Lags" class="rounded-xl shadow-md max-w-full md:max-w-3xl h-auto border border-border" />
+  <img src="/blogs/digital-biosignals/emg_mse_vs_delay.png" alt="Mean Squared Error Objective Landscape Across Candidate Sample Lags" class="rounded-xl shadow-md max-w-full md:max-w-3xl h-auto border border-border" />
   <figcaption class="text-center text-sm text-muted-foreground mt-3">
     Zooming into the MSE bowl around the optimal sample delay: fitting a continuous local parabola across the three minimum discrete lag samples recovers sub-sample delay accuracy and a physiological conduction velocity of 4.12 m/s.
   </figcaption>
@@ -56,7 +56,7 @@ In prosthetic control and biomechanics, you want to predict how much mechanical 
 To extract an amplitude envelope proportional to **motor-unit recruitment** and **rate coding**, we full-wave rectified the signal ($|x[n]|$) and passed it through zero-phase low-pass Butterworth filters across progressively tighter cutoff frequencies ($f_c \in \{1.5, 3.0, 6.0\}\text{ Hz}$):
 
 <figure class="my-8 flex flex-col items-center">
-  <img src="/portfolio/blogs/digital-biosignals/emg_envelopes_vs_torque.png" alt="Rectified Low-Pass sEMG Envelopes Compared Against Load-Cell Isometric Joint Torque" class="rounded-xl shadow-md max-w-full md:max-w-4xl h-auto border border-border" />
+  <img src="/blogs/digital-biosignals/emg_envelopes_vs_torque.png" alt="Rectified Low-Pass sEMG Envelopes Compared Against Load-Cell Isometric Joint Torque" class="rounded-xl shadow-md max-w-full md:max-w-4xl h-auto border border-border" />
   <figcaption class="text-center text-sm text-muted-foreground mt-3">
     Comparing full-wave rectified low-pass Butterworth sEMG envelopes against actual load-cell isometric joint torque: notice the bandwidth trade-off between ripple suppression and responsiveness, as well as the physiological electromechanical delay (EMD).
   </figcaption>
@@ -75,7 +75,7 @@ In our third study, we examined occipital EEG recordings captured while a subjec
 When I first computed a standard raw FFT periodogram $\hat{S}_{\text{PER}}(f) = \frac{1}{N f_s}\left|\sum_{n=0}^{N-1} x[n]e^{-j2\pi fn/f_s}\right|^2$ across the recording, the spectrum looked like a forest of jagged noise spikes. The reason is a classic statistical pitfall: the raw periodogram is an **inconsistent estimator**. Because each frequency bin is the sum of squared Gaussian random variables (a $\chi_2^2$ distribution), the standard deviation of the periodogram at every frequency is equal to $100\%$ of the mean power itself, and taking a longer recording only packs *more* noisy frequency bins closer together without reducing the vertical variance!
 
 <figure class="my-8 flex flex-col items-center">
-  <img src="/portfolio/blogs/digital-biosignals/eeg_alpha_psd.png" alt="Welch Averaged Modified Periodogram of Occipital EEG Alpha Band Synchronisation" class="rounded-xl shadow-md max-w-full md:max-w-3xl h-auto border border-border" />
+  <img src="/blogs/digital-biosignals/eeg_alpha_psd.png" alt="Welch Averaged Modified Periodogram of Occipital EEG Alpha Band Synchronisation" class="rounded-xl shadow-md max-w-full md:max-w-3xl h-auto border border-border" />
   <figcaption class="text-center text-sm text-muted-foreground mt-3">
     Welch Power Spectral Density (PSD) of occipital EEG using 50%-overlapping Hann-windowed segments: variance reduction cleanly isolates the ~10.2 Hz cortical Alpha peak from the 1/f background neural spectrum.
   </figcaption>
@@ -102,13 +102,13 @@ $$H_{\text{notch}}(z) = b_0 \frac{\left(1 - e^{j\omega_0}z^{-1}\right)\left(1 - 
 
 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-8">
   <figure class="flex flex-col items-center">
-    <img src="/portfolio/blogs/digital-biosignals/ecg_zplane.png" alt="Complex Z-Plane Pole-Zero Diagram of Our IIR ECG Filter" class="rounded-xl shadow-md w-full h-auto border border-border bg-white p-2" />
+    <img src="/blogs/digital-biosignals/ecg_zplane.png" alt="Complex Z-Plane Pole-Zero Diagram of Our IIR ECG Filter" class="rounded-xl shadow-md w-full h-auto border border-border bg-white p-2" />
     <figcaption class="text-center text-xs sm:text-sm text-muted-foreground mt-2">
       Complex z-plane pole-zero plot verifying unit-circle transmission zeros and interior stabilizing poles (|p| &lt; 1).
     </figcaption>
   </figure>
   <figure class="flex flex-col items-center">
-    <img src="/portfolio/blogs/digital-biosignals/ecg_time_freq.png" alt="Restored P-QRS-T ECG Morphology and Filter Frequency Response" class="rounded-xl shadow-md w-full h-auto border border-border" />
+    <img src="/blogs/digital-biosignals/ecg_time_freq.png" alt="Restored P-QRS-T ECG Morphology and Filter Frequency Response" class="rounded-xl shadow-md w-full h-auto border border-border" />
     <figcaption class="text-center text-xs sm:text-sm text-muted-foreground mt-2">
       Time- and frequency-domain validation showing clean recovery of the P wave, QRS complex, and ST-T segment.
     </figcaption>

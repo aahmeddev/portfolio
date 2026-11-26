@@ -5,7 +5,7 @@ In synthetic and biological chemistry, getting a white crystalline powder or a y
 This post brings together four of my favourite wet-lab and mathematical biology studies at Imperial College London: synthesising and structurally verifying **acetylsalicylic acid (aspirin)** across **$600.25\text{ MHz}$ $^1\text{H}$ NMR** and **ATR-FTIR**, measuring **acid phosphatase competitive inhibition ($K_i = 463\,\mu\text{M}$)** and **Arrhenius activation barriers ($E_a = 59.84\text{ kJ}\cdot\text{mol}^{-1}$)**, mapping **red blood cell osmotic haemolysis Fragiligraph curves**, and deriving **saddle-node hysteresis bifurcations** in nonlinear biological ODEs.
 
 <figure class="my-8 flex flex-col items-center">
-  <img src="/portfolio/blogs/analytical-kinetics/nmr_spectrometer_photo.jpg" alt="Superconducting Nuclear Magnetic Resonance Spectrometer in the Analytical Chemistry Lab" class="rounded-xl shadow-md max-w-full md:max-w-3xl h-auto border border-border" />
+  <img src="/blogs/analytical-kinetics/nmr_spectrometer_photo.jpg" alt="Superconducting Nuclear Magnetic Resonance Spectrometer in the Analytical Chemistry Lab" class="rounded-xl shadow-md max-w-full md:max-w-3xl h-auto border border-border" />
   <figcaption class="text-center text-sm text-muted-foreground mt-3">
     Inside the analytical spectroscopy suite: high-field superconducting Nuclear Magnetic Resonance (NMR) resolves individual proton chemical environments and spin-spin J-couplings down to parts per billion.
   </figcaption>
@@ -23,7 +23,7 @@ In the lab, we used four orthogonal checks to piece together the molecular proof
 2. **ATR-FTIR Vibrational Fingerprinting:** Placing a few milligrams of dry crystal onto the diamond Attenuated Total Reflectance (ATR) crystal let us directly inspect the carbonyl ($\text{C=O}$) double-bond region. Because aspirin contains *two* distinct carbonyl groups, an aromatic carboxylic acid and a newly formed phenolic acetate ester, we looked for, and resolved, the split between the conjugated acid carbonyl stretch at $\nu_{\text{C=O, acid}} \approx 1,680\text{ cm}^{-1}$ and the higher-frequency ester carbonyl stretch at $\nu_{\text{C=O, ester}} \approx 1,750\text{ cm}^{-1}$, sitting right alongside the broad hydrogen-bonded carboxylic $\text{O-H}$ envelope ($2,500\text{ to }3,200\text{ cm}^{-1}$).
 
 <figure class="my-8 flex flex-col items-center">
-  <img src="/portfolio/blogs/analytical-kinetics/aspirin_ftir_raw.png" alt="ATR-FTIR Transmittance Spectrum of Our Recrystallised Acetylsalicylic Acid" class="rounded-xl shadow-md max-w-full md:max-w-3xl h-auto border border-border" />
+  <img src="/blogs/analytical-kinetics/aspirin_ftir_raw.png" alt="ATR-FTIR Transmittance Spectrum of Our Recrystallised Acetylsalicylic Acid" class="rounded-xl shadow-md max-w-full md:max-w-3xl h-auto border border-border" />
   <figcaption class="text-center text-sm text-muted-foreground mt-3">
     Our experimental ATR-FTIR transmittance spectrum of synthesised acetylsalicylic acid: resolving the separated ester (1,750 cm⁻¹) and carboxylic acid (1,680 cm⁻¹) carbonyl stretching modes alongside the C-O ester fingerprint region.
   </figcaption>
@@ -32,7 +32,7 @@ In the lab, we used four orthogonal checks to piece together the molecular proof
 3. **$600.25\text{ MHz}$ Proton NMR ($^1\text{H}$ NMR in $\text{CDCl}_3$):** High-field $600.25\text{ MHz}$ $^1\text{H}$ NMR is where every proton on the molecule has to account for itself quantitatively. What makes a $1,2$-disubstituted benzene ring like aspirin so satisfying to assign at $600\text{ MHz}$ is that all four aromatic protons ($H_a, H_b, H_c, H_d$ between $\delta = 7.10\text{ and }8.15\text{ ppm}$) are chemically non-equivalent, splitting one another via three-bond *ortho* coupling ($^3J \approx 7.8\text{ Hz}$) and four-bond *meta* coupling ($^4J \approx 1.8\text{ Hz}$) into two doublets of doublets and two triplets of doublets. Upfield at $\delta = 2.35\text{ ppm}$, the sharp 3-proton singlet ($\text{-OCOCH}_3$, integrating in an exact $3:1:1:1:1$ ratio against the four aromatic ring protons) provided definitive confirmation that the acetyl group was covalently attached.
 
 <figure class="my-8 flex flex-col items-center">
-  <img src="/portfolio/blogs/analytical-kinetics/analytical_summary_slide.png" alt="Summary of Our 600 MHz 1H NMR, ATR-FTIR, and Chromatographic Structural Assignments" class="rounded-xl shadow-md max-w-full md:max-w-3xl h-auto border border-border" />
+  <img src="/blogs/analytical-kinetics/analytical_summary_slide.png" alt="Summary of Our 600 MHz 1H NMR, ATR-FTIR, and Chromatographic Structural Assignments" class="rounded-xl shadow-md max-w-full md:max-w-3xl h-auto border border-border" />
   <figcaption class="text-center text-sm text-muted-foreground mt-3">
     Integrating our 600.25 MHz 1H NMR multiplet assignments, ATR-FTIR vibrational modes, and TLC retention factors to verify product purity.
   </figcaption>
@@ -51,7 +51,7 @@ In Michaelis-Menten kinetics, a purely competitive inhibitor with dissociation c
 $$V_0 = \frac{V_{\max}[S]}{\alpha K_m + [S]} \implies \frac{1}{V_0} = \left(\frac{\alpha K_m}{V_{\max}}\right)\frac{1}{[S]} + \frac{1}{V_{\max}}, \quad \alpha = 1 + \frac{[I]}{K_i}$$
 
 <figure class="my-8 flex flex-col items-center">
-  <img src="/portfolio/blogs/analytical-kinetics/enzyme_kinetics_arrhenius.png" alt="Lineweaver-Burk Competitive Inhibition Family and Arrhenius Activation Energy Fit" class="rounded-xl shadow-md max-w-full md:max-w-4xl h-auto border border-border" />
+  <img src="/blogs/analytical-kinetics/enzyme_kinetics_arrhenius.png" alt="Lineweaver-Burk Competitive Inhibition Family and Arrhenius Activation Energy Fit" class="rounded-xl shadow-md max-w-full md:max-w-4xl h-auto border border-border" />
   <figcaption class="text-center text-sm text-muted-foreground mt-3">
     Left: Our double-reciprocal Lineweaver-Burk lines across inorganic phosphate inhibitor concentrations intersecting at a common 1/Vmax y-intercept, yielding a competitive inhibition constant Ki = 463 μM. Right: Arrhenius temperature regression yielding Ea = 59.84 kJ·mol⁻¹ before thermal unfolding above 50 °C.
   </figcaption>
@@ -72,7 +72,7 @@ One important statistical lesson I took away from writing the MATLAB fitting scr
 Why do so many biological systems behave like sharp on/off switches rather than gradual linear dials? We saw this same mathematical theme appear in two completely different contexts:
 
 <figure class="my-8 flex flex-col items-center">
-  <img src="/portfolio/blogs/analytical-kinetics/ode_bifurcation_haemolysis.png" alt="Saddle-Node Hysteresis Bifurcation Diagram and Erythrocyte Osmotic Haemolysis Fragiligraph" class="rounded-xl shadow-md max-w-full md:max-w-4xl h-auto border border-border" />
+  <img src="/blogs/analytical-kinetics/ode_bifurcation_haemolysis.png" alt="Saddle-Node Hysteresis Bifurcation Diagram and Erythrocyte Osmotic Haemolysis Fragiligraph" class="rounded-xl shadow-md max-w-full md:max-w-4xl h-auto border border-border" />
   <figcaption class="text-center text-sm text-muted-foreground mt-3">
     Nonlinear threshold switching in biology: saddle-node hysteresis and bistability in a cooperative Hill-feedback gene regulatory ODE (left), and sigmoidal erythrocyte osmotic haemolysis alongside its derivative Fragiligraph peak at 540 nm haemoglobin absorbance (right).
   </figcaption>

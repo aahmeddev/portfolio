@@ -9,7 +9,7 @@ Just as an ECG measures cardiac action potentials on the chest and an EMG measur
 Our project, **MYOWAVE**, set out to build a complete, wearable, non-invasive EHG acquisition and clinical longitudinal monitoring platform. I served as Project Manager and personally owned all of the **electronic hardware design (KiCad `ADS1299` PCB), embedded signal synthesis (Arduino Due DAC firmware), real-time 250 Hz digital signal processing (`scipy.signal`), and full-stack clinical and patient web applications (NiceGUI + Firebase)**, leading our team to win the **Year 2 Molecular Bioengineering Prize for Best Design Group Project**.
 
 <figure class="my-8 flex flex-col items-center">
-  <img src="/portfolio/projects/myowave-ehg/pcb_angled_3d.png" alt="Angled 3D KiCad Render of Our Custom MYOWAVE ADS1299 Biopotential Acquisition PCB" class="rounded-xl shadow-md max-w-full md:max-w-3xl h-auto border border-border" />
+  <img src="/projects/myowave-ehg/pcb_angled_3d.png" alt="Angled 3D KiCad Render of Our Custom MYOWAVE ADS1299 Biopotential Acquisition PCB" class="rounded-xl shadow-md max-w-full md:max-w-3xl h-auto border border-border" />
   <figcaption class="text-center text-sm text-muted-foreground mt-3">
     Angled 3D KiCad render of our custom MYOWAVE biopotential acquisition shield built around the 8-channel 24-bit Texas Instruments ADS1299-6PAGR front-end.
   </figcaption>
@@ -31,13 +31,13 @@ Instead of chaining discrete instrumentation amplifiers (such as an `INA128` or 
 
 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-8">
   <figure class="flex flex-col items-center">
-    <img src="/portfolio/projects/myowave-ehg/pcb_top_3d.png" alt="Top 3D KiCad View of the MYOWAVE Biopotential PCB" class="rounded-xl shadow-md w-full h-auto border border-border" />
+    <img src="/projects/myowave-ehg/pcb_top_3d.png" alt="Top 3D KiCad View of the MYOWAVE Biopotential PCB" class="rounded-xl shadow-md w-full h-auto border border-border" />
     <figcaption class="text-center text-xs sm:text-sm text-muted-foreground mt-2">
       Top 3D KiCad render showing the central ADS1299-6PAGR TQFP-64 package, local decoupling capacitors, and Arduino shield pin headers.
     </figcaption>
   </figure>
   <figure class="flex flex-col items-center">
-    <img src="/portfolio/projects/myowave-ehg/pcb_top_layout.png" alt="KiCad Copper Routing Layout Separating Differential Analog Inputs from SPI Lines" class="rounded-xl shadow-md w-full h-auto border border-border" />
+    <img src="/projects/myowave-ehg/pcb_top_layout.png" alt="KiCad Copper Routing Layout Separating Differential Analog Inputs from SPI Lines" class="rounded-xl shadow-md w-full h-auto border border-border" />
     <figcaption class="text-center text-xs sm:text-sm text-muted-foreground mt-2">
       KiCad copper routing layout separating the differential analog electrode input traces (left) from the high-speed SPI digital clock and data lines (right).
     </figcaption>
@@ -68,7 +68,7 @@ On the software side, I wrote a multi-threaded Python background acquisition ser
    - **Fast Wave High ($\text{FWH}: 0.34\text{ to }1.0\text{ Hz}$):** Associated with coordinated, high-velocity action-potential propagation across gap junctions (connexin-43) during intense or dysmenorrhoeic contractions.
 
 <figure class="my-8 flex flex-col items-center">
-  <img src="/portfolio/projects/myowave-ehg/ehg_dsp_pipeline.png" alt="MYOWAVE 250 Hz Butterworth Bandpass Recovery and Welch FWL/FWH Spectral Density" class="rounded-xl shadow-md max-w-full md:max-w-4xl h-auto border border-border" />
+  <img src="/projects/myowave-ehg/ehg_dsp_pipeline.png" alt="MYOWAVE 250 Hz Butterworth Bandpass Recovery and Welch FWL/FWH Spectral Density" class="rounded-xl shadow-md max-w-full md:max-w-4xl h-auto border border-border" />
   <figcaption class="text-center text-sm text-muted-foreground mt-3">
     Output of our 250 Hz Python DSP engine (dsp_math.py): recovering clean uterine contraction bursts from noisy raw recordings via 4th-order Butterworth bandpass filtering (left) and computing Welch Power Spectral Density across the FWL and FWH diagnostic bands (right).
   </figcaption>

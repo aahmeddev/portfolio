@@ -4,15 +4,15 @@ export const siteConfig = {
   username: "aahmeddev",
   description:
     "First Class MEng Molecular Bioengineering undergraduate at Imperial College London (Two-Time Dean's List). Nanopore sequencing algorithms, diagnostic bioassays, embedded bioinstrumentation, and high-performance scientific software.",
-  url: "https://aahmeddev.github.io/portfolio",
+  url: "https://ahmedahmed.me",
   links: {
     github: "https://github.com/aahmeddev",
     linkedin: "https://www.linkedin.com/in/ahmediaahmed",
     email: "mailto:ahmed.ia.ahmed@gmail.com",
   },
-  ogImage: "/portfolio/profile-img.jpg",
-  iconIco: "/portfolio/favicon.ico",
-  logoIcon: "/portfolio/logo.png",
+  ogImage: "/profile-img.jpg",
+  iconIco: "/favicon.ico",
+  logoIcon: "/logo.png",
   keywords: [
     "Ahmed Ahmed",
     "Imperial College London",

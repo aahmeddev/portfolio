@@ -2,7 +2,7 @@
 
 Welcome to the source code for my personal portfolio website. This project showcases my skills, projects, and career journey as a developer with a focus on bioinformatics and computational bioengineering. It's built with modern web technologies to be fast, responsive, and easy to navigate.
 
-[**View the live website here**](https://aahmeddev.github.io/portfolio/)
+[**View the live website here**](https://ahmedahmed.me/)
 
 ## ✨ Features
 
