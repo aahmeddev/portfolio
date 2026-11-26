@@ -42,6 +42,76 @@ export interface ProjectInterface {
 
 export const Experiences: ProjectInterface[] = [
   {
+    id: "clinical-trial-feasibility-dashboard",
+    companyName: "Clinical Trial Feasibility Analytics & SQL Dashboard",
+    subtitle: "Live ClinicalTrials.gov v2 API -> SQLite Relational Warehouse -> UK & EU4 Site Density Dashboard",
+    badge: "200 Live Studies | 7,538 Sites",
+    type: "Sequencing & Bioinformatics",
+    category: ["Sequencing & Bioinformatics", "Computational Bioengineering", "Diagnostics & Assays"],
+    shortDescription:
+      "Built an end-to-end clinical trial feasibility informatics pipeline ingesting 200 live UK and EU4 oncology and immunology studies from the ClinicalTrials.gov API v2 into a normalised SQLite warehouse (7,538 active sites, 410,731 target patients), running analytical SQL queries for site density and sponsor recruitment burden, and generating an interactive HTML dashboard.",
+    websiteLink: "/portfolio/demos/clinical-trial-feasibility.html",
+    techStack: [
+      "Python",
+      "SQL (SQLite)",
+      "Clinical Trials Analytics",
+      "Pandas / NumPy / SciPy",
+      "HTML 5",
+      "Git",
+    ],
+    startDate: new Date("2026-11-26"),
+    endDate: new Date("2026-11-26"),
+    companyLogoImg: "/portfolio/projects/clinical-trial-feasibility/feasibility_overview.png",
+    keyMetrics: [
+      {
+        label: "Live Trials Ingested",
+        value: "200 Studies",
+        detail: "125 actively recruiting UK/EU oncology & immunology studies via ClinicalTrials.gov API v2",
+      },
+      {
+        label: "Active Trial Sites",
+        value: "7,538 Sites",
+        detail: "Normalised relational SQLite locations table indexed by country and recruitment status",
+      },
+      {
+        label: "Target Enrolment Pool",
+        value: "410,731 Patients",
+        detail: "Mean 2,053.7 target patients per study; patients-per-site burden segmented by sponsor class",
+      },
+      {
+        label: "Verification",
+        value: "2/2 Pytest Passing",
+        detail: "Automated unit tests covering phase normalisation, SQLite ingestion, and SQL aggregations",
+      },
+    ],
+    pagesInfoTitle: "Global Site Footprint, UK vs EU4 Density & Sponsor Recruitment Burden",
+    pagesInfoArr: [
+      {
+        title: "Global Site Footprint & Clinical Phase Enrolment Overview",
+        description:
+          "Top 10 recruiting countries by active site count alongside clinical phase volume and mean target enrolment across 200 live ClinicalTrials.gov studies.",
+        imgArr: ["/portfolio/projects/clinical-trial-feasibility/feasibility_overview.png"],
+      },
+      {
+        title: "UK vs EU4 Site Density & Sponsor Recruitment Burden",
+        description:
+          "Direct comparison of UK, Germany, France, Spain, and Italy site footprints paired with mean target patients per site across industry and academic sponsors.",
+        imgArr: ["/portfolio/projects/clinical-trial-feasibility/uk_eu_site_density.png"],
+      },
+    ],
+    descriptionDetails: {
+      paragraphs: [
+        "Designed to replicate real-world clinical trial feasibility informatics workflows: pulling live protocol, sponsor, condition, and site metadata from the US NIH ClinicalTrials.gov REST API v2 into a normalised 3-table relational SQLite database (`trials`, `locations`, `conditions`).",
+        "Pairs reproducible analytical SQL (`sql/feasibility_queries.sql`) with automated high-DPI visualisations and a standalone interactive Chart.js dashboard featuring live search and sponsor-class filtering across UK and EU4 trial sites.",
+      ],
+      bullets: [
+        "**Live API Ingestion & Normalisation (`src/fetch_trials.py`):** Paginates ClinicalTrials.gov v2 JSON payloads and loads indexed `trials`, `locations`, and `conditions` tables into SQLite.",
+        "**Analytical SQL Queries (`sql/feasibility_queries.sql`):** Computes country site density, UK vs EU4 recruitment footprints, phase enrolment distributions, and CTE-based patients-per-site burden by sponsor class.",
+        "**Interactive Web Dashboard (`docs/index.html`):** Generates a filterable Chart.js feasibility explorer with direct NCT links to ClinicalTrials.gov study records.",
+      ],
+    },
+  },
+  {
     id: "medmnist-pytorch-classifier",
     companyName: "MedMNIST PyTorch Classifier & Grad-CAM",
     subtitle: "Residual CNN & Pure-PyTorch Grad-CAM Explainability for 2D Medical Imaging",
@@ -50,6 +120,7 @@ export const Experiences: ProjectInterface[] = [
     category: ["Sequencing & Bioinformatics", "Computational Bioengineering", "Diagnostics & Assays"],
     shortDescription:
       "Built a modular PyTorch 2D medical image classification pipeline (MedResNet residual CNN) with inverse-frequency class-weighted CrossEntropyLoss, AdamW, cosine annealing, and a pure-PyTorch Grad-CAM saliency implementation using forward and backward hooks, achieving 0.9673 held-out test ROC-AUC on PneumoniaMNIST.",
+    websiteLink: "/portfolio/demos/medmnist-gradcam-explorer.html",
     githubLink: "https://github.com/aahmeddev/medmnist-pytorch-classifier",
     techStack: [
       "PyTorch",

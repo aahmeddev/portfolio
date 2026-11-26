@@ -4,6 +4,8 @@ export type ValidSkills =
   | "Deep Learning"
   | "Computer Vision"
   | "Grad-CAM"
+  | "SQL (SQLite)"
+  | "Clinical Trials Analytics"
   | "C++17"
   | "Embedded C"
   | "Java"

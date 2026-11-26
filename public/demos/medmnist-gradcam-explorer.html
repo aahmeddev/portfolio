@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>MedMNIST PyTorch Classifier & Grad-CAM Interactive Explorer | Ahmed Ahmed</title>
+<style>
+  :root { --bg:#0b1120; --card:#111827; --border:#1f2937; --text:#f8fafc; --muted:#94a3b8; --accent:#38bdf8; }
+  * { box-sizing:border-box; font-family:Inter,system-ui,-apple-system,sans-serif; }
+  body { margin:0; background:var(--bg); color:var(--text); padding:24px; }
+  .wrap { max-width:1100px; margin:0 auto; }
+  .header { display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:12px; border-bottom:1px solid var(--border); padding-bottom:16px; margin-bottom:20px; }
+  .header h1 { margin:0; font-size:1.5rem; }
+  .header p { margin:4px 0 0; color:var(--muted); font-size:0.9rem; }
+  .kpis { display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:12px; margin-bottom:20px; }
+  .kpi { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:14px; }
+  .kpi .l { color:var(--muted); font-size:0.75rem; text-transform:uppercase; }
+  .kpi .v { color:var(--accent); font-size:1.45rem; font-weight:700; margin-top:4px; }
+  .tabs { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:16px; }
+  .tab { background:var(--card); color:var(--text); border:1px solid var(--border); padding:9px 16px; border-radius:8px; cursor:pointer; font-weight:600; font-size:0.86rem; }
+  .tab.active { background:var(--accent); color:#0b1120; border-color:var(--accent); }
+  .panel { display:none; background:var(--card); border:1px solid var(--border); border-radius:12px; padding:20px; }
+  .panel.active { display:block; }
+  .panel img { width:100%; max-height:620px; object-fit:contain; background:#fff; border-radius:8px; padding:8px; }
+  .caption { color:var(--muted); font-size:0.88rem; margin-top:12px; line-height:1.5; }
+  a.btn { display:inline-block; background:rgba(56,189,248,0.14); color:var(--accent); border:1px solid rgba(56,189,248,0.4); padding:8px 14px; border-radius:8px; text-decoration:none; font-size:0.84rem; font-weight:600; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="header">
+    <div>
+      <h1>MedMNIST PyTorch Classifier &amp; Grad-CAM Explorer</h1>
+      <p>MedResNet Residual CNN + Pure-PyTorch Forward/Backward Hook Grad-CAM on Held-Out PneumoniaMNIST Chest X-Rays</p>
+    </div>
+    <a class="btn" href="https://github.com/aahmeddev/medmnist-pytorch-classifier" target="_blank" rel="noreferrer">View GitHub Repo &rarr;</a>
+  </div>
+
+  <div class="kpis">
+    <div class="kpi"><div class="l">Held-Out Test ROC-AUC</div><div class="v">0.9673</div></div>
+    <div class="kpi"><div class="l">Validation ROC-AUC</div><div class="v">0.9968</div></div>
+    <div class="kpi"><div class="l">Test Accuracy / Macro F1</div><div class="v">88.78% / 0.873</div></div>
+    <div class="kpi"><div class="l">Unit Test Suite</div><div class="v">3/3 Pytest Pass</div></div>
+  </div>
+
+  <div class="tabs">
+    <button class="tab active" onclick="showTab('gradcam', this)">1. Grad-CAM Saliency Overlays</button>
+    <button class="tab" onclick="showTab('roc', this)">2. Held-Out ROC Curve</button>
+    <button class="tab" onclick="showTab('cm', this)">3. Confusion Matrix</button>
+  </div>
+
+  <div id="gradcam" class="panel active">
+    <img src="/portfolio/projects/medmnist-pytorch-classifier/gradcam_grid.png" alt="Grad-CAM Saliency Grid" />
+    <p class="caption">Pure-PyTorch Grad-CAM heatmaps extracted from <code>stage3.conv2</code> via forward and full backward hooks, global-average-pooling class-score gradients into channel weights and upsampling to input resolution to audit which lung opacity regions drive each clinical prediction.</p>
+  </div>
+  <div id="roc" class="panel">
+    <img src="/portfolio/projects/medmnist-pytorch-classifier/roc_curve.png" alt="ROC Curve" />
+    <p class="caption">Evaluated once on 624 untouched PneumoniaMNIST held-out test images using inverse-frequency class-weighted CrossEntropyLoss, AdamW, and cosine annealing.</p>
+  </div>
+  <div id="cm" class="panel">
+    <img src="/portfolio/projects/medmnist-pytorch-classifier/confusion_matrix.png" alt="Confusion Matrix" />
+    <p class="caption">Balanced sensitivity and specificity across Normal vs Pneumonia paediatric chest radiographs, verified by deterministic seeding and 3/3 passing pytest checks.</p>
+  </div>
+</div>
+<script>
+function showTab(id, btn) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+}
+</script>
+</body>
+</html>

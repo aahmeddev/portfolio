@@ -39,7 +39,7 @@ export default function ExperiencePage() {
       <Tabs defaultValue="all" className="w-full">
         <TabsList className="grid max-w-3xl mx-auto grid-cols-2 sm:grid-cols-4 h-auto gap-1 p-1">
           <TabsTrigger value="all">All ({Experiences.length})</TabsTrigger>
-          <TabsTrigger value="sequencing">Sequencing &amp; Bioinfo</TabsTrigger>
+          <TabsTrigger value="sequencing">AI, Data &amp; Bioinfo</TabsTrigger>
           <TabsTrigger value="hardware">Hardware &amp; Medtech</TabsTrigger>
           <TabsTrigger value="systems">Wet Lab &amp; Systems</TabsTrigger>
         </TabsList>

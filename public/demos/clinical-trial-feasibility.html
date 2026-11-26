@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Clinical Trial Feasibility Informatics Dashboard | Ahmed Ahmed</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+<style>
+  :root { --bg:#0b1120; --card:#111827; --border:#1f2937; --text:#f8fafc; --muted:#94a3b8; --accent:#38bdf8; --teal:#2dd4bf; }
+  * { box-sizing:border-box; font-family:Inter,system-ui,-apple-system,sans-serif; }
+  body { margin:0; background:var(--bg); color:var(--text); padding:24px; }
+  .wrap { max-width:1200px; margin:0 auto; }
+  .header { display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:12px; margin-bottom:20px; border-bottom:1px solid var(--border); padding-bottom:16px; }
+  .header h1 { margin:0; font-size:1.5rem; }
+  .header p { margin:4px 0 0; color:var(--muted); font-size:0.9rem; }
+  .badge { background:rgba(56,189,248,0.12); color:var(--accent); border:1px solid rgba(56,189,248,0.35); padding:6px 12px; border-radius:999px; font-size:0.8rem; font-weight:600; }
+  .kpis { display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:14px; margin-bottom:20px; }
+  .kpi { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:16px; }
+  .kpi .label { color:var(--muted); font-size:0.78rem; text-transform:uppercase; letter-spacing:0.05em; }
+  .kpi .val { font-size:1.6rem; font-weight:700; margin-top:6px; color:var(--accent); }
+  .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(460px,1fr)); gap:16px; margin-bottom:20px; }
+  .card { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:18px; }
+  .card h2 { margin:0 0 12px; font-size:1.05rem; }
+  .controls { display:flex; flex-wrap:wrap; gap:10px; margin-bottom:12px; }
+  select, input { background:#0f172a; color:var(--text); border:1px solid var(--border); border-radius:8px; padding:8px 12px; font-size:0.85rem; }
+  table { width:100%; border-collapse:collapse; font-size:0.84rem; }
+  th, td { text-align:left; padding:10px 8px; border-bottom:1px solid var(--border); }
+  th { color:var(--muted); font-weight:600; }
+  a { color:var(--accent); text-decoration:none; }
+  a:hover { text-decoration:underline; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="header">
+    <div>
+      <h1>Clinical Trial Feasibility Informatics Dashboard</h1>
+      <p>Live ClinicalTrials.gov API v2 &rarr; Normalized SQLite &rarr; UK &amp; EU4 Site Density &amp; Enrolment Analytics</p>
+    </div>
+    <span class="badge">SQLite + Python + ClinicalTrials.gov v2</span>
+  </div>
+  <div class="kpis" id="kpis"></div>
+  <div class="grid">
+    <div class="card"><h2>UK vs EU4 Active Site Footprint</h2><canvas id="ukEuChart"></canvas></div>
+    <div class="card"><h2>Trial Volume by Clinical Phase</h2><canvas id="phaseChart"></canvas></div>
+  </div>
+  <div class="card">
+    <h2>Interactive UK/EU Feasibility Study Explorer (Top 25 by UK Site Density)</h2>
+    <div class="controls">
+      <input id="searchInput" type="text" placeholder="Filter by title, NCT ID, or sponsor..." />
+      <select id="sponsorFilter">
+        <option value="ALL">All Sponsor Classes</option>
+        <option value="INDUSTRY">Industry</option>
+        <option value="OTHER">Academic / Other</option>
+      </select>
+    </div>
+    <div style="overflow-x:auto;">
+      <table>
+        <thead><tr><th>NCT ID</th><th>Study Title</th><th>Phase</th><th>Sponsor</th><th>Target Pts</th><th>UK Sites</th><th>Total Sites</th></tr></thead>
+        <tbody id="trialRows"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<script>
+const M = {"kpis": {"total_trials": 200, "recruiting_trials": 125, "total_patients": 410731, "avg_enrollment": 2053.7, "total_sites": 7538}, "countries": [{"country": "United States", "trial_count": 66, "total_sites": 1553, "avg_sites_per_trial": 23.53}, {"country": "France", "trial_count": 99, "total_sites": 877, "avg_sites_per_trial": 8.86}, {"country": "Spain", "trial_count": 75, "total_sites": 576, "avg_sites_per_trial": 7.68}, {"country": "United Kingdom", "trial_count": 62, "total_sites": 494, "avg_sites_per_trial": 7.97}, {"country": "Italy", "trial_count": 81, "total_sites": 442, "avg_sites_per_trial": 5.46}, {"country": "Germany", "trial_count": 56, "total_sites": 409, "avg_sites_per_trial": 7.3}, {"country": "China", "trial_count": 24, "total_sites": 357, "avg_sites_per_trial": 14.88}, {"country": "Japan", "trial_count": 32, "total_sites": 321, "avg_sites_per_trial": 10.03}, {"country": "South Korea", "trial_count": 40, "total_sites": 243, "avg_sites_per_trial": 6.08}, {"country": "Australia", "trial_count": 33, "total_sites": 234, "avg_sites_per_trial": 7.09}], "phases": [{"phase": "NA", "trial_count": 95, "avg_enrollment": 3817.8}, {"phase": "Phase 3", "trial_count": 39, "avg_enrollment": 586.1}, {"phase": "Phase 2", "trial_count": 31, "avg_enrollment": 169.8}, {"phase": "Phase 1 / Phase 2", "trial_count": 17, "avg_enrollment": 194.2}, {"phase": "Phase 1", "trial_count": 13, "avg_enrollment": 184.0}, {"phase": "Phase 2 / Phase 3", "trial_count": 4, "avg_enrollment": 3548.8}], "sponsors": [{"sponsor_class": "OTHER", "trial_count": 116, "avg_enrollment": 2960.5, "avg_sites": 10.3, "patients_per_site": 2136.57}, {"sponsor_class": "INDUSTRY", "trial_count": 76, "avg_enrollment": 667.1, "avg_sites": 81.1, "patients_per_site": 66.7}, {"sponsor_class": "OTHER_GOV", "trial_count": 6, "avg_enrollment": 2199.0, "avg_sites": 22.3, "patients_per_site": 118.83}, {"sponsor_class": "NIH", "trial_count": 1, "avg_enrollment": 3000.0, "avg_sites": 3.0, "patients_per_site": 1000.0}, {"sponsor_class": "NETWORK", "trial_count": 1, "avg_enrollment": 411.0, "avg_sites": 45.0, "patients_per_site": 9.13}], "uk_eu": [{"country": "France", "trial_count": 99, "total_sites": 877}, {"country": "Spain", "trial_count": 75, "total_sites": 576}, {"country": "United Kingdom", "trial_count": 62, "total_sites": 494}, {"country": "Italy", "trial_count": 81, "total_sites": 442}, {"country": "Germany", "trial_count": 56, "total_sites": 409}], "sample_trials": [{"nct_id": "NCT02338310", "brief_title": "Trial of Perioperative Endocrine Therapy - Individualising Care", "status": "ACTIVE_NOT_RECRUITING", "phase": "Phase 3", "enrollment_count": 4486, "sponsor_name": "Institute of Cancer Research, United Kingdom", "sponsor_class": "OTHER", "total_sites": 128, "uk_sites": 128}, {"nct_id": "NCT00268476", "brief_title": "Systemic Therapy in Advancing or Metastatic Prostate Cancer: Evaluation of Drug Efficacy", "status": "ACTIVE_NOT_RECRUITING", "phase": "Phase 2 / Phase 3", "enrollment_count": 11992, "sponsor_name": "Medical Research Council", "sponsor_class": "OTHER_GOV", "total_sites": 120, "uk_sites": 110}, {"nct_id": "NCT03256981", "brief_title": "Stereotactic Body Radiotherapy for the Treatment of OPD", "status": "ACTIVE_NOT_RECRUITING", "phase": "Phase 2 / Phase 3", "enrollment_count": 113, "sponsor_name": "Institute of Cancer Research, United Kingdom", "sponsor_class": "OTHER", "total_sites": 29, "uk_sites": 18}, {"nct_id": "NCT01946204", "brief_title": "A Study of Apalutamide (ARN-509) in Men With Non-Metastatic Castration-Resistant Prostate Cancer", "status": "ACTIVE_NOT_RECRUITING", "phase": "Phase 3", "enrollment_count": 1207, "sponsor_name": "Aragon Pharmaceuticals, Inc.", "sponsor_class": "INDUSTRY", "total_sites": 379, "uk_sites": 16}, {"nct_id": "NCT03336333", "brief_title": "A Study Comparing Zanubrutinib With Bendamustine Plus Rituximab in Participants With Previously Untreated CLL or SLL", "status": "ACTIVE_NOT_RECRUITING", "phase": "Phase 3", "enrollment_count": 590, "sponsor_name": "BeiGene", "sponsor_class": "INDUSTRY", "total_sites": 158, "uk_sites": 16}, {"nct_id": "NCT04170283", "brief_title": "A Study to Evaluate Long-term Safety of Zanubrutinib Regimens in Participants With B-Cell Malignancies Who Participated in BeiGene Parent Studies of Zanubrutinib", "status": "ACTIVE_NOT_RECRUITING", "phase": "Phase 3", "enrollment_count": 955, "sponsor_name": "BeOne Medicines", "sponsor_class": "INDUSTRY", "total_sites": 153, "uk_sites": 13}, {"nct_id": "NCT05926765", "brief_title": "A Study of AAV2-hAQP1 Gene Therapy in Participants With Radiation-Induced Late Xerostomia", "status": "ACTIVE_NOT_RECRUITING", "phase": "Phase 2", "enrollment_count": 290, "sponsor_name": "MeiraGTx, LLC", "sponsor_class": "INDUSTRY", "total_sites": 33, "uk_sites": 11}, {"nct_id": "NCT05296798", "brief_title": "A Study to Evaluate the Efficacy and Safety of Giredestrant in Combination With Phesgo (Pertuzumab, Trastuzumab, and Hyaluronidase-zzxf) Versus Phesgo in Participants With Locally Advanced or Metastatic Breast Cancer (heredERA Breast Cancer)", "status": "ACTIVE_NOT_RECRUITING", "phase": "Phase 3", "enrollment_count": 922, "sponsor_name": "Hoffmann-La Roche", "sponsor_class": "INDUSTRY", "total_sites": 198, "uk_sites": 10}, {"nct_id": "NCT02970318", "brief_title": "A Study of Acalabrutinib vs Investigator's Choice of Idelalisib Plus Rituximab or Bendamustine Plus Rituximab in R/R CLL", "status": "ACTIVE_NOT_RECRUITING", "phase": "Phase 3", "enrollment_count": 310, "sponsor_name": "Acerta Pharma BV", "sponsor_class": "INDUSTRY", "total_sites": 157, "uk_sites": 9}, {"nct_id": "NCT02734004", "brief_title": "A Phase I/II Study of MEDI4736 in Combination With Olaparib in Patients With Advanced Solid Tumors.", "status": "ACTIVE_NOT_RECRUITING", "phase": "Phase 1 / Phase 2", "enrollment_count": 264, "sponsor_name": "AstraZeneca", "sponsor_class": "INDUSTRY", "total_sites": 47, "uk_sites": 9}, {"nct_id": "NCT07174336", "brief_title": "A Study of Tersolisib (LY4064809/STX-478) With Other Anti-Cancer Treatments in Participants With Advanced Breast Cancer With a Genetic Change (PIK3CA)", "status": "RECRUITING", "phase": "Phase 3", "enrollment_count": 800, "sponsor_name": "Eli Lilly and Company", "sponsor_class": "INDUSTRY", "total_sites": 365, "uk_sites": 8}, {"nct_id": "NCT04680052", "brief_title": "A Phase 3 Study to Assess Efficacy and Safety of Tafasitamab Plus Lenalidomide and Rituximab Compared to Placebo Plus Lenalidomide and Rituximab in Patients With Relapsed/Refractory (R/R) Follicular Lymphoma or Marginal Zone Lymphoma.", "status": "ACTIVE_NOT_RECRUITING", "phase": "Phase 3", "enrollment_count": 654, "sponsor_name": "Incyte Corporation", "sponsor_class": "INDUSTRY", "total_sites": 261, "uk_sites": 8}, {"nct_id": "NCT05210790", "brief_title": "A Study of Rusfertide in Adults With Polycythemia Vera (PV)", "status": "ACTIVE_NOT_RECRUITING", "phase": "Phase 3", "enrollment_count": 293, "sponsor_name": "Protagonist Therapeutics, Inc.", "sponsor_class": "INDUSTRY", "total_sites": 184, "uk_sites": 8}, {"nct_id": "NCT06588478", "brief_title": "A Study Evaluating the Efficacy and Safety of Pirtobrutinib in Participants With Relapsed or Refractory Chronic Lymphocytic Leukemia/Small Lymphocytic Lymphoma", "status": "RECRUITING", "phase": "Phase 2", "enrollment_count": 249, "sponsor_name": "Loxo Oncology, Inc.", "sponsor_class": "INDUSTRY", "total_sites": 129, "uk_sites": 8}, {"nct_id": "NCT06500884", "brief_title": "A Study to Evaluate Preventive Treatments for GPRC5D-related Oral Events", "status": "RECRUITING", "phase": "Phase 2", "enrollment_count": 210, "sponsor_name": "Janssen Research & Development, LLC", "sponsor_class": "INDUSTRY", "total_sites": 38, "uk_sites": 8}, {"nct_id": "NCT04607421", "brief_title": "A Study of Encorafenib Plus Cetuximab With or Without Chemotherapy in People With Previously Untreated Metastatic Colorectal Cancer", "status": "ACTIVE_NOT_RECRUITING", "phase": "Phase 3", "enrollment_count": 841, "sponsor_name": "Pfizer", "sponsor_class": "INDUSTRY", "total_sites": 274, "uk_sites": 6}, {"nct_id": "NCT05083169", "brief_title": "A Study of Teclistamab in Combination With Daratumumab Subcutaneously (SC) (Tec-Dara) Versus Daratumumab SC, Pomalidomide, and Dexamethasone (DPd) or Daratumumab SC, Bortezomib, and Dexamethasone (DVd) in Participants With Relapsed or Refractory Multiple Myeloma", "status": "ACTIVE_NOT_RECRUITING", "phase": "Phase 3", "enrollment_count": 587, "sponsor_name": "Janssen Research & Development, LLC", "sponsor_class": "INDUSTRY", "total_sites": 176, "uk_sites": 6}, {"nct_id": "NCT05876754", "brief_title": "An Early Access Study of Ivosidenib in Patients With a Pretreated Locally Advanced or Metastatic Cholangiocarcinoma", "status": "ACTIVE_NOT_RECRUITING", "phase": "Phase 3", "enrollment_count": 299, "sponsor_name": "Servier Affaires M\u00e9dicales", "sponsor_class": "INDUSTRY", "total_sites": 84, "uk_sites": 6}, {"nct_id": "NCT03553836", "brief_title": "Safety and Efficacy of Pembrolizumab Compared to Placebo in Resected High-risk Stage II Melanoma (MK-3475-716/KEYNOTE-716)", "status": "ACTIVE_NOT_RECRUITING", "phase": "Phase 3", "enrollment_count": 976, "sponsor_name": "Merck Sharp & Dohme LLC", "sponsor_class": "INDUSTRY", "total_sites": 159, "uk_sites": 5}, {"nct_id": "NCT06679101", "brief_title": "A Study of Belantamab Mafodotin Administered in Combination With Lenalidomide and Dexamethasone (BRd) Versus Daratumumab, Lenalidomide, and Dexamethasone (DRd) in Participants With Newly Diagnosed Multiple Myeloma (NDMM) Who Are Ineligible for Autologous Stem Cell Transplantation (TI-NDMM)", "status": "RECRUITING", "phase": "Phase 3", "enrollment_count": 520, "sponsor_name": "GlaxoSmithKline", "sponsor_class": "INDUSTRY", "total_sites": 181, "uk_sites": 5}, {"nct_id": "NCT04379596", "brief_title": "Ph1b/2 Study of the Safety and Efficacy of T-DXd Combinations in Advanced HER2-expressing Gastric Cancer (DESTINY-Gastric03)", "status": "ACTIVE_NOT_RECRUITING", "phase": "Phase 2", "enrollment_count": 452, "sponsor_name": "AstraZeneca", "sponsor_class": "INDUSTRY", "total_sites": 71, "uk_sites": 5}, {"nct_id": "NCT06820463", "brief_title": "A Study to Evaluate the Adverse Events, and Efficacy of Intravenous (IV) of Telisotuzumab Adizutecan in Combination With IV Oxaliplatin, Fluorouracil, Folinic Acid/Leucovorin, Bevacizumab, Panitumumab in Adult Participants With Metastatic Colorectal Cancer", "status": "RECRUITING", "phase": "Phase 2", "enrollment_count": 390, "sponsor_name": "AbbVie", "sponsor_class": "INDUSTRY", "total_sites": 82, "uk_sites": 5}, {"nct_id": "NCT06651632", "brief_title": "WATER IV Prostate Cancer", "status": "ACTIVE_NOT_RECRUITING", "phase": "NA", "enrollment_count": 280, "sponsor_name": "PROCEPT BioRobotics", "sponsor_class": "INDUSTRY", "total_sites": 37, "uk_sites": 5}, {"nct_id": "NCT03972488", "brief_title": "Study to Evaluate the Efficacy and Safety of Lutathera in Patients With Grade 2 and Grade 3 Advanced GEP-NET", "status": "ACTIVE_NOT_RECRUITING", "phase": "Phase 3", "enrollment_count": 226, "sponsor_name": "Advanced Accelerator Applications", "sponsor_class": "INDUSTRY", "total_sites": 40, "uk_sites": 5}, {"nct_id": "NCT05384626", "brief_title": "A Study of Neladalkib (NVL-655) in Patients With Advanced NSCLC and Other Solid Tumors Harboring ALK Rearrangement or Activating ALK Mutation (ALKOVE-1)", "status": "RECRUITING", "phase": "Phase 1 / Phase 2", "enrollment_count": 840, "sponsor_name": "Nuvalent Inc.", "sponsor_class": "INDUSTRY", "total_sites": 74, "uk_sites": 4}]};
+document.getElementById("kpis").innerHTML = [
+  ["Live Trials Analysed", M.kpis.total_trials.toLocaleString()],
+  ["Actively Recruiting", M.kpis.recruiting_trials.toLocaleString()],
+  ["Total Active Sites", M.kpis.total_sites.toLocaleString()],
+  ["Target Enrolment Pool", M.kpis.total_patients.toLocaleString()],
+  ["Mean Target / Trial", Math.round(M.kpis.avg_enrollment).toLocaleString()]
+].map(([l,v]) => `<div class="kpi"><div class="label">${l}</div><div class="val">${v}</div></div>`).join("");
+
+new Chart(document.getElementById("ukEuChart"), {
+  type: "bar",
+  data: {
+    labels: M.uk_eu.map(x => x.country),
+    datasets: [{ label: "Active Trial Sites", data: M.uk_eu.map(x => x.total_sites), backgroundColor: M.uk_eu.map(x => x.country === "United Kingdom" ? "#38bdf8" : "#2dd4bf") }]
+  },
+  options: { plugins: { legend: { display: false } }, scales: { y: { ticks: { color: "#94a3b8" } }, x: { ticks: { color: "#cbd5e1" } } } }
+});
+
+new Chart(document.getElementById("phaseChart"), {
+  type: "bar",
+  data: {
+    labels: M.phases.map(x => x.phase),
+    datasets: [{ label: "Trial Count", data: M.phases.map(x => x.trial_count), backgroundColor: "#818cf8" }]
+  },
+  options: { indexAxis: "y", plugins: { legend: { display: false } }, scales: { x: { ticks: { color: "#94a3b8" } }, y: { ticks: { color: "#cbd5e1" } } } }
+});
+
+function renderTable() {
+  const q = document.getElementById("searchInput").value.toLowerCase();
+  const s = document.getElementById("sponsorFilter").value;
+  const rows = M.sample_trials.filter(r =>
+    (s === "ALL" || r.sponsor_class === s) &&
+    (`${r.nct_id} ${r.brief_title} ${r.sponsor_name}`.toLowerCase().includes(q))
+  );
+  document.getElementById("trialRows").innerHTML = rows.map(r => `
+    <tr>
+      <td><a href="https://clinicaltrials.gov/study/${r.nct_id}" target="_blank" rel="noreferrer">${r.nct_id}</a></td>
+      <td>${r.brief_title.slice(0, 72)}${r.brief_title.length > 72 ? "..." : ""}</td>
+      <td>${r.phase}</td>
+      <td>${r.sponsor_name.slice(0, 28)}</td>
+      <td>${r.enrollment_count.toLocaleString()}</td>
+      <td><strong>${r.uk_sites}</strong></td>
+      <td>${r.total_sites}</td>
+    </tr>`).join("");
+}
+document.getElementById("searchInput").addEventListener("input", renderTable);
+document.getElementById("sponsorFilter").addEventListener("change", renderTable);
+renderTable();
+</script>
+</body>
+</html>

@@ -103,6 +103,18 @@ export default function IndexPage() {
               I study Molecular Bioengineering at Imperial College London, where I split my time between wet-lab experimental biology, scientific software, and diagnostic hardware.
             </p>
 
+            <div className="flex flex-wrap gap-2">
+              <span className="inline-flex items-center rounded-full bg-primary/10 border border-primary/30 px-3 py-1 text-xs font-semibold text-primary">
+                IET Future Talent Boost Scholarship (2026)
+              </span>
+              <span className="inline-flex items-center rounded-full bg-muted border border-border px-3 py-1 text-xs font-medium text-foreground">
+                2x Imperial Dean&apos;s List (Top 10%)
+              </span>
+              <span className="inline-flex items-center rounded-full bg-muted border border-border px-3 py-1 text-xs font-medium text-foreground">
+                Y2 Best Design Group Project Prize
+              </span>
+            </div>
+
             <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
               I enjoy working on problems where molecular physics and computation meet directly: writing algorithms to decode raw ionic current traces from nanopore sequencers, tuning peptide nucleic acid surface chemistry for point-of-care cancer assays in the Ladame Lab, building multi-core geochemical modelling tools at Nanolyse Technologies, and designing low-noise biopotential circuits and optical instruments.
             </p>
