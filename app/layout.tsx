@@ -1,9 +1,13 @@
 import "./globals.css";
 
 import { GoogleAnalytics } from "@next/third-parties/google";
-import { Inter as FontSans } from "next/font/google";
-import localFont from "next/font/local";
+import {
+  Fraunces,
+  IBM_Plex_Mono as FontMono,
+  Instrument_Sans as FontSans,
+} from "next/font/google";
 
+import { MagneticBracketCursor } from "@/components/common/magnetic-bracket-cursor";
 import { ThemeProvider } from "@/components/common/theme-provider";
 import { Toaster } from "@/components/ui/toaster";
 import { siteConfig } from "@/config/site";
@@ -15,9 +19,16 @@ const fontSans = FontSans({
   variable: "--font-sans",
 });
 
-const fontHeading = localFont({
-  src: "../assets/fonts/CalSans-SemiBold.woff2",
+const fontHeading = Fraunces({
+  subsets: ["latin"],
+  style: ["normal", "italic"],
   variable: "--font-heading",
+});
+
+const fontMono = FontMono({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  variable: "--font-mono",
 });
 
 interface RootLayoutProps {
@@ -73,18 +84,20 @@ export default function RootLayout({ children }: RootLayoutProps) {
       <head />
       <body
         className={cn(
-          "min-h-screen bg-background font-sans antialiased selection:bg-primary/25 selection:text-foreground",
+          "min-h-screen bg-background oxblood-canvas font-sans antialiased selection:bg-primary/30 selection:text-foreground",
           fontSans.variable,
-          fontHeading.variable
+          fontHeading.variable,
+          fontMono.variable
         )}
       >
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"
-          enableSystem
-          themes={["light", "dark"]}
+          forcedTheme="dark"
+          themes={["dark"]}
         >
           {children}
+          <MagneticBracketCursor />
           <Toaster />
           <ModalProvider />
         </ThemeProvider>

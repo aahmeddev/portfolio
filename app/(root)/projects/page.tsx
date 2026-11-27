@@ -23,8 +23,8 @@ const renderContent = (tabVal: string) => {
 
   return (
     <div className="mx-auto my-6 grid justify-center gap-6 md:grid-cols-2 xl:grid-cols-3 static">
-      {expArr.map((exp) => (
-        <ProjectCard project={exp} key={exp.id} />
+      {expArr.map((exp, idx) => (
+        <ProjectCard project={exp} index={idx} key={exp.id} />
       ))}
     </div>
   );
@@ -33,6 +33,7 @@ const renderContent = (tabVal: string) => {
 export default function ExperiencePage() {
   return (
     <PageContainer
+      kicker="02 // Engineering & Bioinformatics Archive"
       title={pagesConfig.projects.title}
       description={pagesConfig.projects.description}
     >

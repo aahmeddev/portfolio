@@ -13,6 +13,7 @@ export const metadata: Metadata = {
 export default function BlogPage() {
   return (
     <PageContainer
+      kicker="03 // Field Notes & Lab Reports"
       title={pagesConfig.blog.title}
       description={pagesConfig.blog.description}
     >

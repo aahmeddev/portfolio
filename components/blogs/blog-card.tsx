@@ -28,10 +28,15 @@ export default function BlogCard({
         const isPhoto = blog.coverImage?.endsWith(".jpg");
         return (
           <Link href={href} key={id} className="group block h-full">
-            <article className="flex flex-col justify-between h-full rounded-xl border border-border bg-card p-5 hover:border-primary/45 hover:shadow-md transition-all duration-200">
+            <article
+              className={cn(
+                "flex flex-col justify-between h-full bg-card oxblood-plate p-5 rounded-sm",
+                id % 3 === 0 ? "tilt-neg" : id % 3 === 1 ? "tilt-pos" : "tilt-soft"
+              )}
+            >
               <div>
                 {blog.coverImage && (
-                  <div className="relative w-full aspect-[16/10] mb-4 overflow-hidden rounded-lg border border-border/80 bg-slate-950/90">
+                  <div className="relative w-full aspect-[16/10] mb-4 overflow-hidden border border-border/80 bg-[#120e10]">
                     <Image
                       src={blog.coverImage}
                       alt={blog.title}
@@ -40,19 +45,19 @@ export default function BlogCard({
                         "group-hover:scale-[1.02] transition-transform duration-300",
                         isPhoto
                           ? "object-cover"
-                          : "object-contain p-2 bg-white dark:bg-slate-950/90"
+                          : "object-contain p-2 bg-[#120e10]"
                       )}
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     />
                     {blog.category && (
-                      <span className="absolute top-2.5 left-2.5 rounded-md bg-background/95 backdrop-blur px-2.5 py-1 text-[11px] font-semibold text-primary border border-border shadow-sm">
+                      <span className="absolute top-2.5 left-2.5 bg-background/95 px-2.5 py-1 text-[11px] font-mono font-semibold text-primary border border-primary/40">
                         {blog.category}
                       </span>
                     )}
                   </div>
                 )}
 
-                <div className="flex items-center gap-2.5 text-xs text-muted-foreground mb-2">
+                <div className="flex items-center gap-2.5 text-xs font-mono text-muted-foreground mb-2">
                   <time>{blog.date}</time>
                   {blog.readTime && (
                     <>
@@ -76,13 +81,13 @@ export default function BlogCard({
                   {blog.tags?.slice(0, 3).map((tag, idx) => (
                     <span
                       key={idx}
-                      className="rounded-md bg-muted px-2 py-0.5 text-xs font-medium text-muted-foreground"
+                      className="bg-muted px-2 py-0.5 text-[11px] font-mono text-muted-foreground border border-border/50"
                     >
                       {tag}
                     </span>
                   ))}
                 </div>
-                <span className="inline-flex items-center text-xs font-semibold text-primary shrink-0 group-hover:translate-x-0.5 transition-transform">
+                <span className="inline-flex items-center text-xs font-mono font-semibold text-primary shrink-0 group-hover:translate-x-0.5 transition-transform">
                   Read Story
                   <Icons.chevronRight className="w-3.5 h-3.5 ml-1" />
                 </span>

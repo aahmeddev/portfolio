@@ -5,6 +5,7 @@ import { ReactNode } from "react";
 
 interface ClientPageWrapperProps {
   children: ReactNode;
+  className?: string;
 }
 
 const pageVariants = {
@@ -22,13 +23,13 @@ const pageVariants = {
   },
 };
 
-export const ClientPageWrapper = ({ children }: ClientPageWrapperProps) => {
+export const ClientPageWrapper = ({ children, className }: ClientPageWrapperProps) => {
   return (
     <motion.div
       initial="initial"
       animate="animate"
       variants={pageVariants}
-      className="w-full"
+      className={className ? `w-full ${className}` : "w-full"}
     >
       {children}
     </motion.div>

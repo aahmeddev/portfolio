@@ -3,68 +3,70 @@
 @tailwind utilities;
 
 @layer base {
+  /* Light companion: Warm Oxblood Parchment & Burnished Brass */
   :root {
-    --background: 40 25% 98%;
-    --foreground: 222 38% 12%;
+    --background: 32 33% 95%;
+    --foreground: 334 26% 11%;
 
-    --muted: 38 18% 93%;
-    --muted-foreground: 218 15% 38%;
+    --muted: 30 22% 89%;
+    --muted-foreground: 335 12% 36%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222 38% 12%;
+    --popover: 36 38% 98%;
+    --popover-foreground: 334 26% 11%;
 
-    --border: 35 16% 86%;
-    --input: 35 16% 86%;
+    --border: 34 24% 76%;
+    --input: 34 24% 76%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222 38% 12%;
+    --card: 36 38% 98%;
+    --card-foreground: 334 26% 11%;
 
-    --primary: 201 78% 28%;
-    --primary-foreground: 40 33% 99%;
+    --primary: 348 52% 28%;
+    --primary-foreground: 36 38% 97%;
 
-    --secondary: 38 20% 92%;
-    --secondary-foreground: 222 38% 14%;
+    --secondary: 32 24% 90%;
+    --secondary-foreground: 334 26% 13%;
 
-    --accent: 201 40% 93%;
-    --accent-foreground: 201 80% 22%;
+    --accent: 35 60% 44%;
+    --accent-foreground: 36 38% 98%;
 
-    --destructive: 0 78% 52%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 65% 48%;
+    --destructive-foreground: 36 38% 98%;
 
-    --ring: 201 78% 28%;
-    --radius: 0.75rem;
+    --ring: 348 52% 28%;
+    --radius: 0.15rem;
   }
 
+  /* Primary direction: Oxblood & Brass Midnight Studio (C.3) */
   .dark {
-    --background: 222 28% 8%;
-    --foreground: 40 20% 94%;
+    --background: 324 12% 8%;
+    --foreground: 26 39% 93%;
 
-    --muted: 222 22% 13%;
-    --muted-foreground: 215 16% 68%;
+    --muted: 330 15% 16%;
+    --muted-foreground: 18 14% 70%;
 
-    --accent: 215 26% 17%;
-    --accent-foreground: 196 80% 74%;
+    --accent: 0 61% 57%;
+    --accent-foreground: 26 39% 96%;
 
-    --popover: 222 28% 10%;
-    --popover-foreground: 40 20% 94%;
+    --popover: 330 13% 12%;
+    --popover-foreground: 26 39% 93%;
 
-    --border: 218 20% 19%;
-    --input: 218 20% 19%;
+    --border: 35 32% 28%;
+    --input: 35 32% 28%;
 
-    --card: 222 25% 11%;
-    --card-foreground: 40 20% 94%;
+    --card: 330 13% 12%;
+    --card-foreground: 26 39% 93%;
 
-    --primary: 196 76% 52%;
-    --primary-foreground: 222 35% 8%;
+    --primary: 35 63% 60%;
+    --primary-foreground: 324 12% 8%;
 
-    --secondary: 220 22% 15%;
-    --secondary-foreground: 40 20% 94%;
+    --secondary: 330 15% 17%;
+    --secondary-foreground: 26 39% 93%;
 
-    --destructive: 0 63% 44%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 61% 57%;
+    --destructive-foreground: 26 39% 96%;
 
-    --ring: 196 76% 52%;
-    --radius: 0.75rem;
+    --ring: 35 63% 60%;
+    --radius: 0.15rem;
   }
 }
 
@@ -85,10 +87,87 @@
   }
 }
 
-.editorial-hero-bg {
+/* Oxblood & Brass Midnight Studio tactile surface */
+.oxblood-canvas {
   background-image: radial-gradient(
-    ellipse 80% 60% at 50% 0%,
-    hsl(var(--primary) / 0.08),
-    transparent 70%
+    rgba(217, 165, 90, 0.11) 1px,
+    transparent 1px
   );
+  background-size: 28px 28px;
 }
+
+.oxblood-plate {
+  border: 1px solid hsl(var(--primary) / 0.34);
+  box-shadow: 6px 6px 0 rgba(212, 77, 77, 0.24);
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.oxblood-plate:hover {
+  border-color: hsl(var(--primary) / 0.78);
+  box-shadow: 8px 8px 0 rgba(212, 77, 77, 0.38);
+}
+
+.tilt-neg {
+  transform: rotate(-1.6deg);
+}
+.tilt-pos {
+  transform: rotate(1.4deg);
+}
+.tilt-soft {
+  transform: rotate(0.9deg);
+}
+
+.tilt-neg:hover,
+.tilt-pos:hover,
+.tilt-soft:hover {
+  transform: rotate(0deg) translateY(-2px);
+}
+
+/* Sleek antique-brass internal binder scrollbar */
+.binder-scroll::-webkit-scrollbar {
+  width: 8px;
+}
+.binder-scroll::-webkit-scrollbar-track {
+  background: hsl(var(--background));
+}
+.binder-scroll::-webkit-scrollbar-thumb {
+  background: hsl(var(--primary) / 0.42);
+}
+.binder-scroll::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--primary) / 0.78);
+}
+
+/* Vertical Sleeve Pull-Out Animation for Long Scrollable Documents */
+@keyframes sleevePullOut {
+  0% {
+    opacity: 0;
+    transform: translateY(90px) scale(0.94);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes sleeveTuckIn {
+  0% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(90px) scale(0.94);
+  }
+}
+
+.animate-sleeve-pullout {
+  animation: sleevePullOut 0.46s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.animate-sleeve-tuckin {
+  animation: sleeveTuckIn 0.28s cubic-bezier(0.4, 0, 1, 1) forwards;
+}
+
+/* Magnetic Bracket Cursor: hide native pointer on fine-pointer devices */
+html.magnetic-cursor-active, html.magnetic-cursor-active * { cursor: none !important; }
+
