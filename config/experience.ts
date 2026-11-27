@@ -49,7 +49,7 @@ export const Experiences: ProjectInterface[] = [
     type: "Sequencing & Bioinformatics",
     category: ["Sequencing & Bioinformatics", "Computational Bioengineering", "Diagnostics & Assays"],
     shortDescription:
-      "Built an end-to-end clinical trial feasibility informatics pipeline ingesting 200 live UK and EU4 oncology and immunology studies from the ClinicalTrials.gov API v2 into a normalised SQLite warehouse (7,538 active sites, 410,731 target patients), running analytical SQL queries for site density and sponsor recruitment burden, and generating an interactive HTML dashboard.",
+      "Built an end-to-end clinical trial feasibility informatics pipeline that ingests 200 live UK and EU4 oncology and immunology studies from the ClinicalTrials.gov API v2 into a normalised SQLite warehouse (7,538 active sites, 410,731 target patients). Runs analytical SQL queries for site density and sponsor recruitment burden and generates an interactive HTML dashboard.",
     websiteLink: "/demos/clinical-trial-feasibility.html",
     techStack: [
       "Python",
@@ -161,7 +161,7 @@ export const Experiences: ProjectInterface[] = [
       {
         title: "Grad-CAM Saliency Overlays on Held-Out Test Chest X-Rays",
         description:
-          "Class-discriminative Grad-CAM heatmaps generated from the final convolutional layer of MedResNet, highlighting lung opacity regions driving each prediction.",
+          "Class-discriminative Grad-CAM heatmaps generated from the final convolutional layer of MedResNet to show which lung opacity regions drive each prediction.",
         imgArr: ["/projects/medmnist-pytorch-classifier/gradcam_grid.png"],
       },
       {
@@ -523,7 +523,7 @@ export const Experiences: ProjectInterface[] = [
         "Cross-language desktop bioinformatics suite built in Java 22 and JavaFX 24 (Maven build with Jackson 2.17.0 and fat-JAR assembly) paired with a 7-script Python Matplotlib scientific plotting backend.",
       ],
       bullets: [
-        "**Streaming FASTQ Parser (`FastqAnalysisTask.java`):** Streams uncompressed `.fastq` and `GZIPInputStream` `.fastq.gz` 4-line records with live `ReadOnlyLongProperty` progress bindings and rapid 100k-read preview mode.",
+        "**Streaming FASTQ Parser (`FastqAnalysisTask.java`):** Streams uncompressed `.fastq` and `GZIPInputStream` `.fastq.gz` 4-line records with live `ReadOnlyLongProperty` progress bindings and a fast 100k-read preview mode.",
         "**9-Module Rule Engine (`ModuleEvaluator.java`):** Grades Per Base Sequence Quality (WARN $< 20$, FAIL $< 10$ median Phred), Per Sequence Quality, Base Content, GC Content (WARN $> 15\\%$, FAIL $> 30\\%$ normal deviation), N Content, Length Distribution, Duplication, Overrepresented Sequences, and Adapter Content.",
         "**Read Trimming (`TrimmingTask.java`):** Asynchronous 5' and 3' sliding-window Phred trimming, adapter stripping, and minimum-length filtering.",
         "**Java-to-Python Stdin Piping (`PlotGenerator.java`, `HtmlReportGenerator.java`):** Pipes CSV summaries over `stdin` to 7 headless `Agg` Matplotlib scripts with thread-safe `plotNodeCache`, and exports standalone interactive `Plotly.js` HTML5 reports.",

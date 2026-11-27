@@ -45,7 +45,7 @@ When we slid our 2% agarose gel onto the UV transilluminator (pictured above), i
 
 Seeing *COL1A1* mRNA drop on a gel proves transcriptional suppression, but it does not tell you *why* the promoter is turned off. Standard Sanger sequencing or PCR cannot distinguish an unmethylated cytosine (`C`) from a methylated **5-methylcytosine (`5-mC`)** because both base-pair identically with guanine (`G`) during polymerase extension.
 
-The chemical workaround is **sodium bisulphite conversion**. When you denature genomic DNA into single strands and incubate it with sodium bisulphite under acidic conditions, bisulphite sulfonates and hydrolytically deaminates **unmethylated cytosines into uracil (`U`)**, which are then read as **thymine (`T`)** after PCR amplification. Crucially, the methyl group on the 5-carbon of **5-methylcytosine** sterically blocks bisulphite attack, so methylated cytosines remain **`C`** in the final sequencing chromatogram!
+The chemical workaround is sodium bisulphite conversion. When you denature genomic DNA into single strands and incubate it with sodium bisulphite under acidic conditions, bisulphite sulfonates and hydrolytically deaminates unmethylated cytosines into uracil (`U`), which are then read as thymine (`T`) after PCR amplification. The methyl group on the 5-carbon of 5-methylcytosine sterically blocks bisulphite attack, so methylated cytosines remain `C` in the final sequencing chromatogram.
 
 $$C_{\text{unmethylated}} \xrightarrow{\text{NaHSO}_3,\; \text{deamination}} U \xrightarrow{\text{PCR}} T, \qquad 5\text{-mC}_{\text{methylated}} \xrightarrow{\text{NaHSO}_3\text{ (protected)}} C \xrightarrow{\text{PCR}} C$$
 

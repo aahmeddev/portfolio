@@ -55,13 +55,13 @@ export const careerExperiences: CareerExperienceInterface[] = [
       "Combining multi-core geochemical speciation software engineering in Python and C++ with biosensor market strategy, grant writing, and executive stakeholder engagement.",
     description: [
       "Co-developed over Git an installable multi-core Python speciation package (phreeqc-python-tool) wrapping the compiled United States Geological Survey IPhreeqc C++ shared library across 13 thermodynamic databases.",
-      "Engineered a parallel batch execution engine (PhreeqcBatchRunner using ProcessPoolExecutor) with persistent per-worker IPhreeqc instances, automating ingestion, cleaning, and dual-catchment toxic ammonia (NH3) speciation modelling across 35,232 continuous environmental sensor records.",
-      "Owned functional specifications, project plans, and technical business cases for an AI/ML chemical speciation framework modelling pharmaceutical compound behaviour in wastewater, water, and soil matrices.",
-      "Conducted primary and secondary market research on emerging biotechnology start-ups and novel biosensor commercialisation, building dual-layer PowerPoint and Figma decks for technical R&D directors and commercial executives.",
+      "Engineered a parallel batch execution engine (PhreeqcBatchRunner using ProcessPoolExecutor) with persistent per-worker IPhreeqc instances to automate data cleaning and dual-catchment toxic ammonia (NH3) speciation across 35,232 continuous environmental sensor records.",
+      "Owned functional specifications, project plans, and technical business cases for an AI/ML chemical speciation framework modelling pharmaceutical compound behaviour in water and soil matrices.",
+      "Conducted primary and secondary market research on emerging biotechnology start-ups and novel biosensor commercialisation, and built dual-layer PowerPoint and Figma decks for technical R&D directors and commercial executives.",
     ],
     achievements: [
       "Secured a £40,000 commercial grant (STFC / Harwell Science Campus scheme) by proving technical and commercial feasibility to executive assessors.",
-      "Represented Nanolyse across 3 industry conferences, leading commercial briefings and technical discussions to secure 3 corporate R&D partnerships.",
+      "Represented Nanolyse at 3 industry conferences with commercial briefings and technical discussions that led to 3 corporate R&D partnerships.",
       "Eliminated manual spreadsheet bottlenecks by connecting parallel PHREEQC and Python outputs directly into MATLAB and structured Microsoft Excel decision models.",
     ],
     skills: [
@@ -83,7 +83,7 @@ export const careerExperiences: CareerExperienceInterface[] = [
     summary:
       "Clinical and pre-clinical evaluation of ex situ donor organ preservation systems and hepatic regeneration workflows.",
     description: [
-      "Evaluated the OrganOx metra normothermic machine perfusion system within a clinical and translational research environment, documenting operational workflows for ex situ donor liver preservation.",
+      "Evaluated the OrganOx metra normothermic machine perfusion system in a clinical and translational research setting and documented operational workflows for ex situ donor liver preservation.",
       "Observed pre-clinical trials focused on hepatic regeneration protocols and donor organ viability assessment.",
     ],
     achievements: [
@@ -101,7 +101,7 @@ export const careerExperiences: CareerExperienceInterface[] = [
     summary:
       "Directing organisational strategy, financial governance, and external commercial negotiations for Imperial College London's largest mixed sports club (110+ members across 7 competitive squads).",
     description: [
-      "Governs a £26,000 annual budget using Microsoft Excel forecast models and Imperial College Union eActivities, managing cash forecasting, supplier invoicing, and complex bank reconciliations.",
+      "Governs a £26,000 annual budget using Microsoft Excel forecast models and Imperial College Union eActivities across cash forecasting, supplier invoicing, and bank reconciliations.",
       "Expanded the club constitution from 19 to 23 formal committee roles and authored the Core Risk Assessment alongside competing as Men's 1st XI Goalkeeper.",
       "Authored formal budget appeals and negotiated commercial agreements with external sponsors, kit suppliers, and venue partners.",
     ],

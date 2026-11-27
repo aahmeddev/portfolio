@@ -63,7 +63,7 @@ To extract an amplitude envelope proportional to **motor-unit recruitment** and 
 </figure>
 
 Overlaying our rectified sEMG envelope against the physical load-cell torque curve revealed two fascinating physiological facts:
-1. **The Bandwidth-Latency Trade-off in Myoelectric Prosthetics:** A $6.0\text{ Hz}$ envelope reacts rapidly when the subject starts contracting, but leaves spiky motor-unit firing ripples that would make a prosthetic hand jitter. Dropping the cutoff to $1.5\text{ Hz}$ produces a silky-smooth force estimate, but if you use a causal single-pass filter in real time, the filter group delay makes the prosthetic feel sluggish.
+1. **The Bandwidth-Latency Trade-off in Myoelectric Prosthetics:** A $6.0\text{ Hz}$ envelope responds quickly when the subject starts contracting, but it leaves spiky motor-unit firing ripples that would make a prosthetic hand jitter. Dropping the cut-off to $1.5\text{ Hz}$ produces a much smoother force estimate, but if you use a causal single-pass filter in real time, the filter group delay makes the prosthetic feel sluggish.
 2. **Electromechanical Delay ($\text{EMD} \approx 40\text{ to }55\text{ ms}$):** Even when using a zero-phase (`filtfilt`) envelope, the electrical sEMG spike consistently rises roughly $45\text{ ms}$ *before* the mechanical torque transducer registers tension! That gap is the real physical time required for action potentials to travel down T-tubules, trigger dihydropyridine/ryanodine $\text{Ca}^{2+}$ release from the sarcoplasmic reticulum, cycle acto-myosin cross-bridges, and pull the slack out of the series elastic tendon.
 
 ---
